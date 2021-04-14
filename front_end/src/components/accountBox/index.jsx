@@ -6,6 +6,7 @@ import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
 const BoxContainer = styled.div`
+  margin-top: 5%;
   width: 20%;
   min-height: 550px;
   display: flex;
