@@ -20,7 +20,7 @@ export function LoginForm(props) {
                 <Input type="password" placeholder="Password" />
             </FormContainer>
             <Marginer direction="vertical" margin={10} />
-            <MutedLink href="#">Forget your password?</MutedLink>
+            <MutedLink href="#">Forgot your password?</MutedLink>
             <Marginer direction="vertical" margin="1.6em" />
             <SubmitButton type="submit">Login</SubmitButton>
             <Marginer direction="vertical" margin="1em" />

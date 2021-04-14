@@ -6,21 +6,21 @@ import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
 const BoxContainer = styled.div`
-  margin-top: 5%;
-  width: 20%;
+  margin-top: 7%;
+  width: 30%;
   min-height: 550px;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
-  background-color: #fff;
-  box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgb(0, 0, 0);
   position: relative;
   overflow: hidden;
 `;
 
 const TopContainer = styled.div`
   width: 100%;
-  height: 250px;
+  height: 30%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -36,14 +36,12 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  top: -220px;
-  left: -70px;
-  background: rgb(241, 196, 15);
-  background: linear-gradient(
-          58deg,
-          rgba(241, 196, 15, 1) 20%,
-          rgba(243, 172, 18, 1) 100%
-  );
+  //top: -400px;
+  top: -390px;
+  //left: -400px;
+  left:-300px;
+  background: rgb(121, 63, 212);
+  background: linear-gradient(325deg, rgba(121, 63, 212, 1) 7%, rgb(91, 255, 106) 100%);
 `;
 
 const HeaderContainer = styled.div`
@@ -58,13 +56,14 @@ const HeaderText = styled.h2`
   line-height: 1.24;
   color: #fff;
   z-index: 10;
-  margin: 0;
+  //margin: 0;
+  margin-top:-20%;
 `;
 
 const SmallText = styled.h5`
   color: #fff;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 15px;
   z-index: 10;
   margin: 0;
   margin-top: 7px;
@@ -137,15 +136,13 @@ export function AccountBox(props) {
                     />
                     {active === "signin" && (
                         <HeaderContainer>
-                            <HeaderText>Welcome</HeaderText>
-                            <HeaderText>Back</HeaderText>
-                            <SmallText>Please sign-in to continue!</SmallText>
+                            <HeaderText>Welcome back to Q2D!</HeaderText>
+                            <SmallText>Please login to continue!</SmallText>
                         </HeaderContainer>
                     )}
                     {active === "signup" && (
                         <HeaderContainer>
-                            <HeaderText>Create</HeaderText>
-                            <HeaderText>Account</HeaderText>
+                            <HeaderText>Welcome to Q2D!</HeaderText>
                             <SmallText>Please sign-up to continue!</SmallText>
                         </HeaderContainer>
                     )}

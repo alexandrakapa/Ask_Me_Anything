@@ -13,19 +13,18 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
-  margin-bottom:5%;
 `;
 
 export const MutedLink = styled.a`
   font-size: 11px;
-  color: rgb(180, 9, 199);
+  color: rgb(90, 87, 87);
   font-weight: 500;
   text-decoration: none;
 `;
 
 export const BoldLink = styled.a`
   font-size: 11px;
-  color: rgb(241, 196, 15);
+  color: rgb(121, 63, 212);
   font-weight: 500;
   text-decoration: none;
   margin: 0 4px;
@@ -35,23 +34,25 @@ export const Input = styled.input`
   width: 100%;
   height: 42px;
   outline: none;
-  border: 1px solid rgb(191, 16, 16);
+  border: 1px solid rgb(121, 63, 212);
   padding: 0px 10px;
-  border-bottom: 1.4px solid transparent;
+  //border-bottom: 1.4px solid transparent;
   transition: all 200ms ease-in-out;
   font-size: 12px;
-  margin-bottom:5%;
+  margin-bottom: 5%;
+  margin-left: 3%;
+
   &::placeholder {
-    color: rgb(5, 40, 125);
+    color: rgb(0, 0, 0);
   }
 
   &:not(:last-of-type) {
-    border-bottom: 1.5px solid rgb(17, 161, 36);
+    border-bottom: 1.5px solid rgb(121, 63, 212);
   }
 
   &:focus {
     outline: none;
-    border-bottom: 2px solid rgb(241, 196, 15);
+    border-bottom: 2px solid rgb(95, 91, 91);
   }
 `;
 
@@ -64,15 +65,13 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
+  margin-left: 10%;
   transition: all, 240ms ease-in-out;
-  background: rgb(241, 196, 15);
-  background: linear-gradient(
-    58deg,
-    rgba(241, 196, 15, 1) 20%,
-    rgba(243, 172, 18, 1) 100%
-  );
+  background: rgb(121, 63, 212);
+
   &:hover {
-    filter: brightness(1.03);
+    filter: brightness(1);
+    background: rgb(140, 91, 255);
   }
 `;
 
