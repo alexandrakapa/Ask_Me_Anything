@@ -5,8 +5,13 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
+
+
 const BoxContainer = styled.div`
-  margin-top: 7%;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5%;
   width: 30%;
   min-height: 550px;
   display: flex;
@@ -19,6 +24,7 @@ const BoxContainer = styled.div`
 `;
 
 const TopContainer = styled.div`
+  margin-top: 25%;
   width: 100%;
   height: 30%;
   display: flex;

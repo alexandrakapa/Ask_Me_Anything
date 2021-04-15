@@ -14,6 +14,7 @@ export function SignupForm(props) {
     const { switchToSignin } = useContext(AccountContext);
 
     return (
+
         <BoxContainer>
             <FormContainer>
                 <Input type="email" placeholder="Email (user name)" />
@@ -30,5 +31,6 @@ export function SignupForm(props) {
                 </BoldLink>
             </MutedLink>
         </BoxContainer>
+
     );
 }

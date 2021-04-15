@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const BoxContainer = styled.div`
   width: 80%;
   display: flex;
@@ -12,7 +13,6 @@ export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
 export const MutedLink = styled.a`
@@ -20,6 +20,7 @@ export const MutedLink = styled.a`
   color: rgb(90, 87, 87);
   font-weight: 500;
   text-decoration: none;
+  margin-left:30%;
 `;
 
 export const BoldLink = styled.a`
@@ -40,7 +41,8 @@ export const Input = styled.input`
   transition: all 200ms ease-in-out;
   font-size: 12px;
   margin-bottom: 5%;
-  margin-left: 3%;
+  margin-left: 15%;
+
 
   &::placeholder {
     color: rgb(0, 0, 0);
@@ -65,7 +67,8 @@ export const SubmitButton = styled.button`
   border: none;
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
-  margin-left: 10%;
+  margin-left: 15%;
+  margin-right:auto;
   transition: all, 240ms ease-in-out;
   background: rgb(121, 63, 212);
 

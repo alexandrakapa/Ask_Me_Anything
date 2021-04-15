@@ -1,6 +1,21 @@
 import './App.css';
 import styled from "styled-components";
-import {AccountBox} from "./components/accountBox";
+// import {AccountBox} from "./components/accountBox";
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
+
+import About from './components/pages/About/About';
+import Contact from './components/pages/Contact/Contact';
+import Home from './components/pages/Home/Home';
+import Services from './components/pages/Service/Services';
+import Testimonial from './components/pages/Testimonial/Testimonial';
+import {AccountBox} from "./components/pages/accountBox";
+import Navbar from './components/Navbar/Navbar';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -11,11 +26,88 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-function App() {
-  return  <AppContainer>
-    <AccountBox/>
-  </AppContainer>
+// function App() {
+//
+//     return (
+//         <Router>
+//             <div>
+//                 <nav>
+//                     <ul>
+//                         <li>
+//                             <Link to="/">Home</Link>
+//                         </li>
+//                         <li>
+//                             <Link to="/login">Login</Link>
+//                         </li>
+//                         <li>
+//                             <Link to="/users">Users</Link>
+//                         </li>
+//                     </ul>
+//                 </nav>
+//                 <Switch>
+//                     <Route path="/login">
+//                         <Login />
+//                     </Route>
+//                     <Route path="/users">
+//                         <Users />
+//                     </Route>
+//                     <Route path="/">
+//                         <Home />
+//                     </Route>
+//                 </Switch>
+//             </div>
+//         </Router>
+//     );
+// }
+// function Home() {
+//     return  <AppContainer>
+//         <LandingPage/>
+//     </AppContainer>
+// }
+//
+// function Login() {
+//     return  <AppContainer>
+//       <AccountBox/>
+//     </AppContainer>
+// }
+//
+// function Users() {
+//     return  <AppContainer>
+//         <LandingPage/>
+//     </AppContainer>
+// }
+//
+// export default App;
 
+const App = () => {
+    return (
+        <Router>
+            <Navbar/>
+            <main>
+                <Switch>
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
+                    <Route path="/about" exact>
+                        <About/>
+                    </Route>
+                    <Route path="/service" exact>
+                        <Services/>
+                    </Route>
+                    <Route path="/testimonial" exact>
+                        <Testimonial/>
+                    </Route>
+                    <Route path="/contact" exact>
+                        <Contact/>
+                    </Route>
+                    <Route path="/login" exact>
+                        <AccountBox/>
+                    </Route>
+                    <Redirect to="/" />
+                </Switch>
+            </main>
+        </Router>
+    );
 }
 
 export default App;
