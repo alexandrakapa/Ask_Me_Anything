@@ -4,6 +4,7 @@ import {
     BoxContainer,
     FormContainer,
     Input,
+    InputLabel,
     MutedLink,
     SubmitButton,
 } from "./common";

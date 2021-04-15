@@ -18,7 +18,8 @@ i {
 }
 
 .navbar-mainbg {
-    background-color: #000000;
+    background: rgb(70,17,152);
+    background: linear-gradient(325deg, rgba(70,17,152,1) 50%, rgba(91,255,106,1) 100%);
     padding: 0px;
 }
 #navbarSupportedContent {
@@ -102,7 +103,8 @@ i {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #000000;
+    background: rgb(70,17,152);
+
 }
 .hori-selector .right:before {
     bottom: 0;

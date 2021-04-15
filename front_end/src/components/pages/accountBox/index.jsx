@@ -42,12 +42,10 @@ const BackDrop = styled(motion.div)`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  //top: -400px;
-  top: -390px;
-  //left: -400px;
+  top: -440px;
   left:-300px;
-  background: rgb(121, 63, 212);
-  background: linear-gradient(325deg, rgba(121, 63, 212, 1) 7%, rgb(91, 255, 106) 100%);
+  background: rgb(70,17,152);
+  background: linear-gradient(169deg, rgba(70,17,152,1) 50%, rgba(91,255,106,1) 100%);
 `;
 
 const HeaderContainer = styled.div`

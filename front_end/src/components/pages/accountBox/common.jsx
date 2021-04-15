@@ -31,6 +31,16 @@ export const BoldLink = styled.a`
   margin: 0 4px;
 `;
 
+export const InputLabel = styled.label`
+  color: #6404ff;
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  background: #ffffff;
+  transition: 300ms;
+  transform: translate(-50%, -50%);
+`;
+
 export const Input = styled.input`
   width: 100%;
   height: 42px;
@@ -40,9 +50,9 @@ export const Input = styled.input`
   //border-bottom: 1.4px solid transparent;
   transition: all 200ms ease-in-out;
   font-size: 12px;
-  margin-bottom: 5%;
+  margin-bottom: 7%;
   margin-left: 15%;
-
+  
 
   &::placeholder {
     color: rgb(0, 0, 0);
@@ -68,9 +78,9 @@ export const SubmitButton = styled.button`
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   margin-left: 15%;
-  margin-right:auto;
+  margin-right: auto;
   transition: all, 240ms ease-in-out;
-  background: rgb(121, 63, 212);
+  background: rgb(74, 20, 156);
 
   &:hover {
     filter: brightness(1);
