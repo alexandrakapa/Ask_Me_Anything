@@ -16,6 +16,7 @@ import Services from './components/pages/Service/Services';
 import Testimonial from './components/pages/Testimonial/Testimonial';
 import {AccountBox} from "./components/pages/accountBox";
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -106,6 +107,7 @@ const App = () => {
                     <Redirect to="/" />
                 </Switch>
             </main>
+            <Footer/>
         </Router>
     );
 }
