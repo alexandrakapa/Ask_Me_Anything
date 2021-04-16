@@ -51,6 +51,7 @@ export const FooterLink = styled.a`
   }
 `;
 
+
 export const Heading = styled.p`
   font-size: 18px;
   color: #827b7b;
