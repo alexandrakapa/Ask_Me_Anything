@@ -77,6 +77,21 @@ const Navbar = () => {
                         </NavLink>
                     </li>
 
+                    <li className="nav-item active">
+                        <NavLink className="nav-link" to="/ask_a_question" exact>
+                            <i
+                                className="fas fa-question">
+                            </i>Ask a question
+                        </NavLink>
+                    </li>
+                    <li className="nav-item active">
+                        <NavLink className="nav-link" to="/answer_a_question" exact>
+                            <i
+                                className="fas fa-reply">
+                            </i>Answer a question
+                        </NavLink>
+                    </li>
+
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/login" exact>
                             <i
