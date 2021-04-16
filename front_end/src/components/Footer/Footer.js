@@ -14,19 +14,19 @@ const Footer = () => {
             <Container>
                 <Row>
                     <Column>
-                        <Heading>About Us</Heading>
+                        <FooterLink href="#">About Us</FooterLink>
                     </Column>
                     <Column>
-                        <Heading>Contact Us</Heading>
+                        <FooterLink href="#">Contact Us</FooterLink>
                     </Column>
                     <Column>
-                        <Heading>Project Documentation</Heading>
+                        <FooterLink href="#">Project Documentation</FooterLink>
                     </Column>
                     <Column>
-                        <Heading>Link on Github</Heading>
+                        <FooterLink href="#">Link on Github</FooterLink>
                     </Column>
                     <Column>
-                        <Heading>Course Materials</Heading>
+                        <FooterLink href="#">Course Materials</FooterLink>
                     </Column>
                 </Row>
             </Container>
