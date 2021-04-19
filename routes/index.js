@@ -23,15 +23,15 @@ passport.use('token',new JWTstrategy({
     secretOrKey: secret,
     jwtFromRequest:Extract_jwt.fromAuthHeaderAsBearerToken()
 },function (token,done){
-    return done(null,{username: token})
+    return done(null,token.username)
     }
 ));
 
 router.post('/signin',passport.authenticate('signin',{session:false}), function(req, res, next) {
 
-    var elems = {username:req.user};
+    console.log(req.user);
     res.json({
-      token: jwt.sign(elems, secret, { expiresIn: '1800s' })
+      token: jwt.sign(req.user, secret, { expiresIn: 3600 })
     })
 
 });
