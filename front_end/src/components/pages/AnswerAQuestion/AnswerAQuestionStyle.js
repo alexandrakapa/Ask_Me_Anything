@@ -1,16 +1,6 @@
 import styled from "styled-components";
 
-export const AskAQuestionStyle = styled.div`
-
-.error {
-   color: red;
-   font-family: sans-serif;
-   font-size: 15px;
-   height: 15px;
-   font-style: italic;
-   margin-left: 39%;
- }
- 
+export const AnswerAQuestionStyle = styled.div`
   h1 {
     line-height: 2;
     display: flex;
@@ -90,7 +80,11 @@ textarea:focus {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   }
-
+   
+select {
+   width:100%;
+   padding: 10px 15px;
+}
 Label {
   line-height: 2;
   text-align: left;
@@ -108,9 +102,9 @@ input[type="submit"] {
   color: white;
   text-transform: uppercase;
   border: none;
-  margin-top: 3%;
+  margin-top: 2%;
   padding: 1.5%;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 100;
   letter-spacing: 10px;
   display: inline-block;
@@ -123,9 +117,9 @@ input[type="cancel"] {
   color: white;
   text-transform: uppercase;
   border: none;
-  margin-top: 3%;
+  margin-top: 2%;
   padding: 1.5%;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 100;
   letter-spacing: 10px;
   display: inline-block;
@@ -180,5 +174,49 @@ button {
   border-radius: 4px;
 }
 
-
    `;
+
+export const selectStyle2 = {
+
+   control: (styles, {menuIsOpen, isFocused, isSelected}) => ({
+      ...styles, backgroundColor: 'white',
+      '&:hover': {borderColor: 'blue'}, // border style on hover
+      border: '1px solid blue', // default border color
+      marginLeft: '26%',
+      marginTop: '3%',
+      boxShadow: 'none', // no box-shadow
+      width: '48%',
+      height: '30px',
+      fontSize: '12px',
+   }),
+   option: (styles, {data, isDisabled, isFocused, isSelected}) => {
+      const color = 'rgba(44, 130, 201, 1)';
+      return {
+         ...styles,
+         // height : '30px',
+         fontSize: '12px',
+         backgroundColor:
+             isSelected
+                 ? data.color
+                 : isFocused
+                 ? color
+                 : null,
+         color:
+             isSelected
+                 ? 'rgba(44, 130, 201, 1)'
+                 :
+                 isFocused
+                     ? 'white'
+                     : 'black',
+
+         cursor: isSelected ? 'not-allowed' : 'default',
+
+
+         ':active': {
+            ...styles[':active'],
+            backgroundColor:
+                !isDisabled && (isSelected ? data.color : 'green'),
+         },
+      };
+   }
+}

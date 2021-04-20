@@ -5,30 +5,30 @@ import { useForm } from "react-hook-form";
 import { withRouter } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-// const AskAQuestion = () => {
+// const AnswerAQuestion = () => {
 //     // return (
-//     //     <AskAQuestionStyle>
+//     //     <AnswerAQuestionStyle>
 //     //         <div className="container">
 //     //
 //     //         <h1>Ask a question</h1>
 //     //             <Input type="email" placeholder="User name" />
 //     //     </div>
-//     //         </AskAQuestionStyle>
+//     //         </AnswerAQuestionStyle>
 //     // )
 //     const { register, handleSubmit } = useForm();
 //
 //
 //
 //     return (
-//         <AskAQuestionStyle>
+//         <AnswerAQuestionStyle>
 //         <h1>Ask a question</h1>
 //             <input type="text" ref={register} name="firstName" />
-//          </AskAQuestionStyle>
+//          </AnswerAQuestionStyle>
 //     )
 // }
-//  export default AskAQuestion;
+//  export default AnswerAQuestion;
 
-// function AskAQuestion(props) {
+// function AnswerAQuestion(props) {
 //
 //     const { register, handleSubmit } = useForm();
 //     const onFormSubmit  = data => console.log(data);
@@ -37,48 +37,40 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 //
 //
 //     return (
-//         <AskAQuestionStyle>
+//         <AnswerAQuestionStyle>
 //         <h1>Ask a question</h1>
 //
 //
 //                 <form onSubmit={handleSubmit(onFormSubmit, onErrors)}>
 //                     <input type="text" {...register('firstName')} name="firstName" />
 //                 </form>
-//          </AskAQuestionStyle>
+//          </AnswerAQuestionStyle>
 //     )
 // }
-//  // export default AskAQuestion;
+//  // export default AnswerAQuestion;
 //
 //
 // const rootElement = document.getElementById("root");
-// ReactDOM.render(<AskAQuestion />, rootElement);
+// ReactDOM.render(<AnswerAQuestion />, rootElement);
 //
-// export default withRouter(AskAQuestion)
+// export default withRouter(AnswerAQuestion)
 
 const AskAQuestion = () => {
-    const { register, handleSubmit, errors } = useForm();
-    const handleRegistration = (data) => console.log(data);
-    const handleError = (errors) => {};
-    const registerOptions = {
-        name: { required: "Name is required" },
-        email: { required: "Email is required" },
-        password: {
-            required: "Password is required",
-            minLength: {
-                value: 8,
-                message: "Password must have at least 8 characters"
-            }
-        }
-    };
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data) => console.log(data);
+
     return (
         <AskAQuestionStyle>
             <h1>Ask a question</h1>
-        <Form onSubmit={handleSubmit(handleRegistration, handleError)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
                 <Label>Question title</Label>
-                <Input name="title" {...register('title')} />
+                <Input
+                    name="title"
+                    required="true" {...register('title', { required: true })}
+                />
                 <small className="text-danger">
-                    {/*{errors.name && errors.name.message}*/}
+                    {errors.title && <p>Question title is required.</p>}
                 </small>
             </FormGroup>
             <FormGroup>
@@ -86,20 +78,20 @@ const AskAQuestion = () => {
                 <Input
                     type="textarea"
                     name="text"
-                    {...register('text')}
+                    {...register('text', { required: true })}
                 />
                 <small className="text-danger">
-                    {/*{errors.email && errors.email.message}*/}
+                    {errors.text && <p>Question text is required.</p>}
                 </small>
             </FormGroup>
             <FormGroup>
                 <Label>Keywords</Label>
                 <Input
                     name="keywords"
-                    {...register('keywords')}
+                    {...register('keywords', { required: true })}
                 />
                 <small className="text-danger">
-                    {/*{errors.password && errors.password.message}*/}
+                    {errors.keywords && <p>Keywords are required.</p>}
                 </small>
             </FormGroup>
             <div>
