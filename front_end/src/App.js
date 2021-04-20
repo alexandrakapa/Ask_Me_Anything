@@ -19,6 +19,7 @@ import AnswerAQuestion from './components/pages/AnswerAQuestion/AnswerAQuestion'
 import {AccountBox} from "./components/pages/accountBox";
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -29,58 +30,6 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-// function App() {
-//
-//     return (
-//         <Router>
-//             <div>
-//                 <nav>
-//                     <ul>
-//                         <li>
-//                             <Link to="/">Home</Link>
-//                         </li>
-//                         <li>
-//                             <Link to="/login">Login</Link>
-//                         </li>
-//                         <li>
-//                             <Link to="/users">Users</Link>
-//                         </li>
-//                     </ul>
-//                 </nav>
-//                 <Switch>
-//                     <Route path="/login">
-//                         <Login />
-//                     </Route>
-//                     <Route path="/users">
-//                         <Users />
-//                     </Route>
-//                     <Route path="/">
-//                         <Home />
-//                     </Route>
-//                 </Switch>
-//             </div>
-//         </Router>
-//     );
-// }
-// function Home() {
-//     return  <AppContainer>
-//         <LandingPage/>
-//     </AppContainer>
-// }
-//
-// function Login() {
-//     return  <AppContainer>
-//       <AccountBox/>
-//     </AppContainer>
-// }
-//
-// function Users() {
-//     return  <AppContainer>
-//         <LandingPage/>
-//     </AppContainer>
-// }
-//
-// export default App;
 
 const App = () => {
     return (
@@ -111,6 +60,9 @@ const App = () => {
                     </Route>
                     <Route path="/login" exact>
                         <AccountBox/>
+                    </Route>
+                    <Route path="/my_ask_me_anything" exact>
+                        <MyAskMeAnything/>
                     </Route>
                     <Redirect to="/" />
                 </Switch>

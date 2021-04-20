@@ -92,6 +92,14 @@ const Navbar = () => {
                         </NavLink>
                     </li>
 
+                    <li className="nav-item active">
+                        <NavLink className="nav-link" to="/my_ask_me_anything" exact>
+                            <i
+                                className="fas fa-reply">
+                            </i>MyProfile
+                        </NavLink>
+                    </li>
+
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/login" exact>
                             <i
