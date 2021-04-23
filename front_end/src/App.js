@@ -1,5 +1,5 @@
 import './App.css';
-import styled from "styled-components";
+// import styled from "styled-components";
 // import {AccountBox} from "./components/accountBox";
 import React from "react";
 import {
@@ -20,21 +20,13 @@ import {AccountBox} from "./components/pages/accountBox";
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
-
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
+import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
+import NavbarAfterLogin from './components/NavbarAfterLogin/NavbarAfterLogin';
 
 const App = () => {
     return (
         <Router>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <main>
                 <Switch>
                     <Route path="/" exact>
@@ -63,6 +55,9 @@ const App = () => {
                     </Route>
                     <Route path="/my_ask_me_anything" exact>
                         <MyAskMeAnything/>
+                    </Route>
+                    <Route path="/home" exact>
+                        <HomeAfterLogin/>
                     </Route>
                     <Redirect to="/" />
                 </Switch>

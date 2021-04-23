@@ -1,66 +1,15 @@
 import React from 'react'
 import {AskAQuestionStyle} from "../AskAQuestion/AskAQuestionStyle";
-import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { withRouter } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-
-// const AnswerAQuestion = () => {
-//     // return (
-//     //     <AnswerAQuestionStyle>
-//     //         <div className="container">
-//     //
-//     //         <h1>Ask a question</h1>
-//     //             <Input type="email" placeholder="User name" />
-//     //     </div>
-//     //         </AnswerAQuestionStyle>
-//     // )
-//     const { register, handleSubmit } = useForm();
-//
-//
-//
-//     return (
-//         <AnswerAQuestionStyle>
-//         <h1>Ask a question</h1>
-//             <input type="text" ref={register} name="firstName" />
-//          </AnswerAQuestionStyle>
-//     )
-// }
-//  export default AnswerAQuestion;
-
-// function AnswerAQuestion(props) {
-//
-//     const { register, handleSubmit } = useForm();
-//     const onFormSubmit  = data => console.log(data);
-//
-//     const onErrors = errors => console.error(errors);
-//
-//
-//     return (
-//         <AnswerAQuestionStyle>
-//         <h1>Ask a question</h1>
-//
-//
-//                 <form onSubmit={handleSubmit(onFormSubmit, onErrors)}>
-//                     <input type="text" {...register('firstName')} name="firstName" />
-//                 </form>
-//          </AnswerAQuestionStyle>
-//     )
-// }
-//  // export default AnswerAQuestion;
-//
-//
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<AnswerAQuestion />, rootElement);
-//
-// export default withRouter(AnswerAQuestion)
-
+import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 const AskAQuestion = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => console.log(data);
 
     return (
         <AskAQuestionStyle>
+            <NavbarAfterLogin/>
             <h1>Ask a question</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>

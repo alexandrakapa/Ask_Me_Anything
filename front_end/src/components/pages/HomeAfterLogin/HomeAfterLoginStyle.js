@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const HomeStyle = styled.div`
+export const HomeAfterLoginStyle = styled.div`
   h1 {
     line-height: 2;
     display: flex;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
     margin-top: 5%;
     color: #000000;
     font-size: 30px;
@@ -19,12 +19,7 @@ export const HomeStyle = styled.div`
   p {
     font-size: 15px;
   }
-
-  //* {
-  //  box-sizing: border-box;
-  //  height: 400px;
-  //
-  //}
+  
 
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -36,14 +31,13 @@ export const HomeStyle = styled.div`
     float: left;
     width: 25%;
     padding: 0 2%;
-    
   }
 
   /* Remove extra left and right margins, due to padding in columns */
 
   .row {
     margin: 2% -17%;
-   
+
   }
 
   /* Clear floats after the columns */

@@ -4,10 +4,8 @@ import ReactDOM from "react-dom";
 import { useForm, Controller } from "react-hook-form";
 import { withRouter } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import Select from "react-dropdown-select";
-import ReactSelect from "react-select";
-import {selectStyle2} from "../AnswerAQuestion/AnswerAQuestionStyle";
-import { MenuItem } from '@material-ui/core';
+import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
+
 
 const AnswerAQuestion = () => {
     const { register,control, handleSubmit, formState: { errors } } = useForm();
@@ -15,6 +13,9 @@ const AnswerAQuestion = () => {
     const [value, setValue] = useState("1");
     return (
         <AnswerAQuestionStyle>
+            <NavbarAfterLogin/>
+
+
             <h1>Answer a question</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
 

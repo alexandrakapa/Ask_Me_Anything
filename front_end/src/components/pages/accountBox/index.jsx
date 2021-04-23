@@ -4,7 +4,8 @@ import { LoginForm } from "./loginForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
-
+import {BrowserRouter as Router} from "react-router-dom";
+import Navbar from '../../Navbar/Navbar';
 
 
 const BoxContainer = styled.div`
@@ -130,6 +131,7 @@ export function AccountBox(props) {
 
     return (
         <AccountContext.Provider value={contextValue}>
+            <Navbar/>
             <BoxContainer>
                 <TopContainer>
                     <BackDrop
