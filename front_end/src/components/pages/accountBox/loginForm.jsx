@@ -10,7 +10,6 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useHistory } from "react-router";
-import Navbar from '../../Navbar/Navbar';
  export function LoginForm(props) {
 
      const emailRef = React.useRef();

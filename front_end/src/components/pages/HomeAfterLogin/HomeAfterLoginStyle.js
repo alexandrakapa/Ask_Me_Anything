@@ -19,11 +19,14 @@ export const HomeAfterLoginStyle = styled.div`
   p {
     font-size: 15px;
   }
-  
+
 
   body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: coral;
   }
+  
+
 
   /* Float four columns side by side */
 

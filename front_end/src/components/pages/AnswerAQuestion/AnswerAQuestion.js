@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import {AnswerAQuestionStyle} from "../AnswerAQuestion/AnswerAQuestionStyle";
-import ReactDOM from "react-dom";
-import { useForm, Controller } from "react-hook-form";
-import { withRouter } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 
 
 const AnswerAQuestion = () => {
-    const { register,control, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => console.log(data);
     const [value, setValue] = useState("1");
     return (

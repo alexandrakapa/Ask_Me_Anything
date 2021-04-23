@@ -4,9 +4,9 @@ import Navbar from '../../Navbar/Navbar';
 const Home = () => {
     return (
 
-        <HomeStyle>
+        <HomeStyle >
             <Navbar/>
-        <div className="container">
+        <div className="container" >
 
             <h1>Welcome to AskMeAnything</h1>
 
@@ -39,6 +39,7 @@ const Home = () => {
         </div>
 
             </HomeStyle>
+
     )
 }
 export default Home;

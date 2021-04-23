@@ -1,8 +1,8 @@
 import React , {useState, useEffect} from 'react'
 import './Navbar.css';
-import { NavLink } from 'react-router-dom';
-import $ from 'jquery';
-import { Button } from './Button';
+// import { NavLink } from 'react-router-dom';
+// import $ from 'jquery';
+// import { Button } from './Button';
 import { Link } from 'react-router-dom';
 // const Navbar = () => {
 //

@@ -7,7 +7,9 @@ function NavbarAfterLogin(props) {
     const [click, setClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const [button, setButton] = useState(true);
-
+    const username = localStorage.getItem('username');
+    console.log("here")
+    console.log(username);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
@@ -49,6 +51,9 @@ function NavbarAfterLogin(props) {
                     AskMeAnything
 
                 </Link>
+                <li className='username'>
+                    {username}
+                </li>
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
@@ -97,6 +102,7 @@ function NavbarAfterLogin(props) {
                             </i>Logout
                         </Link>
                     </li>
+
                 </ul>
                 {/*{button && <Button index='0'  onClick={logMeOut}>Sign Out</Button>}*/}
             </nav>

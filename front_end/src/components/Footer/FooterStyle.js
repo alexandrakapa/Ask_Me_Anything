@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Box = styled.div`
   //padding: 5px 20px;
   background: #ffffff;
+  //background: rgb(70,17,152);
+  //background: linear-gradient(325deg, rgba(70,17,152,1) 50%, rgba(91,255,106,1) 100%);
+
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -45,8 +48,9 @@ export const FooterLink = styled.a`
   margin-bottom: 20px;
   font-size: 18px;
   text-decoration: none;
+
   &:hover {
-    color: #3d0f82;
+    color: #1f1e1e;
     transition: 200ms ease-in;
   }
 `;

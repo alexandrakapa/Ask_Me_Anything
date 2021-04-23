@@ -1,26 +1,12 @@
 import React from 'react';
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
-import Navbar from "../../Navbar/Navbar";
 import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
 
 export default function HomeAfterLogin() {
     const tokf = localStorage.getItem('username');
     console.log("here")
     console.log(tokf);
-    var textStyle = {
-        position: 'absolute',
-        fontSize: '80px',
-        top: '58%',
-        left: '5%',
-        color: 'white'
-    };
-    var textStyle2 = {
-        position: 'absolute',
-        fontSize: '80px',
-        top: '70%',
-        left: '5%',
-        color: 'white'
-    };
+
     return (
 
         <HomeAfterLoginStyle>

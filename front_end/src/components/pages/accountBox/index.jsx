@@ -4,7 +4,6 @@ import { LoginForm } from "./loginForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
-import {BrowserRouter as Router} from "react-router-dom";
 import Navbar from '../../Navbar/Navbar';
 
 
@@ -12,7 +11,7 @@ const BoxContainer = styled.div`
   justify-content: center;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 5%;
+  margin-top: 3%;
   width: 30%;
   min-height: 550px;
   display: flex;

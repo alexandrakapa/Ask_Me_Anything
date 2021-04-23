@@ -17,17 +17,17 @@ import Testimonial from './components/pages/Testimonial/Testimonial';
 import AskAQuestion from './components/pages/AskAQuestion/AskAQuestion';
 import AnswerAQuestion from './components/pages/AnswerAQuestion/AnswerAQuestion';
 import {AccountBox} from "./components/pages/accountBox";
-import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
 import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
-import NavbarAfterLogin from './components/NavbarAfterLogin/NavbarAfterLogin';
+
 
 const App = () => {
     return (
-        <Router>
+        <div className="body">
+        <Router >
             {/*<Navbar/>*/}
-            <main>
+            <main >
                 <Switch>
                     <Route path="/" exact>
                         <Home/>
@@ -62,8 +62,9 @@ const App = () => {
                     <Redirect to="/" />
                 </Switch>
             </main>
-            {/*<Footer/>*/}
+            <Footer/>
         </Router>
+        </div>
     );
 }
 

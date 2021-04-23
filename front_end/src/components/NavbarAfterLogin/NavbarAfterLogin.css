@@ -13,7 +13,7 @@
 
 
 .navbar-logo {
-    color: #fff;
+    color: #ffffff;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -39,8 +39,17 @@
     height: 80px;
 }
 
-.nav-links {
+.username {
+    display: flex;
+    align-items: center;
+    height: 80px;
     color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.nav-links {
+    color: #ffffff;
     text-decoration: none;
     padding: 0.5rem 1rem;
 }
@@ -49,10 +58,11 @@
     background-color: #9b75cd;
     border-radius: 4px;
     transition: all 0.2s ease-out;
+    color: #030000;
 }
 
 .fa-bars {
-    color: #fff;
+    color: #ffffff;
 }
 
 .nav-links-mobile {

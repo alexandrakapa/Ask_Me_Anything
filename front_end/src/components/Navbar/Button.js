@@ -22,7 +22,7 @@ export const Button = ({
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
     const checkindex=INDEX.includes(index)? index: INDEX[1];
 
-    if(checkindex=='0'){
+    if(checkindex==='0'){
         return (
             <Link className='btn-mobile'>
                 <button

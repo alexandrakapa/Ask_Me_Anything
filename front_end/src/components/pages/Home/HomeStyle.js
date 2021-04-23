@@ -28,6 +28,7 @@ export const HomeStyle = styled.div`
 
   body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #282c34;
   }
 
   /* Float four columns side by side */
