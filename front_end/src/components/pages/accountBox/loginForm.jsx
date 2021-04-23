@@ -1,18 +1,15 @@
 import React, { useContext } from "react";
-import {useState} from 'react';
 import {
     BoldLink,
     BoxContainer,
     FormContainer,
     Input,
-    InputLabel,
     MutedLink,
     SubmitButton,
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useHistory } from "react-router";
-
  export function LoginForm(props) {
 
      const emailRef = React.useRef();
@@ -45,15 +42,19 @@ import { useHistory } from "react-router";
                         // this.props.setUserData(json.accessToken, json.username);
                 if(json.token!=="" ) {
                     localStorage.setItem('token', json.token);
+                    localStorage.setItem('username', empInfo.username);
                     history.push({
-                        pathname:  "/ask_a_question"
+                        pathname:  "/home"
                     });
                 }
-                localStorage.setItem('token', json.token);
+                // localStorage.setItem('token', json.token);
                 const tok = localStorage.getItem('token');
                 console.log("here")
                 console.log(tok);
-
+                // localStorage.setItem('username', json.username);
+                const tokf = localStorage.getItem('username');
+                console.log("here")
+                console.log(tokf);
 
                 // console.log(json.token)
                 }
@@ -63,6 +64,8 @@ import { useHistory } from "react-router";
 
 
         return (
+
+            // <Navbar/>
             <BoxContainer>
                 <FormContainer>
                         <Input

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const AskAQuestionStyle = styled.div`
 
+   
+   
 .error {
    color: red;
    font-family: sans-serif;

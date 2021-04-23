@@ -1,9 +1,11 @@
 import React from 'react'
 import {MyAskMeAnythingStyle} from './MyAskMeAnythingStyle'
+import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 
 const MyAskMeAnything = () => {
     return (
         <MyAskMeAnythingStyle>
+            <NavbarAfterLogin/>
         <div className="container">
 
             <h1>My AskMeAnything</h1>

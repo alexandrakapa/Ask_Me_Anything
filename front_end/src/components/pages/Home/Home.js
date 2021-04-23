@@ -1,10 +1,12 @@
 import React from 'react'
 import {HomeStyle} from './HomeStyle'
-
+import Navbar from '../../Navbar/Navbar';
 const Home = () => {
     return (
-        <HomeStyle>
-        <div className="container">
+
+        <HomeStyle >
+            <Navbar/>
+        <div className="container" >
 
             <h1>Welcome to AskMeAnything</h1>
 
@@ -37,6 +39,7 @@ const Home = () => {
         </div>
 
             </HomeStyle>
+
     )
 }
 export default Home;

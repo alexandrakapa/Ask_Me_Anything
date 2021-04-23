@@ -1,5 +1,5 @@
 import './App.css';
-import styled from "styled-components";
+// import styled from "styled-components";
 // import {AccountBox} from "./components/accountBox";
 import React from "react";
 import {
@@ -17,25 +17,17 @@ import Testimonial from './components/pages/Testimonial/Testimonial';
 import AskAQuestion from './components/pages/AskAQuestion/AskAQuestion';
 import AnswerAQuestion from './components/pages/AnswerAQuestion/AnswerAQuestion';
 import {AccountBox} from "./components/pages/accountBox";
-import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
-
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
 
 
 const App = () => {
     return (
-        <Router>
-            <Navbar/>
-            <main>
+        <div className="body">
+        <Router >
+            {/*<Navbar/>*/}
+            <main >
                 <Switch>
                     <Route path="/" exact>
                         <Home/>
@@ -64,11 +56,15 @@ const App = () => {
                     <Route path="/my_ask_me_anything" exact>
                         <MyAskMeAnything/>
                     </Route>
+                    <Route path="/home" exact>
+                        <HomeAfterLogin/>
+                    </Route>
                     <Redirect to="/" />
                 </Switch>
             </main>
-            {/*<Footer/>*/}
+            <Footer/>
         </Router>
+        </div>
     );
 }
 
