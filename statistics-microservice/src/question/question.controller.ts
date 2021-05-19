@@ -17,6 +17,11 @@ export class QuestionController {
     this.questionService.create(newQuestion);
   }
 
+  @Get('byDay')
+  async getByDay():Promise<Question[]>{
+    return await this.questionService.findByDay();
+  }
+
   @Get('byKeyword')
   async getByKeyword():Promise<Question[]>{
     return await this.questionService.findByKeyword();
