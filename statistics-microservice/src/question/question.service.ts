@@ -12,7 +12,7 @@ export class QuestionService {
   // }
 
   async findAll(): Promise<Question[]> {
-    return this.questionRepo.find({ relations: ["answers"] });
+    return this.questionRepo.find();
   }
 
   async create(newQuestion){
