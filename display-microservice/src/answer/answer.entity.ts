@@ -1,7 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Company } from '../companies/company.entity';
 import { Question } from '../question/question.entity';
-import { User } from '../user/user.entity';
 
 @Entity()
 export class Answer {
@@ -15,8 +13,9 @@ export class Answer {
   @CreateDateColumn()
   answeredOn: Date;
 
-  @ManyToOne(() => User, (answeredFrom) => answeredFrom.answers)
-  public answeredFrom: User;
+  @Column()
+  answeredFrom: number;
+
 
   @ManyToOne(() => Question, (isAnAnswerOf) => isAnAnswerOf.answers)
   public isAnAnswerOf: Question;
