@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { Question } from './question.entity';
 
@@ -10,6 +10,22 @@ export class QuestionController {
   async getAll():Promise<Question[]>{
     return await this.questionService.findAll();
   }
+
+  @Get('user/:askedFrom')
+  findOneByUser(@Param('askedFrom', ParseIntPipe) askedFrom: number): Promise<Question> {
+    return this.questionService.findQuestionByUser(askedFrom);
+  }
+
+  @Get('user/all/:askedFrom')
+  findAllByUser(@Param('askedFrom', ParseIntPipe) askedFrom: number): Promise<Question[]> {
+    return this.questionService.findQuestionsByUser(askedFrom);
+  }
+
+  @Get(':question_id')
+  findOneById(@Param('question_id', ParseIntPipe) question_id: number): Promise<Question> {
+    return this.questionService.findQuestionById(question_id);
+  }
+
 
   @Post('add')
   @HttpCode(201)
