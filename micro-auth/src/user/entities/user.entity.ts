@@ -1,9 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, Unique } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  Unique,
+} from 'typeorm';
 import { sha512 } from 'sha512-crypt-ts';
 import { randomBytes } from 'crypto';
 @Entity('User')
 export class UserEntity {
-  @PrimaryGeneratedColumn('uuid') id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column('varchar', { length: 500, unique: false })
   FirstName: string;

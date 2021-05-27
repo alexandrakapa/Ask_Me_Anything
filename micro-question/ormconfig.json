@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "qna_admin",
+  "password": "1999",
+  "database": "micro_question_db",
+  "entities": ["dist/**/*.entity.js"],
+  "seeds": ["create-user.seed.ts"],
+  "factories": ["user.factory.ts"],
+  "synchronize": true,
+  "logging": true
+}
