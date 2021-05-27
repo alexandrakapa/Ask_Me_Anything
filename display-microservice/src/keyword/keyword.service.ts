@@ -16,7 +16,12 @@ export class KeywordService {
   //   return this.employeeRepo.find({ relations: ["company"] });
   // }
 
-  create(newKeyword){
-    this.keywordRepo.insert(newKeyword)
+  // create(newKeyword){
+  //   this.keywordRepo.insert(newKeyword)
+  // }
+
+  create(data){
+    return this.keywordRepo.insert(data)
   }
+
 }
