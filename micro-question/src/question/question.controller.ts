@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { QuestionService } from './question.service';
 import { CreateQuestionDto } from './dto/create-question.dto';
@@ -6,7 +6,7 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from '../question/entities/question.entity';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller()
+@Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
@@ -14,10 +14,16 @@ export class QuestionController {
   // create(@Payload() createQuestionDto: CreateQuestionDto) {
   //   return this.questionService.create(createQuestionDto);
   // }
-  @UseGuards(AuthGuard('jwt'))
+
+  // @UseGuards(AuthGuard('jwt'))
   @Post('create')
   async addProduct(@Body() body: Question) {
+    console.log(body.title);
+    console.log(body.text);
+    console.log(body.askedOn);
+    console.log(body.askedFrom);
     console.log(body.keywords);
+
     const generatedId = this.questionService.createQuestion(
       body.title,
       body.text,
@@ -27,12 +33,13 @@ export class QuestionController {
     );
     // return generatedId;
   }
-  //
+
   // @MessagePattern('findAllQuestion')
-  //
-  // findAll() {
-  //   return this.questionService.findAll();
-  // }
+  // @UseGuards(AuthGuard('jwt'))
+  @Get()
+  async getAll():Promise<Question[]>{
+    return await this.questionService.findAll();
+  }
   //
   // @MessagePattern('findOneQuestion')
   // findOne(@Payload() id: number) {

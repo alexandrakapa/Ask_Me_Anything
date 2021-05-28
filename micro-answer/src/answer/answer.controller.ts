@@ -6,10 +6,10 @@ import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { Answer } from '../answer/entities/answer.entity';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller()
+@Controller('answer')
 export class AnswerController {
   constructor(private readonly answerService: AnswerService) {}
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('create')
   create(@Body() createQuizDto: CreateAnswerDto): Promise<Answer> {
     return this.answerService.create(createQuizDto);

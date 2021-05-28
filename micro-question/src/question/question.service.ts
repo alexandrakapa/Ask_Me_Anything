@@ -4,12 +4,13 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 import { getManager } from 'typeorm';
 import { Keyword } from '../keyword/keyword.entity';
 import { Question } from './entities/question.entity';
-import { InjectEntityManager } from '@nestjs/typeorm';
-import { EntityManager } from 'typeorm';
+import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm";
+import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class QuestionService {
-  constructor(@InjectEntityManager() private manager: EntityManager) {}
+  constructor(@InjectRepository(Question) private questionRepo: Repository<Question>,
+              @InjectEntityManager() private manager: EntityManager) {}
 
   async createQuestion(title, text, date, user, keywords) {
     const keys = [];
@@ -33,6 +34,7 @@ export class QuestionService {
     question.askedOn = date;
     question.askedFrom = user;
     question.keywords = keys;
+    // console.log(question.question_id)
     await this.manager.save(question);
 
   }
@@ -40,8 +42,9 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  findAll() {
-    return `This action returns all question`;
+
+  findAll(): Promise<Question[]> {
+    return this.questionRepo.find({relations: ["keywords"]});
   }
 
   findOne(id: number) {
