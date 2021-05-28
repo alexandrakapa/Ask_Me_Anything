@@ -13,18 +13,33 @@ export class QuestionService {
 
   async createQuestion(title, text, date, user, keywords) {
     const keys = [];
-    for (let i = 0; i < keywords.length; i++) {
+    if(typeof keywords == "string"){
       const cur_key = await getManager()
         .createQueryBuilder(Keyword, 'keyword')
-        .where('keyword_phrase = :phrase', { phrase: keywords[i] })
+        .where('keyword_phrase = :phrase', { phrase: keywords })
         .getOne();
       if (cur_key) {
         keys.push(cur_key);
       } else {
         const keyword = new Keyword();
-        keyword.keyword_phrase = keywords[i];
+        keyword.keyword_phrase = keywords;
         await this.manager.save(keyword);
         keys.push(keyword);
+      }
+    } else {
+      for (let i = 0; i < keywords.length; i++) {
+        const cur_key = await getManager()
+          .createQueryBuilder(Keyword, 'keyword')
+          .where('keyword_phrase = :phrase', { phrase: keywords[i] })
+          .getOne();
+        if (cur_key) {
+          keys.push(cur_key);
+        } else {
+          const keyword = new Keyword();
+          keyword.keyword_phrase = keywords[i];
+          await this.manager.save(keyword);
+          keys.push(keyword);
+        }
       }
     }
     const question = new Question();
@@ -34,7 +49,6 @@ export class QuestionService {
     question.askedFrom = user;
     question.keywords = keys;
     await this.manager.save(question);
-
   }
   create(createQuestionDto: CreateQuestionDto) {
     return 'This action adds a new question';
