@@ -27,12 +27,4 @@ export class QuestionService {
   }
 
 
-  // findByDay(): Observable<AxiosResponse<any>> {
-  //   return this.httpService.get('http://localhost:3000/question/statistics/byDay')
-  //     .pipe(
-  //       map(response => response.data),
-  //     );
-  // }
-
-
 }

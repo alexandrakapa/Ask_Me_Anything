@@ -36,6 +36,9 @@ let QuestionController = class QuestionController {
     async getByDay() {
         return await this.questionService.findByDay();
     }
+    async getByKeyword() {
+        return await this.questionService.findByKeyword();
+    }
 };
 __decorate([
     common_1.Get('andanswers'),
@@ -63,6 +66,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getByDay", null);
+__decorate([
+    common_1.Get('statistics/byKeyword'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getByKeyword", null);
 QuestionController = __decorate([
     common_1.Controller('question'),
     __metadata("design:paramtypes", [question_service_1.QuestionService])

@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Answer } from "../answer/answer.entity";
 import { Question } from "../question/question.entity";
 
@@ -24,4 +24,5 @@ export class User {
 
   @OneToMany(() => Answer, (answer) => answer.answeredFrom)
   public answers: Answer[];
+
 }

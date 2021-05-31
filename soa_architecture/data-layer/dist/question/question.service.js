@@ -80,6 +80,17 @@ let QuestionService = class QuestionService {
         console.log(qb.getSql());
         return qb.getRawMany();
     }
+    async findByKeyword() {
+        const qb = await this.questionRepo
+            .createQueryBuilder("question")
+            .select(`keyword.keyword_id,"keyword_phrase", COUNT(question.question_id) AS count`)
+            .innerJoin('question_keyword', 'question_keyword', 'question.question_id = question_keyword.question_id')
+            .innerJoin('keyword', 'keyword', 'question_keyword.keyword_id = keyword.keyword_id')
+            .groupBy(`keyword.keyword_id`)
+            .orderBy(`count`);
+        console.log(qb.getSql());
+        return qb.getRawMany();
+    }
 };
 QuestionService = __decorate([
     common_1.Injectable(),

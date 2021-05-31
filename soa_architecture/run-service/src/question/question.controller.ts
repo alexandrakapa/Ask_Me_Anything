@@ -21,8 +21,4 @@ export class QuestionController {
     return this.questionService.createQuestion(body)
   }
 
-  // @Get('statistics/byDay')  //for statistics by day
-  // async getByDay():Promise<any>{
-  //   return await this.questionService.findByDay();
-  // }
 }

@@ -7,4 +7,5 @@ export declare class QuestionController {
     findAllByUser(askedFrom: number): Promise<Question[]>;
     addQuestion(body: Question): Promise<void>;
     getByDay(): Promise<Question[]>;
+    getByKeyword(): Promise<Question[]>;
 }

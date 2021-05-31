@@ -8,4 +8,5 @@ export declare class QuestionService {
     findAllQuestionsByUser(askedFrom: any): Promise<Question[]>;
     createQuestion(title: any, text: any, user: any, keywords: any): Promise<void>;
     findByDay(): Promise<Question[]>;
+    findByKeyword(): Promise<Question[]>;
 }

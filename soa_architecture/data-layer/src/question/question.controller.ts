@@ -36,4 +36,9 @@ export class QuestionController {
     return await this.questionService.findByDay();
   }
 
+  @Get('statistics/byKeyword')
+  async getByKeyword():Promise<Question[]>{
+    return await this.questionService.findByKeyword();
+  }
+
 }
