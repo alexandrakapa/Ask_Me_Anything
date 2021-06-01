@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { AnswerService } from './answer.service';
 import { CreateAnswerDto } from './dto/create-answer.dto';
@@ -6,10 +6,10 @@ import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { Answer } from '../answer/entities/answer.entity';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller()
+@Controller('answer')
 export class AnswerController {
   constructor(private readonly answerService: AnswerService) {}
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('create')
   create(@Body() createQuizDto: CreateAnswerDto): Promise<Answer> {
     return this.answerService.create(createQuizDto);
@@ -17,7 +17,7 @@ export class AnswerController {
   @Post('bus')
   async getEvent(@Req() req, @Res() res) {
     console.log(req.body.id);
-    this.answerService.makeQuestion(req.body.id);
+    await this.answerService.makeQuestion(req.body.id);
   }
   // @MessagePattern('createAnswer')
   // create(@Payload() createAnswerDto: CreateAnswerDto) {

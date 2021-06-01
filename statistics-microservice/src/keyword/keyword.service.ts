@@ -18,6 +18,6 @@ export class KeywordService {
 
   create(newKeyword){
     this.keywordRepo.insert(newKeyword)
-    console.log(newKeyword)
+    // console.log(newKeyword)
   }
 }

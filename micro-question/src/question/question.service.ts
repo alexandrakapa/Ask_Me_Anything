@@ -14,6 +14,7 @@ export class QuestionService {
     @InjectEntityManager() private manager: EntityManager,
     private httpService: HttpService,
   ) {}
+
   async createQuestion(title, text, date, user, keywords) {
     const keys = [];
     if (typeof keywords == 'string') {
@@ -60,7 +61,6 @@ export class QuestionService {
         {
           title: title,
           text: text,
-          askedOn: date,
           askedFrom: user,
           keywords: keys,
         },
@@ -71,6 +71,7 @@ export class QuestionService {
     return this.httpService
       .post('http://localhost:3200/bus', { id: new_question.raw[0].question_id, channel:0})
       .toPromise();
+
   }
 
 
@@ -78,19 +79,20 @@ export class QuestionService {
     return 'This action adds a new question';
   }
 
-  findAll() {
-    return `This action returns all question`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
-  }
-
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
-    return `This action updates a #${id} question`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} question`;
-  }
+//   findAll(): Promise<Question[]> {
+  //     return this.questionRepo.find({relations: ["keywords"]});
+//   }
+//
+//   findOne(id: number) {
+//     return `This action returns a #${id} question`;
+//   }
+//
+//   update(id: number, updateQuestionDto: UpdateQuestionDto) {
+//     return `This action updates a #${id} question`;
+//   }
+//
+//   remove(id: number) {
+//     return `This action removes a #${id} question`;
+//   }
 }
