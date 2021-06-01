@@ -18,7 +18,7 @@ export class AnswerService implements OnModuleInit {
     console.log("here: "+subs);
     console.log("middle: "+subs[0]);
     let found = false;
-    const my_addr = 'http://localhost:3400/bus';
+    const my_addr = 'http://localhost:3003/answer/bus';
     for (let i = 0; i < subs[0].length; i++) {
       if(subs[0][i] == my_addr){
         found=true;

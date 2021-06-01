@@ -15,7 +15,7 @@ export class QuestionController {
   //   return this.questionService.create(createQuestionDto);
   // }
 
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Post('create')
   async addProduct(@Body() body: Question) {
     console.log(body.title);
@@ -36,10 +36,10 @@ export class QuestionController {
 
   // @MessagePattern('findAllQuestion')
   // @UseGuards(AuthGuard('jwt'))
-  @Get()
-  async getAll():Promise<Question[]>{
-    return await this.questionService.findAll();
-  }
+  // @Get()
+  // async getAll():Promise<Question[]>{
+  //   return await this.questionService.findAll();
+  // }
   //
   // @MessagePattern('findOneQuestion')
   // findOne(@Payload() id: number) {
