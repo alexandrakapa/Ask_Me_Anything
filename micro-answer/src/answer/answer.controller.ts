@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res, UseGuards } from "@nestjs/common";
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { AnswerService } from './answer.service';
 import { CreateAnswerDto } from './dto/create-answer.dto';
@@ -13,6 +13,11 @@ export class AnswerController {
   @Post('create')
   create(@Body() createQuizDto: CreateAnswerDto): Promise<Answer> {
     return this.answerService.create(createQuizDto);
+  }
+  @Post('bus')
+  async getEvent(@Req() req, @Res() res) {
+    console.log(req.body.id);
+    this.answerService.makeQuestion(req.body.id);
   }
   // @MessagePattern('createAnswer')
   // create(@Payload() createAnswerDto: CreateAnswerDto) {
