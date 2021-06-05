@@ -172,6 +172,18 @@ function Navbar(props) {
 
                     <li className='nav-item'>
                         <Link
+                            to='/display'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            <i
+                                className="fas fa-search">
+                            </i>View Questions and Answers
+                        </Link>
+                    </li>
+
+                    <li className='nav-item'>
+                        <Link
                             to='/login'
                             className='nav-links'
                             onClick={closeMobileMenu}
@@ -181,6 +193,7 @@ function Navbar(props) {
                             </i>Login
                         </Link>
                     </li>
+
                 </ul>
                 {/*{button && <Button index='0'  onClick={logMeOut}>Sign Out</Button>}*/}
             </nav>

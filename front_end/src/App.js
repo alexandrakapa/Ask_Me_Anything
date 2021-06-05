@@ -20,7 +20,7 @@ import {AccountBox} from "./components/pages/accountBox";
 import Footer from './components/Footer/Footer';
 import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
 import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
-
+import DisplayQuestionsAndAnswers from './components/pages/DisplayQuestionsAndAnswers/DisplayQuestionsAndAnswers';
 
 const App = () => {
     return (
@@ -58,6 +58,9 @@ const App = () => {
                     </Route>
                     <Route path="/home" exact>
                         <HomeAfterLogin/>
+                    </Route>
+                    <Route path="/display" exact>
+                        <DisplayQuestionsAndAnswers/>
                     </Route>
                     <Redirect to="/" />
                 </Switch>

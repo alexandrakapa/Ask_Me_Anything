@@ -35,7 +35,10 @@ const Home = () => {
                 </div>
             </div>
 
-
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </div>
 
             </HomeStyle>
