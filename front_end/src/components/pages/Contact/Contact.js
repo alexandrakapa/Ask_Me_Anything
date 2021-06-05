@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import Table from '@empd/reactable';
+// import Table from '@empd/reactable';
 import '@empd/reactable/lib/styles.css';
 import {columns} from './ContactColumns';
 import  Muitable  from "./MuidataTable";
@@ -21,8 +21,8 @@ import NavbarAfterLogin from "../../NavbarAfterLogin/NavbarAfterLogin";
 export default function Contact() {
     // const [error, setError] = useState(null);
     // const [isLoaded, setIsLoaded] = useState(false);
-    const [answer, setAnswer] = useState([]);
-    const [general, setGeneral] = useState([])
+    // const [answer, setAnswer] = useState([]);
+    // const [general, setGeneral] = useState([])
     const [data, setData] = useState([])
 
     // Note: the empty deps array [] means

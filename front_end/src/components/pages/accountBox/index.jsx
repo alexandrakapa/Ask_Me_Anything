@@ -157,6 +157,9 @@ export function AccountBox(props) {
                     {active === "signup" && <SignupForm />}
                 </InnerContainer>
             </BoxContainer>
+            <br/>
+            <br/>
+
         </AccountContext.Provider>
     );
 }

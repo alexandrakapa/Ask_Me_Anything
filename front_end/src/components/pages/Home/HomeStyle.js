@@ -20,11 +20,10 @@ export const HomeStyle = styled.div`
     font-size: 15px;
   }
 
-  //* {
-  //  box-sizing: border-box;
-  //  height: 400px;
-  //
-  //}
+  label {
+    font-size: 35px;
+    margin-left:30%;
+  }
 
   body {
     font-family: Arial, Helvetica, sans-serif;
@@ -38,6 +37,20 @@ export const HomeStyle = styled.div`
     width: 25%;
     padding: 0 2%;
     
+  }
+
+  .boxleft {
+    float: left;
+    width: 50%;
+    padding: 0 2%;
+    margin-top:5%;
+  }
+
+  .boxright {
+    float: right;
+    width: 50%;
+    padding: 0 2%;
+    margin-top:5%;
   }
 
   /* Remove extra left and right margins, due to padding in columns */

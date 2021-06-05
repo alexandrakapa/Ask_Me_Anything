@@ -5,9 +5,9 @@ import {
     Row,
     Column,
     FooterLink,
-    Heading,
+    // Heading,
 } from "./FooterStyle";
-import {NavLink} from "react-router-dom";
+// import {NavLink} from "react-router-dom";
 
 const Footer = () => {
     return (

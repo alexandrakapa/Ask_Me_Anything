@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './NavbarAfterLogin.css';
 import {Link, NavLink} from 'react-router-dom';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 function NavbarAfterLogin(props) {
     const [click, setClick] = useState(false);
