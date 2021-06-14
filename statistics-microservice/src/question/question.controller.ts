@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { Question } from './question.entity';
 
@@ -26,4 +26,15 @@ export class QuestionController {
   async getByKeyword():Promise<Question[]>{
     return await this.questionService.findByKeyword();
   }
+
+  @Get('byDay/:user')
+  async getByDayUser(@Param('user') user):Promise<Question[]>{
+    return await this.questionService.findByDayUser(user)
+  }
+
+  @Get('byKeyword/:user')
+  async getByKeywordUser(@Param('user') user):Promise<Question[]>{
+    return await this.questionService.findByKeywordUser(user)
+  }
+
 }

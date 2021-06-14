@@ -36,7 +36,9 @@ import { useHistory } from "react-router";
         fetch('http://localhost:8001/signin',{
             method: 'POST',
             body: JSON.stringify(empInfo),
-            headers:{'Content-type':'application/json'}
+            headers:{
+                // "Access-Control-Allow-Origin": "*",
+                'Content-type':'application/json'}
         }).then(res => res.json() )
             .then( json => {
                         // this.props.setUserData(json.accessToken, json.username);
@@ -44,7 +46,7 @@ import { useHistory } from "react-router";
                     localStorage.setItem('token', json.token);
                     localStorage.setItem('username', empInfo.username);
                     history.push({
-                        pathname:  "/home"
+                        pathname:  "/home/user"
                     });
                 }
                 // localStorage.setItem('token', json.token);

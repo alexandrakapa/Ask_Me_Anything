@@ -1,54 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
-import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
-import {HomeStyle} from "../Home/HomeStyle";
-import Navbar from "../../Navbar/Navbar";
+import {ProfileStyle} from "../Profile/ProfileStyle";
 import {Bar, Line} from "react-chartjs-2";
+import cubejs from "@cubejs-client/core";
+// import { CubeProvider, useCubeQuery } from "@cubejs-client/react";
+// import "chartjs-plugin-colorschemes";
+// import { RdPu4 } from "chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer";
+//
+// import moment from "moment";
 
-export default function HomeAfterLogin() {
+export default function Profile() {
     const tokf = localStorage.getItem('username');
     console.log("here")
     console.log(tokf);
-
-    // return (
-    //
-    //     <HomeAfterLoginStyle>
-    //         <NavbarAfterLogin/>
-    //         <div className="container">
-    //
-    //             <h1>Welcome to AskMeAnything</h1>
-    //
-    //             <div className="row">
-    //                 <div className="column">
-    //                     <div className="card">
-    //                         <h3>Questions per keyword</h3>
-    //                         <p>graph/table</p>
-    //                     </div>
-    //                 </div>
-    //                 <div className="column">
-    //                     <div className="card">
-    //                         <h3> Questions per day/period</h3>
-    //                         <p>graph/table</p>
-    //                     </div>
-    //                 </div>
-    //                 <div className="column">
-    //                     <div className="card">
-    //                         <h3>Ask a new question</h3>
-    //                     </div>
-    //                 </div>
-    //                 <div className="column">
-    //                     <div className="card">
-    //                         <h3>Answer a question</h3>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         <br/>
-    //         <br/>
-    //
-    //         </div>
-    //
-    //     </HomeAfterLoginStyle>);
-
 
     const [labels, setLabels] = useState([]);
     const [phrase, setPhrase] = useState([]);
@@ -81,7 +45,7 @@ export default function HomeAfterLogin() {
         //for the second diagram
         fetch(`http://localhost:3001/question/byDay/6`)
             .then(response => {
-                    return response.json()
+                return response.json()
             })
             .then(fetchedData2 => {
 
@@ -130,10 +94,46 @@ export default function HomeAfterLogin() {
             }
         ]
     }
+    //for the third diagram
+    // const { resultSet } = useCubeQuery({
+    //     measures: ["Orders.count"],
+    //     dimensions: ["ProductCategories.name"],
+    //     filters: [
+    //         {
+    //             member: "ProductCategories.name",
+    //             operator: "equals",
+    //             values: ["Beauty", "Clothing", "Computers", "Electronics"]
+    //         }
+    //     ],
+    //     timeDimensions: [
+    //         {
+    //             dimension: "Orders.createdAt",
+    //             granularity: "month",
+    //             dateRange: "last 6 month"
+    //         }
+    //     ]
+    // });
+
+
+
+    //Transform data for visualization
+    // const labelss = resultSet
+    //     .seriesNames({
+    //         x: [],
+    //         y: ["Orders.createdAt"]
+    //     })
+    //     .map((column) => moment(column.yValues[0]).format("MMMM"));
+    //
+    // const datasets = resultSet.series().map((item, i) => {
+    //     return {
+    //         label: item.title,
+    //         data: item.series.map((item) => item.value)
+    //     };
+    // });
 
 
     return (
-        <HomeAfterLoginStyle >
+        <ProfileStyle >
             <NavbarAfterLogin/>
             <div className="boxleft">
                 <label>My Questions per keyword</label>
@@ -141,11 +141,6 @@ export default function HomeAfterLogin() {
                     data={state}
 
                     options={{
-                        title:{
-                            display:true,
-                            text:'Average',
-                            fontSize:50
-                        },
                         legend:{
                             display:true,
                             position:'right'
@@ -154,24 +149,44 @@ export default function HomeAfterLogin() {
                 />
             </div>
 
-            <div className="boxright">
-                <label>My Questions per day</label>
-                <Line
-                    data={state2}
-                    options={{
-                        legend:{
-                            display:true,
-                            position:'right'
-                        }
-                    }}
-                />
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+            {/*<div className="boxright">*/}
+            {/*    <label>My Questions per day</label>*/}
+            {/*    <Line*/}
+            {/*        data={state2}*/}
+            {/*        options={{*/}
+            {/*            legend:{*/}
+            {/*                display:true,*/}
+            {/*                position:'right'*/}
+            {/*            }*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <br/>*/}
+            {/*    <br/>*/}
+            {/*    <br/>*/}
+            {/*    <br/>*/}
 
-            </div>
+            {/*</div>*/}
 
-        </HomeAfterLoginStyle >
+            {/*<div className="boxright">*/}
+            {/*<Bar*/}
+            {/*    data={{*/}
+            {/*        labelss,*/}
+            {/*        datasets*/}
+            {/*    }}*/}
+            {/*    options={{*/}
+            {/*        legend: {*/}
+            {/*            position: "bottom",*/}
+            {/*            align: "start"*/}
+            {/*        },*/}
+            {/*        plugins: {*/}
+            {/*            colorschemes: {*/}
+            {/*                scheme: RdPu4*/}
+            {/*            }*/}
+            {/*        }*/}
+            {/*    }}*/}
+            {/*/>*/}
+            {/*</div>*/}
+
+        </ProfileStyle >
     );
 }

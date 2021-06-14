@@ -19,6 +19,7 @@ import AnswerAQuestion from './components/pages/AnswerAQuestion/AnswerAQuestion'
 import {AccountBox} from "./components/pages/accountBox";
 import Footer from './components/Footer/Footer';
 import MyAskMeAnything from "./components/pages/MyAskMeAnything/MyAskMeAnything";
+import Profile from "./components/pages/Profile/Profile";
 import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
 import DisplayQuestionsAndAnswers from './components/pages/DisplayQuestionsAndAnswers/DisplayQuestionsAndAnswers';
 
@@ -56,8 +57,11 @@ const App = () => {
                     <Route path="/my_ask_me_anything" exact>
                         <MyAskMeAnything/>
                     </Route>
-                    <Route path="/home" exact>
+                    <Route path="/home/user" exact>
                         <HomeAfterLogin/>
+                    </Route>
+                    <Route path="/profile" exact>
+                        <Profile/>
                     </Route>
                     <Route path="/display" exact>
                         <DisplayQuestionsAndAnswers/>
@@ -65,7 +69,7 @@ const App = () => {
                     <Redirect to="/" />
                 </Switch>
             </main>
-            <Footer/>
+            {/*<Footer/>*/}
         </Router>
         </div>
     );
