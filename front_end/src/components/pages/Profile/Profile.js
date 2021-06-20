@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 import {ProfileStyle} from "../Profile/ProfileStyle";
 import {Bar, Line} from "react-chartjs-2";
-import cubejs from "@cubejs-client/core";
+// import cubejs from "@cubejs-client/core";
 // import { CubeProvider, useCubeQuery } from "@cubejs-client/react";
 // import "chartjs-plugin-colorschemes";
 // import { RdPu4 } from "chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer";

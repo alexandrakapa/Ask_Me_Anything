@@ -17,12 +17,12 @@ function AskAQuestion(props) {
     const [tags, setTags] = React.useState(["example tag"])
 
     const onSubmit = (data) => {
-        console.log(data);
-        if (true){
-            // console.log(data.title)
-            // console.log(data.text)
-            // console.log(data.keywords)
-            console.log(tags)
+         // console.log(data.keywords)
+            console.log(data);
+            if (true){
+                // console.log(data.title)
+                // console.log(data.text)
+                console.log(tags)
             // console.log(tags[0])
             props.history.push({
                 pathname: '/home/user',
@@ -79,13 +79,6 @@ function AskAQuestion(props) {
             </FormGroup>
             <FormGroup>
                 <Label>Keywords</Label>
-                {/*<Input*/}
-                {/*    name="keywords"*/}
-                {/*    {...register('keywords', { required: true })}*/}
-                {/*/>*/}
-                {/*<small className="text-danger">*/}
-                {/*    {errors.keywords && <p>Keywords are required.</p>}*/}
-                {/*</small>*/}
                 <ReactTagInput
                     tags={tags}
                     placeholder="Enter a keyword and press enter"
@@ -101,8 +94,6 @@ function AskAQuestion(props) {
             <Button type="cancel">Cancel</Button>
             </div>
         </Form>
-            <br/>
-            <br/>
             <br/>
         <Footer/>
 
