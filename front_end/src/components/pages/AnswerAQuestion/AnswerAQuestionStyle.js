@@ -33,7 +33,7 @@ export const AnswerAQuestionStyle = styled.div`
 
    Form {
       width: 100%;
-      margin-left: -1%;
+      //margin-left: -1%;
       margin-top: 1%;
    }
 
@@ -42,6 +42,20 @@ export const AnswerAQuestionStyle = styled.div`
       //margin-left: 30%;
       margin-top: 5%;
       //height: 100%;
+   }
+
+   textarea {
+      display: block;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 2px solid #474747;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      -webkit-transition: 0.5s;
+      transition: 0.5s;
+      margin-left : 13%;
+      width: 73%;
    }
 
 
@@ -86,7 +100,7 @@ export const AnswerAQuestionStyle = styled.div`
       color: #000000;
       font-size: 20px;
       font-weight: 200;
-      margin-left: 15%
+      margin-left: 13%
    }
 
    button[type="submit"],
@@ -102,7 +116,7 @@ export const AnswerAQuestionStyle = styled.div`
       letter-spacing: 10px;
       display: inline-block;
       margin-right: 3%;
-      margin-left: 15%;
+      margin-left: 13%;
    }
 
    button[type="cancel"],

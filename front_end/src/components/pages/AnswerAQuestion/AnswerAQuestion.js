@@ -9,7 +9,10 @@ import {Input} from "../accountBox/common";
 import { makeStyles } from "@material-ui/core/styles";
 import {Button, Form, Label} from "reactstrap";
 import {useForm} from "react-hook-form";
-import {AskAQuestionStyle} from "../AskAQuestion/AskAQuestionStyle";
+import '@empd/reactable/lib/styles.css';
+import {withRouter} from "react-router-dom";
+import  Muitable  from "./DisplayTable";
+import {columns} from './DisplayColumns';
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(2)
@@ -32,9 +35,10 @@ const useStyles = makeStyles(theme => ({
         }
     }
 }));
-
-const AnswerAQuestion = () => {
+function AnswerAQuestion(props) {
+// const AnswerAQuestion = () => {
     const [question, setQuestion] = useState([]);
+    const [answer, setAnswer] = useState([]);
 
 
     useEffect( () => {
@@ -47,8 +51,17 @@ const AnswerAQuestion = () => {
                 setQuestion(() => fetchedData)
                 console.log(fetchedData)
                 console.log(question)
+            })
 
+        fetch(`http://localhost:3000/answer/all/1`,{
+            // headers:{'Content-type':'application/json'}
+        })
+            .then(response => response.json())
+            .then(fetchedData => {
 
+                setAnswer(() => fetchedData)
+                console.log(fetchedData)
+                console.log(answer)
             })
 
     },[])
@@ -62,20 +75,7 @@ const AnswerAQuestion = () => {
             desc: question.text,
             askedOn: question.askedOn
         },
-      //   {
-      //       name: "Jonathan",
-      //       desc: `Lorem Ipsum is simply dummy text of the printing and typesetting
-      // industry. Lorem Ipsum has been the industry's standard dummy text ever
-      // since the 1500s, when an unknown printer took a galley of type and
-      // scrambled it to make a type specimen book.`
-      //   },
-      //   {
-      //       name: "Joshua",
-      //       desc: `Lorem Ipsum is simply dummy text of the printing and typesetting
-      // industry. Lorem Ipsum has been the industry's standard dummy text ever
-      // since the 1500s, when an unknown printer took a galley of type and
-      // scrambled it to make a type specimen book.`
-      //   }
+
     ];
 
     const renderPaper = ({ name,title, desc, askedOn }) => (
@@ -120,6 +120,23 @@ const AnswerAQuestion = () => {
     const onSubmit = (data) => {
         // console.log(data.keywords)
         console.log(data);
+        if (true){
+            props.history.push({
+                pathname: '/home/user',
+                state: { text : data.text, askedFrom: 1}
+            })
+            // const tok = localStorage.getItem('token');
+            fetch(`http://localhost:3003/answer/create`, {
+                method: 'POST',
+                headers: {
+                    // 'Accept': 'application/json',
+                    'Content-type':'application/json',
+                    // 'x-access-token':tok
+                },
+                body: JSON.stringify({ text : data.text, answeredFrom: 1, isAnAnswerOf: 3})
+
+            })
+        }
     }
 
     return (
@@ -135,8 +152,8 @@ const AnswerAQuestion = () => {
             </Grid>
             <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
-                <Label>Answer text</Label>
-                <Input
+                <Label>Please fill the form below with your answer:</Label>
+                <textarea
                     type="textarea"
                     name="text"
                     placeholder= "Enter the text of your answer"
@@ -146,8 +163,14 @@ const AnswerAQuestion = () => {
                 <Button type="submit">Submit</Button>
                 <Button type="cancel">Cancel</Button>
             </Form>
+
+            <div
+                style={{ marginLeft: '13%', marginRight: '14%', marginTop: '2%', marginBottom: '3%', padding:'2px'}}>
+                <Muitable data={answer} tableName={"Here are the answers of other users!"} columns={columns} />
+            </div>
             <Footer/>
         </AnswerAQuestionStyle>
     );
 };
-export default AnswerAQuestion;
+// export default AnswerAQuestion;
+export default withRouter(AnswerAQuestion)
