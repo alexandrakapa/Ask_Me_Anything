@@ -2,12 +2,8 @@ import React, {useEffect, useState} from 'react';
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 import {ProfileStyle} from "../Profile/ProfileStyle";
 import {Bar, Line} from "react-chartjs-2";
-// import cubejs from "@cubejs-client/core";
-// import { CubeProvider, useCubeQuery } from "@cubejs-client/react";
-// import "chartjs-plugin-colorschemes";
-// import { RdPu4 } from "chartjs-plugin-colorschemes/src/colorschemes/colorschemes.brewer";
-//
-// import moment from "moment";
+import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
+import Footer from "../../FooterAfterLogin/Footer";
 
 export default function Profile() {
     const tokf = localStorage.getItem('username');
@@ -94,42 +90,6 @@ export default function Profile() {
             }
         ]
     }
-    //for the third diagram
-    // const { resultSet } = useCubeQuery({
-    //     measures: ["Orders.count"],
-    //     dimensions: ["ProductCategories.name"],
-    //     filters: [
-    //         {
-    //             member: "ProductCategories.name",
-    //             operator: "equals",
-    //             values: ["Beauty", "Clothing", "Computers", "Electronics"]
-    //         }
-    //     ],
-    //     timeDimensions: [
-    //         {
-    //             dimension: "Orders.createdAt",
-    //             granularity: "month",
-    //             dateRange: "last 6 month"
-    //         }
-    //     ]
-    // });
-
-
-
-    //Transform data for visualization
-    // const labelss = resultSet
-    //     .seriesNames({
-    //         x: [],
-    //         y: ["Orders.createdAt"]
-    //     })
-    //     .map((column) => moment(column.yValues[0]).format("MMMM"));
-    //
-    // const datasets = resultSet.series().map((item, i) => {
-    //     return {
-    //         label: item.title,
-    //         data: item.series.map((item) => item.value)
-    //     };
-    // });
 
 
     return (
@@ -141,6 +101,11 @@ export default function Profile() {
                     data={state}
 
                     options={{
+                        title:{
+                            display:true,
+                            text:'Average',
+                            fontSize:50
+                        },
                         legend:{
                             display:true,
                             position:'right'
@@ -149,44 +114,24 @@ export default function Profile() {
                 />
             </div>
 
-            {/*<div className="boxright">*/}
-            {/*    <label>My Questions per day</label>*/}
-            {/*    <Line*/}
-            {/*        data={state2}*/}
-            {/*        options={{*/}
-            {/*            legend:{*/}
-            {/*                display:true,*/}
-            {/*                position:'right'*/}
-            {/*            }*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*    <br/>*/}
-            {/*    <br/>*/}
-            {/*    <br/>*/}
-            {/*    <br/>*/}
+            <div className="boxright">
+                <label>My Questions per day</label>
+                <Line
+                    data={state2}
+                    options={{
+                        legend:{
+                            display:true,
+                            position:'right'
+                        }
+                    }}
+                />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
 
-            {/*</div>*/}
-
-            {/*<div className="boxright">*/}
-            {/*<Bar*/}
-            {/*    data={{*/}
-            {/*        labelss,*/}
-            {/*        datasets*/}
-            {/*    }}*/}
-            {/*    options={{*/}
-            {/*        legend: {*/}
-            {/*            position: "bottom",*/}
-            {/*            align: "start"*/}
-            {/*        },*/}
-            {/*        plugins: {*/}
-            {/*            colorschemes: {*/}
-            {/*                scheme: RdPu4*/}
-            {/*            }*/}
-            {/*        }*/}
-            {/*    }}*/}
-            {/*/>*/}
-            {/*</div>*/}
-
+            </div>
+            <Footer/>
         </ProfileStyle >
     );
 }

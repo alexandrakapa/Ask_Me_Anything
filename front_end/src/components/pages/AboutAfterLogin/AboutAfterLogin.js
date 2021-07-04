@@ -1,11 +1,12 @@
 import React from 'react'
 import Navbar from "../../Navbar/Navbar";
-import {AboutStyle} from "./AboutStyle";
-import Footer from "../../Footer/Footer";
-const About = () => {
+import {AboutAfterLoginStyle} from "./AboutAfterLoginStyle";
+import Footer from "../../FooterAfterLogin/Footer";
+import NavbarAfterLogin from "../../NavbarAfterLogin/NavbarAfterLogin";
+const AboutAfterLogin = () => {
     return (
-        <AboutStyle>
-            <Navbar/>
+        <AboutAfterLoginStyle>
+            <NavbarAfterLogin/>
             <h1>About us</h1>
         <div className="card-group">
             <div className="card">
@@ -27,8 +28,8 @@ const About = () => {
         </div>
 <br/>
             <Footer/>
-        </AboutStyle>
+        </AboutAfterLoginStyle>
 )
 
 }
-export default About;
+export default AboutAfterLogin;

@@ -15,7 +15,7 @@ const Footer = () => {
             <Container>
                 <Row>
                     <Column>
-                        <FooterLink href="/about">
+                        <FooterLink href="/user/about">
                             <i
                                 className="far fa-address-book">
                             </i>
@@ -23,7 +23,7 @@ const Footer = () => {
                         </FooterLink>
                     </Column>
                     <Column>
-                        <FooterLink href="/contact">
+                        <FooterLink href="/user/contact">
                             <i
                                 className="fas fa-phone">
                             </i>

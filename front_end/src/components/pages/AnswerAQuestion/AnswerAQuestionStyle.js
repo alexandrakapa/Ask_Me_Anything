@@ -6,11 +6,11 @@ export const AnswerAQuestionStyle = styled.div`
    h1 {
       line-height: 2;
       display: flex;
-      margin-top: 3%;
+      margin-top: 2%;
       color: #000000;
       font-size: 30px;
       font-weight: 200;
-      margin-left: 20%;
+      margin-left: 13%;
    }
 
    h3 {
@@ -96,7 +96,7 @@ export const AnswerAQuestionStyle = styled.div`
       text-align: left;
       display: block;
       margin-bottom: 13px;
-      margin-top: 20px;
+      margin-top: 0%;
       color: #000000;
       font-size: 20px;
       font-weight: 200;
@@ -183,48 +183,3 @@ export const AnswerAQuestionStyle = styled.div`
    }
 
 `;
-
-export const selectStyle2 = {
-
-   control: (styles, {menuIsOpen, isFocused, isSelected}) => ({
-      ...styles, backgroundColor: 'white',
-      '&:hover': {borderColor: 'blue'}, // border style on hover
-      border: '1px solid blue', // default border color
-      marginLeft: '26%',
-      marginTop: '3%',
-      boxShadow: 'none', // no box-shadow
-      width: '48%',
-      height: '30px',
-      fontSize: '12px',
-   }),
-   option: (styles, {data, isDisabled, isFocused, isSelected}) => {
-      const color = 'rgba(44, 130, 201, 1)';
-      return {
-         ...styles,
-         // height : '30px',
-         fontSize: '12px',
-         backgroundColor:
-             isSelected
-                 ? data.color
-                 : isFocused
-                 ? color
-                 : null,
-         color:
-             isSelected
-                 ? 'rgba(44, 130, 201, 1)'
-                 :
-                 isFocused
-                     ? 'white'
-                     : 'black',
-
-         cursor: isSelected ? 'not-allowed' : 'default',
-
-
-         ':active': {
-            ...styles[':active'],
-            backgroundColor:
-                !isDisabled && (isSelected ? data.color : 'green'),
-         },
-      };
-   }
-}

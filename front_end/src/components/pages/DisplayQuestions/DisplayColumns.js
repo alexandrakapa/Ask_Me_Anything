@@ -10,7 +10,7 @@ export const columns = [
     },
     {
         name: "title",
-        label: "Title of question",
+        label: "Title",
         options: {
             filter: true,
             sort: true,
@@ -29,12 +29,12 @@ export const columns = [
         label: "Date asked",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
     {
         name: "askedFrom",
-        label: "Asked From",
+        label: "Asked from User",
         options: {
             filter: true,
             sort: false,

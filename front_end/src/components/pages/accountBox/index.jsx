@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 import Navbar from '../../Navbar/Navbar';
+import Footer from "../../Footer/Footer";
 
 
 const BoxContainer = styled.div`
   justify-content: center;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 3%;
+  margin-top: 2%;
+  margin-bottom:1%;
   width: 30%;
   min-height: 550px;
   display: flex;
@@ -157,9 +159,8 @@ export function AccountBox(props) {
                     {active === "signup" && <SignupForm />}
                 </InnerContainer>
             </BoxContainer>
-            <br/>
-            <br/>
 
+        <Footer/>
         </AccountContext.Provider>
     );
 }

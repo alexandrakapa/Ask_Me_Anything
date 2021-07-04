@@ -61,7 +61,7 @@ export const AskAQuestionStyle = styled.div`
   h1 {
     line-height: 2;
     display: flex;
-    margin-top: 3%;
+    margin-top: 1%;
     color: #000000;
     font-size: 30px;
     font-weight: 200;

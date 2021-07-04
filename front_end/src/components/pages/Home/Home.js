@@ -3,52 +3,7 @@ import Navbar from '../../Navbar/Navbar';
 import {Bar, Line} from 'react-chartjs-2';
 
 import React, { useEffect, useState} from 'react';
-
-// const Home = () => {
-//     return (
-//
-//         <HomeStyle >
-//             <Navbar/>
-//         <div className="container" >
-//
-//             <h1>Welcome to AskMeAnything</h1>
-//
-//             <div className="row">
-//                 <div className="column">
-//                     <div className="card">
-//                         <h3>Questions per keyword</h3>
-//                         <p>graph/table</p>
-//                     </div>
-//                 </div>
-//                 <div className="column">
-//                     <div className="card">
-//                         <h3> Questions per day/period</h3>
-//                         <p>graph/table</p>
-//                     </div>
-//                 </div>
-//                 <div className="column">
-//                     <div className="card">
-//                        <h3>Ask a new question</h3>
-//                     </div>
-//                 </div>
-//                 <div className="column">
-//                     <div className="card">
-//                         <h3>Answer a question</h3>
-//                     </div>
-//                 </div>
-//             </div>
-//
-//             <br/>
-//             <br/>
-//             <br/>
-//             <br/>
-//         </div>
-//
-//             </HomeStyle>
-//
-//     )
-// }
-// export default Home;
+import Footer from "../../Footer/Footer";
 
 export default function Home() {
     const [labels, setLabels] = useState([]);
@@ -190,7 +145,7 @@ export default function Home() {
                     <br/>
 
                 </div>
-
+                <Footer/>
                 </HomeStyle >
         );
 

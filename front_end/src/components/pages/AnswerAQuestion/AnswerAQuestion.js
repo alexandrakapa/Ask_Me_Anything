@@ -3,9 +3,8 @@ import {AnswerAQuestionStyle} from "../AnswerAQuestion/AnswerAQuestionStyle";
 // import { useForm } from "react-hook-form";
 // import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
-import Footer from "../../Footer/Footer";
+import Footer from "../../FooterAfterLogin/Footer";
 import {Avatar, CardMedia, Divider, FormGroup, Grid, Paper, Typography} from "@material-ui/core";
-import {Input} from "../accountBox/common";
 import { makeStyles } from "@material-ui/core/styles";
 import {Button, Form, Label} from "reactstrap";
 import {useForm} from "react-hook-form";
@@ -13,6 +12,8 @@ import '@empd/reactable/lib/styles.css';
 import {withRouter} from "react-router-dom";
 import  Muitable  from "./DisplayTable";
 import {columns} from './DisplayColumns';
+import { useLocation , useHistory} from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(2)
@@ -37,34 +38,35 @@ const useStyles = makeStyles(theme => ({
 }));
 function AnswerAQuestion(props) {
 // const AnswerAQuestion = () => {
+    const location = useLocation();
     const [question, setQuestion] = useState([]);
     const [answer, setAnswer] = useState([]);
+    const question_id = location.state.question_id;
 
-
-    useEffect( () => {
-        fetch(`http://localhost:3000/question/2`,{
-            // headers:{'Content-type':'application/json'}
+        useEffect(() => {
+            fetch(`http://localhost:3000/question/${question_id}`, {
+                // headers:{'Content-type':'application/json'}
             })
-            .then(response => response.json())
-            .then(fetchedData => {
+                .then(response => response.json())
+                .then(fetchedData => {
 
-                setQuestion(() => fetchedData)
-                console.log(fetchedData)
-                console.log(question)
+                    setQuestion(() => fetchedData)
+                    console.log(fetchedData)
+                    console.log(question)
+                })
+
+            fetch(`http://localhost:3000/answer/all/1`, {
+                // headers:{'Content-type':'application/json'}
             })
+                .then(response => response.json())
+                .then(fetchedData => {
 
-        fetch(`http://localhost:3000/answer/all/1`,{
-            // headers:{'Content-type':'application/json'}
-        })
-            .then(response => response.json())
-            .then(fetchedData => {
+                    setAnswer(() => fetchedData)
+                    console.log(fetchedData)
+                    console.log(answer)
+                })
 
-                setAnswer(() => fetchedData)
-                console.log(fetchedData)
-                console.log(answer)
-            })
-
-    },[])
+        }, []);
 
     const classes = useStyles();
 
@@ -123,7 +125,6 @@ function AnswerAQuestion(props) {
         if (true){
             props.history.push({
                 pathname: '/home/user',
-                state: { text : data.text, askedFrom: 1}
             })
             // const tok = localStorage.getItem('token');
             fetch(`http://localhost:3003/answer/create`, {
@@ -143,7 +144,7 @@ function AnswerAQuestion(props) {
         <AnswerAQuestionStyle>
             <NavbarAfterLogin/>
 
-            <h1>Here you can answer the question you selected!</h1>
+            <h1>Here you can answer the question you selected! Below are other users answers!</h1>
 
             <Grid className={classes.root} container direction="column" spacing={4}>
                 {users.map(user => (
@@ -156,6 +157,7 @@ function AnswerAQuestion(props) {
                 <textarea
                     type="textarea"
                     name="text"
+                    rows={4}
                     placeholder= "Enter the text of your answer"
                     {...register('text', { required: true })}
                 />

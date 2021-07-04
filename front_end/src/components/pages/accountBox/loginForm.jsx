@@ -18,7 +18,7 @@ import { useHistory } from "react-router";
      const history = useHistory();
 
     function onSubmit() {
-        alert("The form was submitted");
+        // alert("The form was submitted");
         // console.log(emailRef.current.value)
         // console.log(passwordRef.current.value)
 
@@ -95,7 +95,6 @@ import { useHistory } from "react-router";
                     </BoldLink>
                 </MutedLink>
             </BoxContainer>
-
         );
 
 }

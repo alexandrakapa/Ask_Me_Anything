@@ -2,7 +2,7 @@ import React from 'react'
 import {AskAQuestionStyle} from "../AskAQuestion/AskAQuestionStyle";
 import { useForm } from "react-hook-form";
 import { useLocation , useHistory} from "react-router-dom";
-import Footer from '../../Footer/Footer'
+import Footer from '../../FooterAfterLogin/Footer'
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 import {withRouter} from "react-router-dom";
@@ -94,7 +94,7 @@ function AskAQuestion(props) {
             <Button type="cancel">Cancel</Button>
             </div>
         </Form>
-            <br/>
+
         <Footer/>
 
         </AskAQuestionStyle>

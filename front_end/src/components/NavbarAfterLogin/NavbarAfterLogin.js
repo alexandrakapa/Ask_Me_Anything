@@ -82,7 +82,8 @@ function NavbarAfterLogin(props) {
                     </li>
                     <li className='nav-item'>
                         <Link
-                            to='/answer_a_question'
+                            // to='/answer_a_question'
+                            to = '/display_questions'
                             className='nav-links'
                             onClick={closeMobileMenu}
                         >

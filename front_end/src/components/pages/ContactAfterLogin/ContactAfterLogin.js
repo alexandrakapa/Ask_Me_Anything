@@ -4,7 +4,7 @@ import '@empd/reactable/lib/styles.css';
 import NavbarAfterLogin from "../../NavbarAfterLogin/NavbarAfterLogin";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
-import {ContactStyle} from "./ContactStyle";
+import {ContactAfterLoginStyle} from "./ContactAfterLoginStyle";
 import {Button} from "../../Navbar/Button";
 import {Form} from "react-bootstrap";
 
@@ -12,8 +12,8 @@ function ContactUs(props) {
 
 
     return (
-        <ContactStyle>
-            <Navbar/>
+        <ContactAfterLoginStyle>
+            <NavbarAfterLogin/>
             <h2>For any issues please contact us!</h2>
             <Form>
                 <Form.Group controlId="formBasicEmail">
@@ -40,7 +40,7 @@ function ContactUs(props) {
             <br/>
             <br/>
             <Footer/>
-        </ContactStyle>
+        </ContactAfterLoginStyle>
 
 
 

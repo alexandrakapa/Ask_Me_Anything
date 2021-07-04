@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AboutStyle = styled.div`
+export const AboutAfterLoginStyle = styled.div`
   h1 {
     margin-top:2%;
     margin-bottom:-3%;
