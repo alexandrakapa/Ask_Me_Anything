@@ -11,6 +11,16 @@ export class QuestionController {
     return await this.questionService.findAll();
   }
 
+  @Get('andkeywords')
+  async getAllKeywords():Promise<Question[]>{  //for display
+    return await this.questionService.findAllKeywords();
+  }
+
+  @Get('/byId/:question_id')
+  findOneById(@Param('question_id', ParseIntPipe) question_id: number): Promise<Question> {
+    return this.questionService.findQuestionById(question_id);
+  }
+
   @Get('user/all/:askedFrom')  //for showing the question contributions of a user
   findAllByUser(@Param('askedFrom', ParseIntPipe) askedFrom: number): Promise<Question[]> {
     return this.questionService.findAllQuestionsByUser(askedFrom);
@@ -39,6 +49,16 @@ export class QuestionController {
   @Get('statistics/byKeyword')
   async getByKeyword():Promise<Question[]>{
     return await this.questionService.findByKeyword();
+  }
+
+  @Get('statistics/byDay/:user')
+  async getByDayUser(@Param('user') user):Promise<Question[]>{
+    return await this.questionService.findByDayUser(user)
+  }
+
+  @Get('statistics/byKeyword/:user')
+  async getByKeywordUser(@Param('user') user):Promise<Question[]>{
+    return await this.questionService.findByKeywordUser(user)
   }
 
 }

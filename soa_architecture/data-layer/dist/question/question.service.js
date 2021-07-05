@@ -24,8 +24,24 @@ let QuestionService = class QuestionService {
         this.questionRepo = questionRepo;
         this.questionManager = questionManager;
     }
+    async findQuestionById(question_id) {
+        const question = await this.questionManager.findOne(question_entity_1.Question, question_id);
+        console.log(question_id);
+        if (!question)
+            throw new common_1.NotFoundException(`Question ${question_id} not found.`);
+        return question;
+    }
     findAll() {
         return this.questionRepo.find({ relations: ["answers"] });
+    }
+    async findAllKeywords() {
+        const qb = await this.questionRepo
+            .createQueryBuilder("question")
+            .select(`question.question_id,"keyword_phrase"`)
+            .innerJoin('question_keyword', 'question_keyword', 'question.question_id = question_keyword.question_id')
+            .innerJoin('keyword', 'keyword', 'question_keyword.keyword_id = keyword.keyword_id');
+        console.log(qb.getSql());
+        return qb.getRawMany();
     }
     async findAllQuestionsByUser(askedFrom) {
         return this.questionManager.find(question_entity_1.Question, { askedFrom: askedFrom });
@@ -77,7 +93,6 @@ let QuestionService = class QuestionService {
             .select(`DATE_TRUNC('day', "askedOn") AS questions_per_day, COUNT(question_id) AS count`)
             .groupBy(`DATE_TRUNC('day',"askedOn")`)
             .orderBy(`questions_per_day`);
-        console.log(qb.getSql());
         return qb.getRawMany();
     }
     async findByKeyword() {
@@ -89,6 +104,26 @@ let QuestionService = class QuestionService {
             .groupBy(`keyword.keyword_id`)
             .orderBy(`count`);
         console.log(qb.getSql());
+        return qb.getRawMany();
+    }
+    async findByDayUser(user) {
+        const qb = await this.questionRepo
+            .createQueryBuilder("question")
+            .select(`DATE_TRUNC('day', "askedOn") AS questions_per_day, COUNT(question_id) AS count`)
+            .where(`question.askedFrom = ${user}`)
+            .groupBy(`DATE_TRUNC('day',"askedOn")`)
+            .orderBy(`questions_per_day`);
+        return qb.getRawMany();
+    }
+    async findByKeywordUser(user) {
+        const qb = await this.questionRepo
+            .createQueryBuilder("question")
+            .select(`keyword.keyword_id,"keyword_phrase", COUNT(question.question_id) AS count`)
+            .innerJoin('question_keyword', 'question_keyword', 'question.question_id = question_keyword.question_id')
+            .innerJoin('keyword', 'keyword', 'question_keyword.keyword_id = keyword.keyword_id')
+            .where(`question.askedFrom = ${user}`)
+            .groupBy(`keyword.keyword_id`)
+            .orderBy(`count`);
         return qb.getRawMany();
     }
 };

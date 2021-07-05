@@ -23,6 +23,12 @@ let QuestionController = class QuestionController {
     async getAll() {
         return await this.questionService.findAll();
     }
+    async getAllKeywords() {
+        return await this.questionService.findAllKeywords();
+    }
+    findOneById(question_id) {
+        return this.questionService.findQuestionById(question_id);
+    }
     findAllByUser(askedFrom) {
         return this.questionService.findAllQuestionsByUser(askedFrom);
     }
@@ -39,6 +45,12 @@ let QuestionController = class QuestionController {
     async getByKeyword() {
         return await this.questionService.findByKeyword();
     }
+    async getByDayUser(user) {
+        return await this.questionService.findByDayUser(user);
+    }
+    async getByKeywordUser(user) {
+        return await this.questionService.findByKeywordUser(user);
+    }
 };
 __decorate([
     common_1.Get('andanswers'),
@@ -46,6 +58,19 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getAll", null);
+__decorate([
+    common_1.Get('andkeywords'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getAllKeywords", null);
+__decorate([
+    common_1.Get('/byId/:question_id'),
+    __param(0, common_1.Param('question_id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "findOneById", null);
 __decorate([
     common_1.Get('user/all/:askedFrom'),
     __param(0, common_1.Param('askedFrom', common_1.ParseIntPipe)),
@@ -72,6 +97,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getByKeyword", null);
+__decorate([
+    common_1.Get('statistics/byDay/:user'),
+    __param(0, common_1.Param('user')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getByDayUser", null);
+__decorate([
+    common_1.Get('statistics/byKeyword/:user'),
+    __param(0, common_1.Param('user')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getByKeywordUser", null);
 QuestionController = __decorate([
     common_1.Controller('question'),
     __metadata("design:paramtypes", [question_service_1.QuestionService])
