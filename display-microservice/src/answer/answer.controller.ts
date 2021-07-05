@@ -9,6 +9,7 @@ export class AnswerController {
 
   constructor(private readonly answerService: AnswerService){}
 
+
   @Get()
   async getAll():Promise<Answer[]>{
     return await this.answerService.findAll();

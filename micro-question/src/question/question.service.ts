@@ -15,25 +15,27 @@ export class QuestionService {
     private httpService: HttpService,
   ) {}
 
-  async createQuestion(title, text, user, keywords) {
-  // async createQuestion(title, text, date, user, keywords) {
-    try {
-      const keys = [];
-      if (typeof keywords == 'string') {
-        const cur_key = await getManager()
-          .createQueryBuilder(Keyword, 'keyword')
-          .where('keyword_phrase = :phrase', { phrase: keywords })
-          .getOne();
-        if (cur_key) {
-          keys.push(cur_key);
-        } else {
-          const keyword = new Keyword();
-          keyword.keyword_phrase = keywords;
-          await this.manager.save(keyword);
-          keys.push(keyword);
-        }
+  async createQuestion(title, text, date, user, keywords) {
+    const keys = [];
+    if (typeof keywords == 'string') {
+      console.log("keys: "+keywords);
+      console.log("keys specific: "+keywords[0]);
+      const cur_key = await getManager()
+        .createQueryBuilder(Keyword, 'keyword')
+        .where('keyword_phrase = :phrase', { phrase: keywords })
+        .getOne();
+      if (cur_key) {
+        keys.push(cur_key);
       } else {
-        for (let i = 0; i < keywords.length; i++) {
+        const keyword = new Keyword();
+        keyword.keyword_phrase = keywords;
+        await this.manager.save(keyword);
+        keys.push(keyword);
+      }
+    } else {
+      for (let i = 0; i < keywords.length; i++) {
+
+
           const cur_key = await getManager()
             .createQueryBuilder(Keyword, 'keyword')
             .where('keyword_phrase = :phrase', { phrase: keywords[i] })
@@ -77,6 +79,27 @@ export class QuestionService {
     catch (error) {
       console.log("The new question could not be imported")
     }
+
+    const new_question = await getManager()
+      .createQueryBuilder()
+      .insert()
+      .into(Question)
+      .values([
+        {
+          title: title,
+          text: text,
+          askedFrom: user,
+          keywords: keys,
+        },
+      ])
+      .returning(['question_id','askedOn'])
+      .execute();
+    console.log(new_question.raw[0].question_id);
+    return this.httpService
+      .post('http://localhost:3200/bus', { id: new_question.raw[0].question_id,title:title,text:text,askedFrom:user,askedOn:new_question.raw[0].askedOn,keywords:keys, category:"question"})
+      .toPromise();
+
+
   }
 
 

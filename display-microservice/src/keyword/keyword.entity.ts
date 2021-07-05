@@ -1,12 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Keyword {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   keyword_id : number;
 
   @Column()
-  Keyword_phrase: string;
+  keyword_phrase: string;
 
 }

@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty, IsDate, IsNumber, IsDefined, ValidateNested } from "class-validator";
 import { Type } from 'class-transformer';
 import { ObjectWithId } from '../../validation';
-import { ManyToOne } from 'typeorm';
+import { CreateDateColumn, ManyToOne } from "typeorm";
 import { Question } from '../../question/question.entity';
 
 export class CreateAnswerDto {
@@ -11,7 +11,7 @@ export class CreateAnswerDto {
   readonly text: string;
 
 
-  @IsDate()
+  @CreateDateColumn()
   @IsNotEmpty()
   readonly answeredOn: Date;
 

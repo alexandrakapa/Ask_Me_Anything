@@ -1,38 +1,53 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, getManager, Repository } from 'typeorm';
 import { Question } from './question.entity';
+import { Keyword } from '../keyword/keyword.entity';
 
 @Injectable()
 export class QuestionService {
-  constructor(@InjectRepository(Question) private questionRepo: Repository<Question>,
-              @InjectEntityManager() private questionManager: EntityManager) {}
+  constructor(
+    @InjectEntityManager() private questionManager: EntityManager,
+  ) {}
 
-  // findAll(): Promise<Question[]> {
-  //   return this.questionRepo.find();
+
+  async make_question_keyword(quest_id,title,text, quest_from, quest_on, keywords) {
+    const keys = [];
+
+    for (let i = 0; i < keywords.length; i++) {
+      const cur_key = await getManager()
+        .createQueryBuilder(Keyword, 'keyword')
+        .where('keyword_phrase = :phrase', { phrase: keywords[i].keyword_phrase })
+        .getOne();
+      if (cur_key) {
+        keys.push(cur_key);
+      } else {
+        const keyword = new Keyword();
+        keyword.keyword_phrase = keywords[i].keyword_phrase;
+        keyword.keyword_id = keywords[i].keyword_id;
+        await this.questionManager.save(keyword);
+        keys.push(keyword);
+      }
+    }
+
+    const new_question = await getManager()
+      .createQueryBuilder()
+      .insert()
+      .into(Question)
+      .values([
+        {
+          question_id: quest_id,
+          title: title,
+          text: text,
+          askedFrom: quest_from,
+          askedOn: quest_on,
+          keywords: keys,
+          // answers:[],
+        },
+      ]).execute();
+    return 'ok';
+  }
+  // create(newQuestion){
+  //   this.questionRepo.insert(newQuestion)
   // }
-
-  findAll(): Promise<Question[]> {
-    return this.questionRepo.find({ relations: ["answers"] });
-  }
-
-  async findQuestionByUser(askedFrom: number): Promise<Question> {    //returns one question by user id
-    const question = await this.questionManager.findOne(Question, {askedFrom});
-    if (!question) throw new NotFoundException(`Question ${askedFrom} not found.`);
-    return question;
-  }
-
-  async findQuestionsByUser(askedFrom: number): Promise<Question[]> {    //returns all questions by user id
-    return this.questionManager.find(Question, {askedFrom});
-  }
-
-  async findQuestionById(question_id: number): Promise<Question> {  //return one question by question id
-    const question = await this.questionManager.findOne(Question, question_id);
-    if (!question) throw new NotFoundException(`Question ${question_id} not found.`);
-    return question;
-  }
-
-  create(newQuestion){
-    this.questionRepo.insert(newQuestion)
-  }
 }
