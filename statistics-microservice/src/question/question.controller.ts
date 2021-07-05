@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req, Res } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { Question } from './question.entity';
 
@@ -10,7 +10,12 @@ export class QuestionController {
   async getAll():Promise<Question[]>{
     return await this.questionService.findAll();
   }
-
+  @Post('bus')
+  async getEvent(@Req() req, @Res() res) {
+    console.log(req.body.id);
+    await this.questionService.make_question_keyword(req.body.id,req.body.askedFrom,req.body.askedOn,req.body.keywords);
+    res.send('ok');
+  }
   @Post('add')
   @HttpCode(201)
   createQuestion(@Body() newQuestion:any){

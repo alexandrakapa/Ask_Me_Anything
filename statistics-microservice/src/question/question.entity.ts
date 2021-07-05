@@ -5,7 +5,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
+  OneToMany, PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Keyword } from '../keyword/keyword.entity';
@@ -13,7 +13,7 @@ import { Keyword } from '../keyword/keyword.entity';
 @Entity()
 export class Question {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   question_id : number;
 
   @CreateDateColumn()

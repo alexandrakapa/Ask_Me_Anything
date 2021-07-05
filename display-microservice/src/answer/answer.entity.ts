@@ -1,10 +1,10 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Question } from '../question/question.entity';
 
 @Entity()
 export class Answer {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   answer_id : number;
 
   @Column()

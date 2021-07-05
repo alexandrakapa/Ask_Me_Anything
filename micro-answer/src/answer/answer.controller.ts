@@ -11,13 +11,16 @@ export class AnswerController {
   constructor(private readonly answerService: AnswerService) {}
   // @UseGuards(AuthGuard('jwt'))
   @Post('create')
-  create(@Body() createQuizDto: CreateAnswerDto): Promise<Answer> {
+  create(@Body() createQuizDto: CreateAnswerDto): Promise<void | string> {
     return this.answerService.create(createQuizDto);
   }
   @Post('bus')
   async getEvent(@Req() req, @Res() res) {
     console.log(req.body.id);
-    await this.answerService.makeQuestion(req.body.id);
+    const smth = await this.answerService.makeQuestion(req.body.id);
+    console.log('here');
+    res.send('ok');
+    //return smth;
   }
   // @MessagePattern('createAnswer')
   // create(@Payload() createAnswerDto: CreateAnswerDto) {
