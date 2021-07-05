@@ -15,23 +15,29 @@ export class QuestionController {
   //   return this.questionService.create(createQuestionDto);
   // }
 
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('create')
   async addProduct(@Body() body: Question) {
-    console.log(body.title);
-    console.log(body.text);
-    console.log(body.askedOn);
-    console.log(body.askedFrom);
-    console.log(body.keywords);
+    try {
+      console.log(body.title);
+      console.log(body.text);
+      // console.log(body.askedOn);
+      console.log(body.askedFrom);
+      console.log(body.keywords);
 
-    const generatedId = this.questionService.createQuestion(
-      body.title,
-      body.text,
-      body.askedOn,
-      body.askedFrom,
-      body.keywords,
-    );
-    // return generatedId;
+      const generatedId = this.questionService.createQuestion(
+        body.title,
+        body.text,
+        // body.askedOn,
+        body.askedFrom,
+        body.keywords,
+      );
+      // return generatedId;
+      return("A new question has been added")
+    }
+    catch (error) {
+      console.log("error")
+    }
   }
 
   // @MessagePattern('findAllQuestion')

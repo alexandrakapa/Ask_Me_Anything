@@ -114,4 +114,30 @@ export class QuestionService {
     console.log(qb.getSql());
     return qb.getRawMany();
   }
+
+
+  async findByDayUser(user): Promise<Question[]> {
+    const qb = await this.questionRepo
+      .createQueryBuilder("question")
+      .select(`DATE_TRUNC('day', "askedOn") AS questions_per_day, COUNT(question_id) AS count`)
+      .where(`question.askedFrom = ${user}`)
+      .groupBy(`DATE_TRUNC('day',"askedOn")`)
+      .orderBy(`questions_per_day`)
+    console.log(qb.getSql())
+    return qb.getRawMany()
+  }
+
+  async findByKeywordUser(user): Promise<Question[]> {
+    const qb = await this.questionRepo
+      .createQueryBuilder("question")
+      .select(`keyword.keyword_id,"Keyword_phrase", COUNT(question.question_id) AS count`)
+      .innerJoin('question_keyword','question_keyword', 'question.question_id = question_keyword.question_id')
+      .innerJoin('keyword','keyword', 'question_keyword.keyword_id = keyword.keyword_id')
+      .where(`question.askedFrom = ${user}`)
+      .groupBy(`keyword.keyword_id`)
+      .orderBy(`count`)
+    console.log(qb.getSql())
+    return qb.getRawMany()
+  }
+
 }

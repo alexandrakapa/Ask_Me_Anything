@@ -33,6 +33,7 @@ export class AnswerService implements OnModuleInit {
       await this.cacheManager.set('subscribers', new_obj);
     }
   }
+
   async makeQuestion(given_id){
     const tade = await getManager()
       .createQueryBuilder()
