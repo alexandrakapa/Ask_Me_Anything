@@ -9,4 +9,7 @@ export declare class QuestionService {
     findByDay(): Observable<AxiosResponse<any>>;
     findByKeyword(): Observable<AxiosResponse<any>>;
     checkTok(token: any): Promise<any>;
+
+    findByDayUser(user: number): Observable<AxiosResponse<any>>;
+    findByKeywordUser(user: number): Observable<AxiosResponse<any>>;
 }

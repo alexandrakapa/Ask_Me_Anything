@@ -2,6 +2,8 @@ import { HttpException, HttpService, Injectable } from '@nestjs/common';
 import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { RedisService } from "nestjs-redis";
+import {Answer} from "../../../data-layer/src/answer/answer.entity";
+import {AxiosResponse} from "axios";
 
 @Injectable()
 export class AnswerService {
@@ -37,4 +39,10 @@ export class AnswerService {
     return this.httpService.post('http://localhost:3000/answer/create', body)
       .pipe(map(result => result.data));
   }
+
+  findAnswersByQuestionId(isAnAnswerOf: any): Observable<AxiosResponse<any>> {    //returns all answers by question id
+    return this.httpService.get(`http://localhost:3000/answer/all/` + isAnAnswerOf)
+      .pipe(map(result => result.data));
+  }
+
 }

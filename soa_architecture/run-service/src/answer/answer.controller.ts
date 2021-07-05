@@ -1,4 +1,4 @@
-import { Body, Controller, Post,Headers } from "@nestjs/common";
+import {Body, Controller, Get, Param, ParseIntPipe, Post,Headers} from "@nestjs/common";
 import { AnswerService } from './answer.service';
 @Controller('answer')
 export class AnswerController {
@@ -14,5 +14,10 @@ export class AnswerController {
     }else{
       return "not authorized!";
     }
+  }
+
+  @Get('all/:isAnAnswerOf')
+  async findAllByQuestionId(@Param('isAnAnswerOf', ParseIntPipe) isAnAnswerOf: number): Promise<any> {
+    return this.answerService.findAnswersByQuestionId(isAnAnswerOf);
   }
 }

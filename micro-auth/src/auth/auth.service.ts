@@ -11,13 +11,18 @@ export class AuthService {
   ) {}
 
   async validateUser(userName: string, pass: string): Promise<any> {
+    console.log(userName);
+    console.log(pass);
     const user = await this.UserService.findOne(userName);
-    const origHash = user.password,
-      parts = origHash.split('$'),
-      rounds = parts[2],
-      salt = '$' + parts[1] + '$' + rounds + '$' + parts[3];
-    const hash = sha512.crypt(pass, salt);
-    if (user && hash === origHash) {
+
+    // const origHash = user.password,
+    //   parts = origHash.split('$'),
+    //   rounds = parts[2],
+    //   salt = '$' + parts[1] + '$' + rounds + '$' + parts[3];
+    // console.log(pass);
+    // console.log(user.password);
+    // const hash = sha512.crypt(pass, salt);
+    if (user && pass === user.password) {
       const payload = { username: user.username };
 
       return {

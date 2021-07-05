@@ -18,6 +18,8 @@ export class QuestionService {
   async createQuestion(title, text, date, user, keywords) {
     const keys = [];
     if (typeof keywords == 'string') {
+      console.log("keys: "+keywords);
+      console.log("keys specific: "+keywords[0]);
       const cur_key = await getManager()
         .createQueryBuilder(Keyword, 'keyword')
         .where('keyword_phrase = :phrase', { phrase: keywords })
@@ -32,27 +34,52 @@ export class QuestionService {
       }
     } else {
       for (let i = 0; i < keywords.length; i++) {
-        const cur_key = await getManager()
-          .createQueryBuilder(Keyword, 'keyword')
-          .where('keyword_phrase = :phrase', { phrase: keywords[i] })
-          .getOne();
-        if (cur_key) {
-          keys.push(cur_key);
-        } else {
-          const keyword = new Keyword();
-          keyword.keyword_phrase = keywords[i];
-          await this.manager.save(keyword);
-          keys.push(keyword);
+
+
+          const cur_key = await getManager()
+            .createQueryBuilder(Keyword, 'keyword')
+            .where('keyword_phrase = :phrase', { phrase: keywords[i] })
+            .getOne();
+          if (cur_key) {
+            keys.push(cur_key);
+          } else {
+            const keyword = new Keyword();
+            keyword.keyword_phrase = keywords[i];
+            await this.manager.save(keyword);
+            keys.push(keyword);
+          }
         }
       }
+      // const question = new Question();
+      // question.title = title;
+      // question.text = text;
+      // question.askedOn = date;
+      // question.askedFrom = user;
+      // question.keywords = keys;
+      // await this.manager.save(question);
+      const new_question = await getManager()
+        .createQueryBuilder()
+        .insert()
+        .into(Question)
+        .values([
+          {
+            title: title,
+            text: text,
+            askedFrom: user,
+            keywords: keys,
+          },
+        ])
+        .returning('question_id')
+        .execute();
+      console.log(new_question.raw[0].question_id);
+      return this.httpService
+        .post('http://localhost:3200/bus', { id: new_question.raw[0].question_id, channel: 0 })
+        .toPromise();
     }
-    // const question = new Question();
-    // question.title = title;
-    // question.text = text;
-    // question.askedOn = date;
-    // question.askedFrom = user;
-    // question.keywords = keys;
-    // await this.manager.save(question);
+    catch (error) {
+      console.log("The new question could not be imported")
+    }
+
     const new_question = await getManager()
       .createQueryBuilder()
       .insert()
@@ -65,12 +92,13 @@ export class QuestionService {
           keywords: keys,
         },
       ])
-      .returning('question_id')
+      .returning(['question_id','askedOn'])
       .execute();
     console.log(new_question.raw[0].question_id);
     return this.httpService
-      .post('http://localhost:3200/bus', { id: new_question.raw[0].question_id, channel:0})
+      .post('http://localhost:3200/bus', { id: new_question.raw[0].question_id,title:title,text:text,askedFrom:user,askedOn:new_question.raw[0].askedOn,keywords:keys, category:"question"})
       .toPromise();
+
 
   }
 

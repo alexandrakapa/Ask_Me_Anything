@@ -39,6 +39,12 @@ let QuestionController = class QuestionController {
             return "not authorized!";
         }
     }
+    async getByDayUser(user) {
+        return this.questionService.findByDayUser(user);
+    }
+    async getByKeywordUser(user) {
+        return this.questionService.findByKeywordUser(user);
+    }
 };
 __decorate([
     common_1.Get('statistics/byDay'),
@@ -54,6 +60,20 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getByKeyword", null);
+__decorate([
+    common_1.Get('statistics/byDay/:user'),
+    __param(0, common_1.Param('user', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getByDayUser", null);
+__decorate([
+    common_1.Get('statistics/byKeyword/:user'),
+    __param(0, common_1.Param('user', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getByKeywordUser", null);
 QuestionController = __decorate([
     common_1.Controller('question'),
     __metadata("design:paramtypes", [question_service_1.QuestionService])

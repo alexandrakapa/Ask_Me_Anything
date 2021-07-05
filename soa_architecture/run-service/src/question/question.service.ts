@@ -1,8 +1,9 @@
-import { HttpException, HttpService, Injectable } from "@nestjs/common";
+import {HttpService, Injectable, NotFoundException,HttpException} from "@nestjs/common";
 import { Observable } from "rxjs";
 import { AxiosResponse } from 'axios'
 import { catchError, map } from "rxjs/operators";
 import { RedisService } from "nestjs-redis";
+import {Question} from "../../../data-layer/src/question/question.entity";
 
 @Injectable()
 export class QuestionService {
@@ -48,5 +49,11 @@ export class QuestionService {
       .pipe(map(result => result.data));
   }
 
+  findQuestionById(questionId: number): Observable<AxiosResponse<any>> {  //return one question by question id
+    return this.httpService.get(`http://localhost:3000/question/byId/6`)
+        .pipe(
+            map(response => response.data),
+        );
+  }
 
 }

@@ -1,4 +1,5 @@
-import { Controller, Get,Headers } from "@nestjs/common";
+
+import {Controller, Get, Param, ParseIntPipe,Headers} from "@nestjs/common";
 import { QuestionService } from './question.service';
 
 @Controller('question')
@@ -26,4 +27,15 @@ export class QuestionController {
       return "not authorized!";
     }
   }
+
+  @Get('statistics/byDay/:user')  //for statistics by day
+  async getByDayUser(@Param('user', ParseIntPipe) user: number): Promise<any>{
+    return this.questionService.findByDayUser(user);
+  }
+
+  @Get('statistics/byKeyword/:user')  //for statistics by keyword
+  async getByKeywordUser(@Param('user', ParseIntPipe) user: number): Promise<any>{
+    return this.questionService.findByKeywordUser(user);
+  }
+
 }

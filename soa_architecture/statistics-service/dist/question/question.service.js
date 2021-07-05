@@ -46,6 +46,13 @@ let QuestionService = class QuestionService {
         else {
             return 0;
         }
+    findByDayUser(user) {
+        return this.httpService.get('http://localhost:3000/question/statistics/byDay/' + user)
+            .pipe(operators_1.map(response => response.data));
+    }
+    findByKeywordUser(user) {
+        return this.httpService.get('http://localhost:3000/question/statistics/byKeyword/' + user)
+            .pipe(operators_1.map(response => response.data));
     }
 };
 QuestionService = __decorate([

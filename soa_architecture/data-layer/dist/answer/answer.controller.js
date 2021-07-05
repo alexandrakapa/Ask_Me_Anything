@@ -23,6 +23,12 @@ let AnswerController = class AnswerController {
     addAnswer(createQuizDto) {
         return this.answerService.createAnswer(createQuizDto);
     }
+    findAllByQuestionId(isAnAnswerOf) {
+        return this.answerService.findAnswersByQuestionId(isAnAnswerOf);
+    }
+    async getByDayUser(user) {
+        return await this.answerService.findByDayUser(user);
+    }
 };
 __decorate([
     common_1.Post('create'),
@@ -31,6 +37,20 @@ __decorate([
     __metadata("design:paramtypes", [create_answer_dto_1.CreateAnswerDto]),
     __metadata("design:returntype", Promise)
 ], AnswerController.prototype, "addAnswer", null);
+__decorate([
+    common_1.Get('all/:isAnAnswerOf'),
+    __param(0, common_1.Param('isAnAnswerOf', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], AnswerController.prototype, "findAllByQuestionId", null);
+__decorate([
+    common_1.Get('statistics/byDay/:user'),
+    __param(0, common_1.Param('user')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AnswerController.prototype, "getByDayUser", null);
 AnswerController = __decorate([
     common_1.Controller('answer'),
     __metadata("design:paramtypes", [answer_service_1.AnswerService])
