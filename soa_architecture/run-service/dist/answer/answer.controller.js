@@ -19,16 +19,24 @@ let AnswerController = class AnswerController {
     constructor(answerService) {
         this.answerService = answerService;
     }
-    async addAnswer(body) {
-        console.log(body);
-        return this.answerService.createAnswer(body);
+    async addAnswer(body, headers) {
+        console.log("ready to create answer");
+        let auth_res = await this.answerService.checkTok(headers.authorization);
+        if (auth_res == 1) {
+            console.log("got auth, let's procceed!");
+            return this.answerService.createAnswer(body);
+        }
+        else {
+            return "not authorized!";
+        }
     }
 };
 __decorate([
     common_1.Post('create'),
     __param(0, common_1.Body()),
+    __param(1, common_1.Headers()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AnswerController.prototype, "addAnswer", null);
 AnswerController = __decorate([

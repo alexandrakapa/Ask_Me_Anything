@@ -19,35 +19,60 @@ let QuestionController = class QuestionController {
     constructor(questionService) {
         this.questionService = questionService;
     }
-    async getAll() {
-        return this.questionService.findAll();
+    async getAll(headers) {
+        console.log("first step:request received!");
+        let auth_res = await this.questionService.checkTok(headers.authorization);
+        console.log("auth: " + auth_res);
+        if (auth_res == 1) {
+            return this.questionService.findAll();
+        }
+        else {
+            return "not authorized!";
+        }
     }
-    async getAllQuestionsByUserId(askedFrom) {
-        return this.questionService.findAllQuestionsByUserId(askedFrom);
+    async getAllQuestionsByUserId(askedFrom, headers) {
+        let auth_res = await this.questionService.checkTok(headers.authorization);
+        console.log("auth: " + auth_res);
+        if (auth_res == 1) {
+            return this.questionService.findAllQuestionsByUserId(askedFrom);
+        }
+        else {
+            return "not authorized!";
+        }
     }
-    async addQuestion(body) {
-        console.log(body);
-        return this.questionService.createQuestion(body);
+    async addQuestion(body, headers) {
+        console.log("ready to create question");
+        let auth_res = await this.questionService.checkTok(headers.authorization);
+        if (auth_res == 1) {
+            console.log("ready to go!");
+            return this.questionService.createQuestion(body);
+        }
+        else {
+            return "not authorized!";
+        }
     }
 };
 __decorate([
     common_1.Get('andanswers'),
+    __param(0, common_1.Headers()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getAll", null);
 __decorate([
     common_1.Get('user/all/:askedFrom'),
     __param(0, common_1.Param('askedFrom', common_1.ParseIntPipe)),
+    __param(1, common_1.Headers()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getAllQuestionsByUserId", null);
 __decorate([
     common_1.Post('create'),
     __param(0, common_1.Body()),
+    __param(1, common_1.Headers()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "addQuestion", null);
 QuestionController = __decorate([

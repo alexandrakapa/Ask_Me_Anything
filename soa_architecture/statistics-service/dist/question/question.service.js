@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuestionService = void 0;
 const common_1 = require("@nestjs/common");
 const operators_1 = require("rxjs/operators");
+const nestjs_redis_1 = require("nestjs-redis");
 let QuestionService = class QuestionService {
-    constructor(httpService) {
+    constructor(httpService, redisService) {
         this.httpService = httpService;
+        this.redisService = redisService;
     }
     findByDay() {
         return this.httpService.get('http://localhost:3000/question/statistics/byDay')
@@ -24,6 +26,26 @@ let QuestionService = class QuestionService {
         return this.httpService.get('http://localhost:3000/question/statistics/byKeyword')
             .pipe(operators_1.map(response => response.data));
     }
+    async checkTok(token) {
+        const client = await this.redisService.getClient();
+        const get_addr = await client.hget("sb", "addr");
+        const auth_get_addr = get_addr + "/auth/check_tok";
+        const config = {
+            headers: { Authorization: token }
+        };
+        console.log("config: " + auth_get_addr);
+        console.log(config);
+        if (auth_get_addr != "nil") {
+            let res = await this.httpService.get(auth_get_addr, config)
+                .pipe(operators_1.catchError(e => {
+                throw new common_1.HttpException("error", 400);
+            })).toPromise();
+            console.log("here: " + res.data);
+            return res.data;
+        }
+        else {
+            return 0;
+        }
     findByDayUser(user) {
         return this.httpService.get('http://localhost:3000/question/statistics/byDay/' + user)
             .pipe(operators_1.map(response => response.data));
@@ -35,7 +57,7 @@ let QuestionService = class QuestionService {
 };
 QuestionService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [common_1.HttpService])
+    __metadata("design:paramtypes", [common_1.HttpService, nestjs_redis_1.RedisService])
 ], QuestionService);
 exports.QuestionService = QuestionService;
 //# sourceMappingURL=question.service.js.map

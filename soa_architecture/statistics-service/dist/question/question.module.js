@@ -10,11 +10,15 @@ exports.QuestionModule = void 0;
 const common_1 = require("@nestjs/common");
 const question_service_1 = require("./question.service");
 const question_controller_1 = require("./question.controller");
+const nestjs_redis_1 = require("nestjs-redis");
+const options = { host: 'localhost',
+    port: 6379,
+    ttl: null };
 let QuestionModule = class QuestionModule {
 };
 QuestionModule = __decorate([
     common_1.Module({
-        imports: [common_1.HttpModule],
+        imports: [common_1.HttpModule, nestjs_redis_1.RedisModule.register(options)],
         controllers: [question_controller_1.QuestionController],
         providers: [question_service_1.QuestionService]
     })
