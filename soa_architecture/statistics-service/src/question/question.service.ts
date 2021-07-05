@@ -20,4 +20,18 @@ export class QuestionService {
         map(response => response.data),
       );
   }
+
+  findByDayUser(user:number): Observable<AxiosResponse<any>> {
+    return this.httpService.get('http://localhost:3000/question/statistics/byDay/'+user)
+        .pipe(
+            map(response => response.data),
+        );
+  }
+
+  findByKeywordUser(user:number): Observable<AxiosResponse<any>> {
+    return this.httpService.get('http://localhost:3000/question/statistics/byKeyword/'+user)
+        .pipe(
+            map(response => response.data),
+        );
+  }
 }

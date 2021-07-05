@@ -19,7 +19,8 @@ const typeorm_2 = require("typeorm");
 const answer_entity_1 = require("./answer.entity");
 const question_entity_1 = require("../question/question.entity");
 let AnswerService = class AnswerService {
-    constructor(manager) {
+    constructor(answerRepo, manager) {
+        this.answerRepo = answerRepo;
         this.manager = manager;
     }
     async createAnswer(CreateAnswerDto) {
@@ -36,11 +37,25 @@ let AnswerService = class AnswerService {
             return this.manager.save(answer);
         });
     }
+    async findAnswersByQuestionId(isAnAnswerOf) {
+        return this.manager.find(answer_entity_1.Answer, { isAnAnswerOf });
+    }
+    async findByDayUser(user) {
+        const qb = await this.answerRepo
+            .createQueryBuilder("answer")
+            .select(`DATE_TRUNC('day', "answeredOn") AS answers_per_day, COUNT(answer_id) AS count`)
+            .where(`answer.answeredFrom = ${user}`)
+            .groupBy(`DATE_TRUNC('day',"answeredOn")`)
+            .orderBy(`answers_per_day`);
+        return qb.getRawMany();
+    }
 };
 AnswerService = __decorate([
     common_1.Injectable(),
-    __param(0, typeorm_1.InjectEntityManager()),
-    __metadata("design:paramtypes", [typeorm_2.EntityManager])
+    __param(0, typeorm_1.InjectRepository(answer_entity_1.Answer)),
+    __param(1, typeorm_1.InjectEntityManager()),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.EntityManager])
 ], AnswerService);
 exports.AnswerService = AnswerService;
 //# sourceMappingURL=answer.service.js.map

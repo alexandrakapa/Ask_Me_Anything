@@ -1,13 +1,14 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { InjectEntityManager } from "@nestjs/typeorm";
-import { EntityManager } from "typeorm";
+import {InjectEntityManager, InjectRepository} from "@nestjs/typeorm";
+import {EntityManager, Repository} from "typeorm";
 import { Answer } from "./answer.entity";
-import { Question } from "../question/question.entity";
 import { CreateAnswerDto } from './dto/create-answer.dto';
+import {Question} from "../question/question.entity";
 
 @Injectable()
 export class AnswerService {
-  constructor(@InjectEntityManager() private manager: EntityManager) {}
+  constructor(@InjectRepository(Answer) private answerRepo: Repository<Answer>,
+              @InjectEntityManager() private manager: EntityManager) {}
 
   async createAnswer(CreateAnswerDto: CreateAnswerDto): Promise<Answer> {
     return this.manager.transaction(async (manager) => {
@@ -27,4 +28,18 @@ export class AnswerService {
     });
   }
 
+  async findAnswersByQuestionId(isAnAnswerOf: any): Promise<Answer[]> {    //returns all answers by question id
+    return this.manager.find(Answer, {isAnAnswerOf});
+  }
+
+  async findByDayUser(user): Promise<Answer[]> {
+    const qb = await this.answerRepo
+        .createQueryBuilder("answer")
+        .select(`DATE_TRUNC('day', "answeredOn") AS answers_per_day, COUNT(answer_id) AS count`)
+        .where(`answer.answeredFrom = ${user}`)
+        .groupBy(`DATE_TRUNC('day',"answeredOn")`)
+        .orderBy(`answers_per_day`)
+    // console.log(qb.getSql())
+    return qb.getRawMany()
+  }
 }

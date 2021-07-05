@@ -8,32 +8,32 @@ import { Answer } from '../answer/entities/answer.entity';
 import { RedisCacheService } from '../redis-cache/redis-cache.service';
 
 @Injectable()
-export class AnswerService implements OnModuleInit {
+export class AnswerService{ // implements OnModuleInit {
   constructor(@InjectEntityManager() private manager: EntityManager,private cacheManager: RedisCacheService) {}
-  async onModuleInit() {
-    console.log(`The module has been initialized.`);
-    const saved_subs = await this.cacheManager.get('subscribers');
-    console.log(saved_subs[0]);
-    const subs= saved_subs[0].subscribers;
-    console.log("here: "+subs);
-    console.log("middle: "+subs[0]);
-    let found = false;
-    const my_addr = 'http://localhost:3003/answer/bus';
-    for (let i = 0; i < subs[0].length; i++) {
-      if(subs[0][i] == my_addr){
-        found=true;
-      }
-    }
-    if(!found){
-      subs[0].push(my_addr);
-      const new_obj = [
-        {
-          subscribers: subs,
-        },
-      ];
-      await this.cacheManager.set('subscribers', new_obj);
-    }
-  }
+  // async onModuleInit() {
+  //   console.log(`The module has been initialized.`);
+  //   const saved_subs = await this.cacheManager.get('subscribers');
+  //   console.log(saved_subs[0]);
+  //   const subs= saved_subs[0].subscribers;
+  //   console.log("here: "+subs);
+  //   console.log("middle: "+subs[0]);
+  //   let found = false;
+  //   const my_addr = 'http://localhost:3003/answer/bus';
+  //   for (let i = 0; i < subs[0].length; i++) {
+  //     if(subs[0][i] == my_addr){
+  //       found=true;
+  //     }
+  //   }
+  //   if(!found){
+  //     subs[0].push(my_addr);
+  //     const new_obj = [
+  //       {
+  //         subscribers: subs,
+  //       },
+  //     ];
+  //     await this.cacheManager.set('subscribers', new_obj);
+  //   }
+  // }
   async makeQuestion(given_id){
     await getManager()
       .createQueryBuilder()

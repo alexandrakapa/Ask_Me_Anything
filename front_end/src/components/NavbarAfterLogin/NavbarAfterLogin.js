@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import './NavbarAfterLogin.css';
 import {Link, NavLink} from 'react-router-dom';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 function NavbarAfterLogin(props) {
     const [click, setClick] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const [button, setButton] = useState(true);
     const username = localStorage.getItem('username');
-    console.log("here")
-    console.log(username);
+    // console.log("here")
+    // console.log(username);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
 
@@ -59,7 +59,7 @@ function NavbarAfterLogin(props) {
                 </div>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item'>
-                        <Link to='/home'
+                        <Link to='/home/user'
                               className='nav-links'
                               onClick={closeMobileMenu}
                         >
@@ -82,13 +82,25 @@ function NavbarAfterLogin(props) {
                     </li>
                     <li className='nav-item'>
                         <Link
-                            to='/answer_a_question'
+                            // to='/answer_a_question'
+                            to = '/display_questions'
                             className='nav-links'
                             onClick={closeMobileMenu}
                         >
                             <i
                                 className="fas fa-reply">
                             </i>Answer a question
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                            to='/profile'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            <i
+                                className="fas fa-user">
+                            </i>My Profile
                         </Link>
                     </li>
                     <li className='nav-item'>
