@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Answer } from '../answer/answer.entity';
 import { Keyword } from '../keyword/keyword.entity';
-import { User } from "../user/user.entity";
+import { UserEntity } from "../user/entities/user.entity";
 
 @Entity()
 export class Question {
@@ -34,7 +34,7 @@ export class Question {
   @JoinTable({ name: 'question_keyword', joinColumn: { name: 'question_id', referencedColumnName: 'question_id'}, inverseJoinColumn: { name: 'keyword_id', referencedColumnName: 'keyword_id'}, })
   keywords: Keyword[];
 
-  @ManyToOne(() => User, (askedFrom) => askedFrom.questions)
-  public askedFrom: User;
+  @ManyToOne(() => UserEntity, (askedFrom) => askedFrom.questions)
+  public askedFrom: UserEntity;
 
 }
