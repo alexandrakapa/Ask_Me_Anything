@@ -13,7 +13,7 @@ export default function Home() {
     const [number, setNumber] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3002/question/statistics/byKeyword`)
+        fetch(`http://localhost:3005/question/statistics/byKeyword`)
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -37,7 +37,7 @@ export default function Home() {
                 // console.log(fetchedData)
             })
         //for the second diagram
-        fetch(`http://localhost:3002/question/statistics/byDay`)
+        fetch(`http://localhost:3005/question/statistics/byDay`)
             .then(response => {
                 if (response.ok){
                     return response.json()

@@ -8,6 +8,12 @@ import {Question} from "../../../data-layer/src/question/question.entity";
 @Injectable()
 export class QuestionService {
   constructor(private httpService: HttpService,private readonly redisService: RedisService) {}
+  findSome(): Observable<AxiosResponse<any>> {   //returns all the questions with their answers
+    return this.httpService.get('http://localhost:3000/question/some_answers')
+        .pipe(
+            map(response => response.data),
+        );
+  }
 
   findAll(): Observable<AxiosResponse<any>> {   //returns all the questions with their answers
     return this.httpService.get('http://localhost:3000/question/andanswers')

@@ -20,9 +20,10 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    create(createQuizDto) {
+    async create(createQuizDto) {
         console.log("hrere inside");
-        return this.userService.create(createQuizDto);
+        let res = await this.userService.create(createQuizDto);
+        return "ok";
     }
     async cre() {
         console.log('im here!');

@@ -4,6 +4,7 @@ export declare class QuestionController {
     private readonly questionService;
     constructor(questionService: QuestionService);
     getAll(): Promise<Question[]>;
+    getSomeAnswers(): Promise<Question[]>;
     getAllKeywords(): Promise<Question[]>;
     findOneById(question_id: number): Promise<Question>;
     findAllByUser(askedFrom: number): Promise<Question[]>;

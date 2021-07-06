@@ -19,17 +19,10 @@ let QuestionController = class QuestionController {
     constructor(questionService) {
         this.questionService = questionService;
     }
-    async getNikos() {
-        return "nikos";
-    }
-    async getByDay(head) {
-        let auth_res = await this.questionService.checkTok(head.authorization);
-        console.log("auth: " + auth_res);
+    async getByDay() {
         return this.questionService.findByDay();
     }
-    async getByKeyword(head) {
-        let auth_res = await this.questionService.checkTok(head.authorization);
-        console.log("auth: " + auth_res);
+    async getByKeyword() {
         return this.questionService.findByKeyword();
     }
     async getByDayUser(user) {
@@ -40,23 +33,15 @@ let QuestionController = class QuestionController {
     }
 };
 __decorate([
-    common_1.Get('nikos'),
+    common_1.Get('statistics/byDay'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], QuestionController.prototype, "getNikos", null);
-__decorate([
-    common_1.Get('statistics/byDay'),
-    __param(0, common_1.Headers()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getByDay", null);
 __decorate([
     common_1.Get('statistics/byKeyword'),
-    __param(0, common_1.Headers()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getByKeyword", null);
 __decorate([

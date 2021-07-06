@@ -25,7 +25,6 @@ let UserService = class UserService {
     async create(CreateUserDto) {
         console.log(CreateUserDto);
         const user = await this.manager.create(user_entity_1.UserEntity, CreateUserDto);
-        console.log("here" + user.username);
         return this.manager.save(user);
     }
     async findOne(userName) {

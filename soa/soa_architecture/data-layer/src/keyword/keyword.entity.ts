@@ -6,7 +6,7 @@ export class Keyword {
   @PrimaryGeneratedColumn()
   keyword_id : number;
 
-  @Column()
+  @Column({unique:true})
   keyword_phrase: string;
 
 }

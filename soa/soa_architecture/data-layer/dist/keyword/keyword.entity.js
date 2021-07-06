@@ -18,7 +18,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Keyword.prototype, "keyword_id", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_1.Column({ unique: true }),
     __metadata("design:type", String)
 ], Keyword.prototype, "keyword_phrase", void 0);
 Keyword = __decorate([

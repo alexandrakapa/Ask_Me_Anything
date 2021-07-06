@@ -28,7 +28,8 @@ export class AppController {
     if(validator != -1){
       return await this.authService.login(validator);
     }else{
-      return "wrong credentials!";
+      let obj={'accessToken':''}
+      return JSON.stringify(obj);
     }
   }
   @UseGuards(AuthGuard('jwt'))

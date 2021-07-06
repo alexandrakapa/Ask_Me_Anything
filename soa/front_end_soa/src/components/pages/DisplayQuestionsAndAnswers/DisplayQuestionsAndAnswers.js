@@ -14,14 +14,17 @@ import {
 
 export default function DisplayQuestionsAndAnswers() {
     const [answer, setAnswer] = useState([]);
-    const [data, setData] = useState([])
-
+    const [data, setData] = useState([]);
+    const [max_id , setMax] = useState();
     useEffect(() => {
-        fetch(`http://localhost:3001/question/andanswers`)
+        fetch(`http://localhost:3001/question/some_answers`)
             .then(response => response.json())
             .then(fetchedData => {
-
-
+                // let max_id = fetchedData[0].question_id
+                setMax(() => fetchedData[0].question_id)
+                console.log("MAX",max_id)
+                console.log(fetchedData[0].answers.length ===0);
+                console.log("weird anwswer: "+fetchedData.length);
                 for (let i=0; i<fetchedData.length; i++) {
                     let date;
                     date=fetchedData[i].askedOn
@@ -37,17 +40,32 @@ export default function DisplayQuestionsAndAnswers() {
                 let tmp=[]
                 let i=0
                 for (let j=0; j<fetchedData.length; j++) {
-                    tmp[j] = []
+                    console.log(j);
+                    // tmp[j] = []
+                    let cur_arr=[]
                     i=0
-                    while (typeof fetchedData[j].answers[i] !== "undefined") {
-                        tmp[j].push(fetchedData[j].answers[i])
-                        i = i+1
+                    console.log(fetchedData[j].answers.length);
+                    if( fetchedData[j].answers.length ===0){
+                        console.log("here");
+                        cur_arr.push(0)
+                    }else{
+                        for(let k=0; k<fetchedData[j].answers.length;k++){
+                            console.log(fetchedData[j].answers[k])
+                            cur_arr.push(fetchedData[j].answers[k])
+                            console.log(cur_arr)
+                        }
                     }
+                    console.log("tmp j: "+cur_arr);
+                    // while (typeof fetchedData[j].answers[i] !== "undefined") {
+                    //     tmp[j].push(fetchedData[j].answers[i])
+                    //     i = i+1
+                    // }
+                    tmp[fetchedData[j].question_id] = cur_arr;
                 }
                 // console.log(fetchedData[1].answers)
-                console.log(tmp)
+
                 setAnswer(() => tmp)
-                // console.log(answer)
+                console.log(answer)
 
             })
     }, [])
@@ -72,17 +90,21 @@ export default function DisplayQuestionsAndAnswers() {
 
     renderExpandableRow: (rowData, rowMeta) => {
             const colSpan = rowData.length + 1;
-            // console.log(rowData[0])
+            console.log("row: "+rowData)
             const id = rowData[0]
-            // console.log(answer[id])
-            // const id = rowData[0]
-            // console.log(answer[0][0])
+
             return (
-                <TableRow>
-                    <TableCell colSpan={colSpan}>
-                        {answer[id].map(answers => <li key={answers.answer_id}>{answers.text}</li>)}
-                    </TableCell>
-                </TableRow>
+
+        <TableRow>
+            <TableCell colSpan={colSpan}>
+                {answer[id][0] !== 0 ?
+                    answer[id].map(answers => <li key={answers.answer_id}>{answers.text}</li>)
+                    :< p > No answers yet</p>
+                }
+            </TableCell>
+        </TableRow>
+
+
             );
         },
         // onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) => console.log(curExpanded, allExpanded, rowsExpanded)

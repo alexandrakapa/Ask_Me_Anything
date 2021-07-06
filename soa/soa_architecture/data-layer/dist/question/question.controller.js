@@ -23,6 +23,9 @@ let QuestionController = class QuestionController {
     async getAll() {
         return await this.questionService.findAll();
     }
+    async getSomeAnswers() {
+        return await this.questionService.findSome();
+    }
     async getAllKeywords() {
         return await this.questionService.findAllKeywords();
     }
@@ -58,6 +61,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getAll", null);
+__decorate([
+    common_1.Get('some_answers'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getSomeAnswers", null);
 __decorate([
     common_1.Get('andkeywords'),
     __metadata("design:type", Function),

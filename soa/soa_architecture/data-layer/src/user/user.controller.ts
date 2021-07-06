@@ -8,9 +8,10 @@ import { UserEntity } from './entities/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Post('register')
-  create(@Body() createQuizDto: CreateUserDto): Promise<UserEntity> {
+  async create(@Body() createQuizDto: CreateUserDto) {
     console.log("hrere inside");
-    return this.userService.create(createQuizDto);
+    let res = await this.userService.create(createQuizDto);
+    return "ok";
   }
   @Post('test')
   async cre()  {

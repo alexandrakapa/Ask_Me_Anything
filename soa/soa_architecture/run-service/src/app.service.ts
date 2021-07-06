@@ -37,6 +37,12 @@ export class AppService implements OnModuleInit{
       let obj = [my_addr+"/question/create","post","auth"];
       const res4 = await client.hset("run_services", "create_question",JSON.stringify(obj) );
     }
+
+    const get_some = await client.hget("run_services", "get_some")
+    if(!get_some ||get_some[0] != my_addr+"/question/some_answers"){
+      let obj = [my_addr+"/question/some_answers","get","no_auth"];
+      const res4 = await client.hset("run_services", "get_some",JSON.stringify(obj) );
+    }
     return "ok";
   }
 

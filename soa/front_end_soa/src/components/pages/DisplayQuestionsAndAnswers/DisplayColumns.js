@@ -29,7 +29,7 @@ export const columns = [
         label: "Date asked",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         },
     },
     {

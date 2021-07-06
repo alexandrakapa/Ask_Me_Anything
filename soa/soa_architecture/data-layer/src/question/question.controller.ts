@@ -10,6 +10,10 @@ export class QuestionController {
   async getAll():Promise<Question[]>{  //for display
     return await this.questionService.findAll();
   }
+  @Get('some_answers')
+  async getSomeAnswers():Promise<Question[]>{  //for display
+    return await this.questionService.findSome();
+  }
 
   @Get('andkeywords')
   async getAllKeywords():Promise<Question[]>{  //for display

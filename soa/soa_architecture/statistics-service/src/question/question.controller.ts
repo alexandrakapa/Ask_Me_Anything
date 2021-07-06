@@ -7,9 +7,9 @@ export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
   @Get('statistics/byDay')  //for statistics by day
-  async getByDay(@Headers() head):Promise<any>{
-    let auth_res = await this.questionService.checkTok(head.authorization);
-    console.log("auth: "+auth_res);
+  async getByDay():Promise<any>{
+    // let auth_res = await this.questionService.checkTok(head.authorization);
+    // console.log("auth: "+auth_res);
     // if(auth_res ==1) {
     return this.questionService.findByDay();
     // }else{
@@ -18,9 +18,9 @@ export class QuestionController {
   }
 
   @Get('statistics/byKeyword')  //for statistics by keyword
-  async getByKeyword(@Headers() head):Promise<any>{
-    let auth_res = await this.questionService.checkTok(head.authorization);
-    console.log("auth: "+auth_res);
+  async getByKeyword():Promise<any>{
+    // let auth_res = await this.questionService.checkTok(head.authorization);
+    // console.log("auth: "+auth_res);
     // if(auth_res ==1) {
     return this.questionService.findByKeyword();
     // }else{

@@ -37,7 +37,8 @@ let AppController = class AppController {
             return await this.authService.login(validator);
         }
         else {
-            return "wrong credentials!";
+            let obj = { 'accessToken': '' };
+            return JSON.stringify(obj);
         }
     }
     getTodos() {

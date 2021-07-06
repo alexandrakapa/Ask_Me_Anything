@@ -44,24 +44,26 @@ import { useHistory } from "react-router";
         fetch('http://localhost:3100/auth/login',requestOptions).then(res => res.json() )
             .then( json => {
                         // this.props.setUserData(json.accessToken, json.username);
-                if(json.accessToken!=="" ) {
+                console.log("HEREEEE"+ json);
+                if(json.accessToken ) {
                     console.log("here: "+json.accessToken);
                     localStorage.setItem('token', json.accessToken);
-                    localStorage.setItem('username', empInfo.username);
                     localStorage.setItem('id', json.id);
+                    console.log(localStorage.getItem('token'));
+                    console.log(localStorage.getItem('id'));
+                    history.push({pathname:"/home/user"})
 
-                    history.push({
-                        pathname:  "/home/user"
-                    });
+                }else{
+                    alert("wrong credentials");
                 }
                 // localStorage.setItem('token', json.token);
-                const tok = localStorage.getItem('token');
-                console.log("here")
-                console.log(tok);
-                // localStorage.setItem('username', json.username);
-                const tokf = localStorage.getItem('username');
-                console.log("here")
-                console.log(tokf);
+                // const tok = localStorage.getItem('token');
+                // console.log("here")
+                // console.log(tok);
+                // // localStorage.setItem('username', json.username);
+                // const tokf = localStorage.getItem('username');
+                // console.log("here")
+                // console.log(tokf);
 
                 // console.log(json.token)
                 }

@@ -34,6 +34,11 @@ let QuestionService = class QuestionService {
     findAll() {
         return this.questionRepo.find({ relations: ["answers"] });
     }
+    findSome() {
+        return this.questionRepo.find({ relations: ["answers"], order: {
+                question_id: "DESC",
+            }, take: 10 });
+    }
     async findAllKeywords() {
         const qb = await this.questionRepo
             .createQueryBuilder("question")
@@ -49,6 +54,7 @@ let QuestionService = class QuestionService {
     async createQuestion(title, text, user, keywords) {
         const keys = [];
         if (typeof keywords == "string") {
+            console.log("string: " + keywords);
             const cur_key = await typeorm_3.getManager()
                 .createQueryBuilder(keyword_entity_1.Keyword, 'keyword')
                 .where('keyword_phrase = :phrase', { phrase: keywords })
@@ -65,11 +71,14 @@ let QuestionService = class QuestionService {
         }
         else {
             for (let i = 0; i < keywords.length; i++) {
+                console.log("array: " + keywords);
+                console.log("cur: " + keywords[i]);
                 const cur_key = await typeorm_3.getManager()
                     .createQueryBuilder(keyword_entity_1.Keyword, 'keyword')
                     .where('keyword_phrase = :phrase', { phrase: keywords[i] })
                     .getOne();
                 if (cur_key) {
+                    console.log("here true");
                     keys.push(cur_key);
                 }
                 else {

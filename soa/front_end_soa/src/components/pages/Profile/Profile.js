@@ -18,7 +18,7 @@ export default function Profile() {
 
     useEffect(() => {
         let req_id = localStorage.getItem('id')
-        fetch(`http://localhost:3002/question/statistics/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`http://localhost:3005/question/statistics/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -41,7 +41,7 @@ export default function Profile() {
                 setPhrase(() => newtemp)
             })
         //for the second diagram
-        fetch(`http://localhost:3002/question/statistics/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`http://localhost:3005/question/statistics/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 return response.json()
             })

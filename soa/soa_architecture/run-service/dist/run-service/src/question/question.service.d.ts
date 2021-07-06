@@ -6,6 +6,7 @@ export declare class QuestionService {
     private httpService;
     private readonly redisService;
     constructor(httpService: HttpService, redisService: RedisService);
+    findSome(): Observable<AxiosResponse<any>>;
     findAll(): Observable<AxiosResponse<any>>;
     findAllQuestionsByUserId(askedFrom: number): Observable<AxiosResponse<any>>;
     checkTok(token: any): Promise<any>;

@@ -24,7 +24,7 @@ let AnswerController = class AnswerController {
     }
 };
 __decorate([
-    common_1.Get('/statistics/byDay/:user'),
+    common_1.Get('statistics/byDay/:user'),
     __param(0, common_1.Param('user', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

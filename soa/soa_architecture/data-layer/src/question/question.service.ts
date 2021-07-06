@@ -20,7 +20,11 @@ export class QuestionService {
   findAll(): Promise<Question[]> {    //returns all the questions with their answers  //for display
     return this.questionRepo.find({ relations: ["answers"] });
   }
-
+  findSome(): Promise<Question[]> {    //returns all 10 recent questions with their answers //for display
+    return this.questionRepo.find({ relations: ["answers"] ,order: {
+        question_id: "DESC",
+      },take: 10});
+  }
   async findAllKeywords(): Promise<Question[]> {    //returns all the questions with their keywords //for display
     const qb = await this.questionRepo
         .createQueryBuilder("question")
@@ -40,6 +44,7 @@ export class QuestionService {
   async createQuestion(title, text, user, keywords) {   //creates a question
     const keys = [];
     if(typeof keywords == "string"){
+      console.log("string: "+keywords)
       const cur_key = await getManager()
         .createQueryBuilder(Keyword, 'keyword')
         .where('keyword_phrase = :phrase', { phrase: keywords })
@@ -54,11 +59,15 @@ export class QuestionService {
       }
     } else {
       for (let i = 0; i < keywords.length; i++) {
+        console.log("array: "+keywords)
+        console.log("cur: "+keywords[i])
+
         const cur_key = await getManager()
           .createQueryBuilder(Keyword, 'keyword')
           .where('keyword_phrase = :phrase', { phrase: keywords[i] })
           .getOne();
         if (cur_key) {
+          console.log("here true");
           keys.push(cur_key);
         } else {
           const keyword = new Keyword();

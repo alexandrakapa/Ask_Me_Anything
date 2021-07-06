@@ -18,6 +18,10 @@ let QuestionService = class QuestionService {
         this.httpService = httpService;
         this.redisService = redisService;
     }
+    findSome() {
+        return this.httpService.get('http://localhost:3000/question/some_answers')
+            .pipe(operators_1.map(response => response.data));
+    }
     findAll() {
         return this.httpService.get('http://localhost:3000/question/andanswers')
             .pipe(operators_1.map(response => response.data));

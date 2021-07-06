@@ -6,6 +6,7 @@ export declare class QuestionService {
     constructor(questionRepo: Repository<Question>, questionManager: EntityManager);
     findQuestionById(question_id: number): Promise<Question>;
     findAll(): Promise<Question[]>;
+    findSome(): Promise<Question[]>;
     findAllKeywords(): Promise<Question[]>;
     findAllQuestionsByUser(askedFrom: any): Promise<Question[]>;
     createQuestion(title: any, text: any, user: any, keywords: any): Promise<void>;

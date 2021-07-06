@@ -5,9 +5,9 @@ export declare class AppController {
     private appService;
     constructor(authService: AuthService, appService: AppService);
     reg(request: Request): Promise<import("rxjs").Observable<any>>;
-    login(request: Request): Promise<{
+    login(request: Request): Promise<string | {
         accessToken: string;
         id: any;
-    } | "wrong credentials!">;
+    }>;
     getTodos(): number;
 }

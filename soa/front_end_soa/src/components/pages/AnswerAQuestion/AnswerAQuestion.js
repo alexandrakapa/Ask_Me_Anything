@@ -87,7 +87,7 @@ function AnswerAQuestion(props) {
 
     const users = [
         {
-            name: question.question_id,
+            name: question.askedFrom,
             title: question.title,
             desc: question.text,
             askedOn: question.askedOn
@@ -105,7 +105,7 @@ function AnswerAQuestion(props) {
             <Grid item xs={12} sm={3} md={2}>
                 <Grid container direction="column" alignItems="center">
                     <Avatar className={classes.avatar} style={{ height: '50px', width: '50px' }}/>
-                    <Typography align="center" variant="subtitle2">Asked From: {name}</Typography>
+                    {/*<Typography align="center" variant="subtitle2">Asked From: {name}</Typography>*/}
                     <Typography align="center" variant="subtitle2">Asked On: {askedOn}</Typography>
                 </Grid>
             </Grid>
@@ -150,7 +150,7 @@ function AnswerAQuestion(props) {
                     'Authorization': 'Bearer '+localStorage.getItem('token'),
                     // 'x-access-token':tok
                 },
-                body: JSON.stringify({ text : data.text, answeredFrom: 1, isAnAnswerOf: {question_id}})
+                body: JSON.stringify({ text : data.text, answeredFrom: localStorage.getItem('id'), isAnAnswerOf: {question_id}})
 
             })
         }

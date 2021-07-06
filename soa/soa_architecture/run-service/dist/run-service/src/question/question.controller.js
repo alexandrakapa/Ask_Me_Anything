@@ -19,9 +19,6 @@ let QuestionController = class QuestionController {
     constructor(questionService) {
         this.questionService = questionService;
     }
-    async getNikos() {
-        return "nikos";
-    }
     async getAll(headers) {
         console.log("first step:request received!");
         let auth_res = await this.questionService.checkTok(headers.authorization);
@@ -32,6 +29,9 @@ let QuestionController = class QuestionController {
         else {
             return "not authorized!";
         }
+    }
+    async getSomeAnswers() {
+        return this.questionService.findSome();
     }
     async getAllQuestionsByUserId(askedFrom, headers) {
         let auth_res = await this.questionService.checkTok(headers.authorization);
@@ -66,18 +66,18 @@ let QuestionController = class QuestionController {
     }
 };
 __decorate([
-    common_1.Get('nikos'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], QuestionController.prototype, "getNikos", null);
-__decorate([
     common_1.Get('andanswers'),
     __param(0, common_1.Headers()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], QuestionController.prototype, "getAll", null);
+__decorate([
+    common_1.Get('some_answers'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], QuestionController.prototype, "getSomeAnswers", null);
 __decorate([
     common_1.Get('user/all/:askedFrom'),
     __param(0, common_1.Param('askedFrom', common_1.ParseIntPipe)),

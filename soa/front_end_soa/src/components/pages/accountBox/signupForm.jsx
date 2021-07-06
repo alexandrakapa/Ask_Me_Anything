@@ -46,14 +46,14 @@ export function SignupForm(props) {
             })
         };
         console.log(requestOptions);
-        fetch('http://localhost:3100/register',requestOptions).then(res => res.json() )
-            .then( json => {
+        fetch('http://localhost:3100/register',requestOptions).then(response => {
+            if(response.ok){
+                switchToSignin();
+            }else{
+                alert("There has been an error with your registration ")
+            }
+        } )
 
-
-                     console.log(json);
-                }
-            )
-            .catch(err => console.log(err));
     }
     return (
 

@@ -2,18 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectEntityManager } from '@nestjs/typeorm';
-import { EntityManager } from 'typeorm';
+import {EntityManager, getConnection} from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 import { sha512 } from 'sha512-crypt-ts';
 
 @Injectable()
 export class UserService {
   constructor(@InjectEntityManager() private manager: EntityManager) {}
-  async create( CreateUserDto): Promise<UserEntity> {
+  async create( CreateUserDto) {
     console.log(CreateUserDto);
     const user = await this.manager.create(UserEntity, CreateUserDto);
-    console.log("here"+user.username);
     return this.manager.save(user);
+
   }
 
   // async findAll(): Promise<UserEntity[]> {

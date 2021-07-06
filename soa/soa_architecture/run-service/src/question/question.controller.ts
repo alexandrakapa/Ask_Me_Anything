@@ -5,10 +5,10 @@ import {Question} from "../../../data-layer/src/question/question.entity";
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
-  @Get('nikos')
-  async getNikos(){
-    return "nikos";
-  }
+  // @Get('nikos')
+  // async getNikos(){
+  //   return "nikos";
+  // }
 
   @Get('andanswers')  //for display
   async getAll( @Headers() headers):Promise<any>{
@@ -21,7 +21,12 @@ export class QuestionController {
       return "not authorized!";
     }
   }
+  @Get('some_answers')  //for display
+  async getSomeAnswers( ):Promise<any>{
 
+    return this.questionService.findSome();
+
+  }
 
   @Get('user/all/:askedFrom')  //for display
   async getAllQuestionsByUserId(@Param('askedFrom', ParseIntPipe) askedFrom: number, @Headers() headers):Promise<any>{
