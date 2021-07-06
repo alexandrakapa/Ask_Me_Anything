@@ -22,8 +22,10 @@ export const ContactAfterLoginStyle = styled.div`
     font-size: 20px;
     margin-top: 3%;
   }
-  
- 
-  
+
+
+  p {
+    font-size: 15px;
+  }
  
 `

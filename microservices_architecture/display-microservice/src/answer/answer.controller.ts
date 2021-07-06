@@ -25,4 +25,9 @@ export class AnswerController {
   findAllByQuestionId(@Param('isAnAnswerOf', ParseIntPipe) isAnAnswerOf: number): Promise<Answer[]> {
     return this.answerService.findAnswersByQuestionId(isAnAnswerOf);
   }
+
+  @Get('byDay/:user')
+  async getByDayUser(@Param('user') user):Promise<Answer[]>{
+    return await this.answerService.findByDayUser(user)
+  }
 }

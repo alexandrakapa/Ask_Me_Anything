@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const AnswerAQuestionStyle = styled.div`
    
-
    h1 {
       line-height: 2;
       display: flex;
@@ -12,14 +11,12 @@ export const AnswerAQuestionStyle = styled.div`
       font-weight: 200;
       margin-left: 13%;
    }
-
    h3 {
       font-size: 18px;
       display: flex;
       justify-content: center;
       align-items: center;
    }
-
    h5 {
       margin-top: 2.5%;
       margin-bottom: 1.5%;
@@ -29,21 +26,17 @@ export const AnswerAQuestionStyle = styled.div`
       align-items: center;
       font-weight: bold;
    }
-
-
    Form {
       width: 100%;
       //margin-left: -1%;
       margin-top: 1%;
    }
-
    FormGroup {
       width: 100%;
       //margin-left: 30%;
       margin-top: 5%;
       //height: 100%;
    }
-
    textarea {
       display: block;
       box-sizing: border-box;
@@ -57,8 +50,6 @@ export const AnswerAQuestionStyle = styled.div`
       margin-left : 13%;
       width: 73%;
    }
-
-
    Input {
       display: block;
       box-sizing: border-box;
@@ -72,25 +63,21 @@ export const AnswerAQuestionStyle = styled.div`
       -webkit-transition: 0.5s;
       transition: 0.5s;
    }
-
    Input:focus {
       outline: none !important;
       border: 2px solid #8d17cd;
       box-shadow: 0 0 10px #000000;
    }
-
    textarea:focus {
       outline: none !important;
       border: 2px solid #8d17cd;
       box-shadow: 0 0 10px #000000;;
    }
    
-
    select {
       width: 100%;
       padding: 10px 15px;
    }
-
    Label {
       line-height: 2;
       text-align: left;
@@ -102,7 +89,6 @@ export const AnswerAQuestionStyle = styled.div`
       font-weight: 200;
       margin-left: 13%
    }
-
    button[type="submit"],
    input[type="submit"] {
       background: rgb(74, 20, 156);
@@ -118,7 +104,6 @@ export const AnswerAQuestionStyle = styled.div`
       margin-right: 3%;
       margin-left: 13%;
    }
-
    button[type="cancel"],
    input[type="cancel"] {
       background: rgb(74, 20, 156);
@@ -132,7 +117,6 @@ export const AnswerAQuestionStyle = styled.div`
       letter-spacing: 10px;
       display: inline-block;
    }
-
    button[type="submit"]:hover,
    input[type="submit"]:hover,
    button[type="cancel"]:hover,
@@ -140,22 +124,17 @@ export const AnswerAQuestionStyle = styled.div`
       filter: brightness(1);
       background: rgb(140, 91, 255);
    }
-
    input:disabled {
       opacity: 0.4;
    }
-
    input[type="button"]:hover {
       transition: 0.3s all;
    }
-
    button[type="submit"],
    input[type="button"],
    input[type="submit"] {
       -webkit-appearance: none;
    }
-
-
    button[type="button"] {
       display: block;
       appearance: none;
@@ -166,11 +145,9 @@ export const AnswerAQuestionStyle = styled.div`
       padding: 10px 20px;
       border-radius: 4px;
    }
-
    hr {
       margin-top: 30px;
    }
-
    button {
       display: block;
       appearance: none;
@@ -181,5 +158,7 @@ export const AnswerAQuestionStyle = styled.div`
       padding: 10px 20px;
       border-radius: 4px;
    }
-
+  p {
+    font-size: 15px;
+  }
 `;

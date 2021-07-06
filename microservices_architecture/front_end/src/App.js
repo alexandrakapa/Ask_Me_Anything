@@ -24,6 +24,8 @@ import Profile from "./components/pages/Profile/Profile";
 import HomeAfterLogin from "./components/pages/HomeAfterLogin/HomeAfterLogin";
 import DisplayQuestionsAndAnswers from './components/pages/DisplayQuestionsAndAnswers/DisplayQuestionsAndAnswers';
 import DisplayQuestions from './components/pages/DisplayQuestions/DisplayQuestions';
+import DisplayQuestionsAndAnswersAfterLogin
+    from "./components/pages/DisplayQuestionsAndAnswersAfterLogin/DisplayQuestionsAndAnswersAfterLogin";
 
 const App = () => {
     return (
@@ -76,6 +78,9 @@ const App = () => {
                     </Route>
                     <Route path="/user/contact" exact>
                         <ContactAfterLogin/>
+                    </Route>
+                    <Route path="/display/user" exact>
+                        <DisplayQuestionsAndAnswersAfterLogin/>
                     </Route>
                     <Redirect to="/" />
                 </Switch>

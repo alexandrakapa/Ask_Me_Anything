@@ -14,6 +14,8 @@ export default function Profile() {
     const [phrase, setPhrase] = useState([]);
     const [day, setDay] = useState([]);
     const [number, setNumber] = useState([]);
+    const [day2, setDay2] = useState([]);
+    const [number2, setNumber2] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:3001/question/byKeyword/6`)
@@ -60,6 +62,28 @@ export default function Profile() {
                 setNumber(() => tmp3)
                 setDay(() => newtemp2)
             })
+        //for the third diagram
+        fetch(`http://localhost:3000/answer/byDay/1`)
+            .then(response => {
+                return response.json()
+            })
+            .then(fetchedData3 => {
+
+                let tmp4=[]
+                let newtemp3 = []
+                let i
+                for (i=0; i<fetchedData3.length; i++){
+                    tmp4.push(fetchedData3[i].count)
+                    let day = fetchedData3[i].answers_per_day.slice(8, 10)
+                    let month = fetchedData3[i].answers_per_day.slice(5, 7)
+                    let year = fetchedData3[i].answers_per_day.slice(0, 4)
+                    let newdate = day.concat("-",month,"-",year)
+                    newtemp3.push(newdate)
+
+                }
+                setNumber2(() => tmp4)
+                setDay2(() => newtemp3)
+            })
     }, [])
 
     const state = {
@@ -91,11 +115,56 @@ export default function Profile() {
         ]
     }
 
+    const state3 = {
+        labels: day2,
+        datasets: [
+            {
+                label: 'Statistics for answers per day',
+                fill: false,
+                lineTension: 0.5,
+                backgroundColor: 'rgb(59,215,124)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 2,
+                data: number2
+            }
+        ]
+    }
 
     return (
         <ProfileStyle >
             <NavbarAfterLogin/>
+            <h1>My contributions</h1>
+
             <div className="boxleft">
+                <label>My Questions per day</label>
+                <Line
+                    data={state2}
+                    options={{
+                        legend:{
+                            display:true,
+                            position:'right'
+                        }
+                    }}
+                />
+                <br/>
+                <br/>
+            </div>
+
+            <div className="boxright">
+                <label>My Answers per day</label>
+                <Line
+                    data={state3}
+                    options={{
+                        legend:{
+                            display:true,
+                            position:'right'
+                        }
+                    }}
+                />
+                <br/>
+                <br/>
+            </div>
+            <div className="boxmiddle">
                 <label>My Questions per keyword</label>
                 <Bar
                     data={state}
@@ -112,24 +181,6 @@ export default function Profile() {
                         }
                     }}
                 />
-            </div>
-
-            <div className="boxright">
-                <label>My Questions per day</label>
-                <Line
-                    data={state2}
-                    options={{
-                        legend:{
-                            display:true,
-                            position:'right'
-                        }
-                    }}
-                />
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
             </div>
             <Footer/>
         </ProfileStyle >

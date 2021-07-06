@@ -1,10 +1,9 @@
-
 .navbar {
     /*background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);*/
     background: rgb(70,17,152);
     background: linear-gradient(325deg, rgba(70,17,152,1) 50%, rgb(91, 255, 106) 100%);
     padding: 0px;
-    height: 90px;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +23,7 @@
 
 .nav-menu {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
