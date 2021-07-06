@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { Keyword } from '../keyword/keyword.entity';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager, getManager, Repository } from "typeorm";
 import { Answer } from './answer.entity';
 import { Question } from '../question/question.entity';
 
@@ -12,7 +12,9 @@ export class AnswerService {
   constructor(@InjectRepository(Answer) private answerRepo: Repository<Answer>,
               @InjectEntityManager() private answerManager: EntityManager) {}
 
-
+  findAll(): Promise<Answer[]> {
+    return this.answerRepo.find();
+  }
 
   async make_answer(id, text, user, date, quid) {
     const answers = [];
@@ -39,8 +41,20 @@ export class AnswerService {
     //   .where('id = :id', { id: quid })
     //   .execute();
     return 'ok';
+  }
   async findAnswersByQuestionId(isAnAnswerOf: any): Promise<Answer[]> {    //returns all answers by question id
     return this.answerManager.find(Answer, {isAnAnswerOf});
+  }
+
+  async findByDayUser(user): Promise<Answer[]> {
+    const qb = await this.answerRepo
+      .createQueryBuilder("answer")
+      .select(`DATE_TRUNC('day', "answeredOn") AS answers_per_day, COUNT(answer_id) AS count`)
+      .where(`answer.answeredFrom = ${user}`)
+      .groupBy(`DATE_TRUNC('day',"answeredOn")`)
+      .orderBy(`answers_per_day`)
+    // console.log(qb.getSql())
+    return qb.getRawMany()
   }
 
   create(newAnswer){

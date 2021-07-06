@@ -4,12 +4,11 @@ export const ProfileStyle = styled.div`
   h1 {
     line-height: 2;
     display: flex;
-    margin-bottom: 5%;
-    margin-top: 5%;
+    margin-top: 1%;
     color: #000000;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 200;
-    margin-left: -10%;
+    margin-left: 40%;
   }
 
   h3 {
@@ -43,14 +42,20 @@ export const ProfileStyle = styled.div`
     float: left;
     width: 50%;
     padding: 0 2%;
-    margin-top:5%;
+    margin-top:1%;
   }
-
   .boxright {
     float: right;
     width: 50%;
     padding: 0 2%;
-    margin-top:5%;
+    margin-top:1%;
+  }
+  .boxmiddle {
+    margin-left:auto;
+    margin-right:auto;
+    width: 50%;
+    padding: 0 2%;
+    margin-top:3%;
   }
 
   /* Remove extra left and right margins, due to padding in columns */

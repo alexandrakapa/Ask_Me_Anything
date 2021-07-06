@@ -1,4 +1,4 @@
-import { BadRequestException, HttpService, Injectable, NotFoundException, OnModuleInit } from "@nestjs/common";
+import { BadRequestException, Get, HttpService, Injectable, NotFoundException, OnModuleInit, Param } from "@nestjs/common";
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { InjectEntityManager } from '@nestjs/typeorm';
@@ -108,4 +108,5 @@ export class AnswerService implements OnModuleInit {
   remove(id: number) {
     return `This action removes a #${id} answer`;
   }
+
 }

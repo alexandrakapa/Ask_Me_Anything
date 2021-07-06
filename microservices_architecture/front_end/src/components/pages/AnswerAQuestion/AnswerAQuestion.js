@@ -49,18 +49,34 @@ function AnswerAQuestion(props) {
             })
                 .then(response => response.json())
                 .then(fetchedData => {
-
+                    let date;
+                    date=fetchedData.askedOn
+                    date = date.split("T")
+                    let date2;
+                    date2 = date[1].split(".")
+                    let cut;
+                    cut = date[0].concat(" ",date2[0])
+                    fetchedData.askedOn = cut
                     setQuestion(() => fetchedData)
                     console.log(fetchedData)
                     console.log(question)
                 })
 
-            fetch(`http://localhost:3000/answer/all/1`, {
+            fetch(`http://localhost:3000/answer/all/${question_id}`, {
                 // headers:{'Content-type':'application/json'}
             })
                 .then(response => response.json())
                 .then(fetchedData => {
-
+                    for (let i=0; i<fetchedData.length; i++) {
+                        let date;
+                        date=fetchedData[i].answeredOn
+                        date = date.split("T")
+                        let date2;
+                        date2 = date[1].split(".")
+                        let cut;
+                        cut = date[0].concat(" ",date2[0])
+                        fetchedData[i].answeredOn = cut
+                    }
                     setAnswer(() => fetchedData)
                     console.log(fetchedData)
                     console.log(answer)

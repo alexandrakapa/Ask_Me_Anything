@@ -19,6 +19,16 @@ function DisplayQuestions(props)  {
         })
             .then(response => response.json())
             .then(fetchedData => {
+                for (let i=0; i<fetchedData.length; i++) {
+                    let date;
+                    date=fetchedData[i].askedOn
+                    date = date.split("T")
+                    let date2;
+                    date2 = date[1].split(".")
+                    let cut;
+                    cut = date[0].concat(" ",date2[0])
+                    fetchedData[i].askedOn = cut
+                }
                 setQuestion(() => fetchedData)
                 console.log(fetchedData)
             })

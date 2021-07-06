@@ -31,4 +31,8 @@ export const AboutAfterLoginStyle = styled.div`
     background-color: rgb(70,17,152);
     border-color: rgb(70,17,152);
   }
+
+  p {
+    font-size: 15px;
+  }
 `

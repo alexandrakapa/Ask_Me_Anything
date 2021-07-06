@@ -5,7 +5,6 @@ import {Link, NavLink} from 'react-router-dom';
 
 function NavbarAfterLogin(props) {
     const [click, setClick] = useState(false);
-    const [dropdown, setDropdown] = useState(false);
     const [button, setButton] = useState(true);
     const username = localStorage.getItem('username');
     // console.log("here")
@@ -28,32 +27,13 @@ function NavbarAfterLogin(props) {
     window.addEventListener('resize', showButton);
 
 
-    const onMouseEnter = () => {
-        if (window.innerWidth < 960) {
-            setDropdown(false);
-        } else {
-            setDropdown(true);
-        }
-    };
-
-    const onMouseLeave = () => {
-        if (window.innerWidth < 960) {
-            setDropdown(false);
-        } else {
-            setDropdown(false);
-        }
-    };
-
     return (
         <>
             <nav className='navbar'>
                 <Link to='/home' className='navbar-logo' onClick={closeMobileMenu}>
                     AskMeAnything
-
+                    <p>Personal account</p>
                 </Link>
-                <li className='username'>
-                    {username}
-                </li>
                 <div className='menu-icon' onClick={handleClick}>
                     <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                 </div>
@@ -67,6 +47,17 @@ function NavbarAfterLogin(props) {
                                 className="fas fa-home">
                             </i>
                             Home
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link
+                            to='/display/user'
+                            className='nav-links'
+                            onClick={closeMobileMenu}
+                        >
+                            <i
+                                className="fas fa-search">
+                            </i>View questions and answers
                         </Link>
                     </li>
                     <li className='nav-item'>
