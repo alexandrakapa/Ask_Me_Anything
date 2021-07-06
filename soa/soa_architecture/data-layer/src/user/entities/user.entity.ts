@@ -20,11 +20,11 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('varchar', { length: 500, unique: false })
-  FirstName: string;
-
-  @Column('varchar', { length: 500, unique: false })
-  LastName: string;
+  // @Column('varchar', { length: 500, unique: false })
+  // FirstName: string;
+  //
+  // @Column('varchar', { length: 500, unique: false })
+  // LastName: string;
 
   @Column('varchar', { length: 500, unique: true })
   username: string;

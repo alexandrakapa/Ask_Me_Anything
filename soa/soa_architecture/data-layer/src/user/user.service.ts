@@ -9,10 +9,10 @@ import { sha512 } from 'sha512-crypt-ts';
 @Injectable()
 export class UserService {
   constructor(@InjectEntityManager() private manager: EntityManager) {}
-  async create(CreateUserDto: CreateUserDto): Promise<UserEntity> {
+  async create( CreateUserDto): Promise<UserEntity> {
     console.log(CreateUserDto);
     const user = await this.manager.create(UserEntity, CreateUserDto);
-    console.log(user.username);
+    console.log("here"+user.username);
     return this.manager.save(user);
   }
 
@@ -26,6 +26,7 @@ export class UserService {
     return this.manager.findOne(UserEntity, { username: userName });
   }
   async validate(userName: string,passWord: string){
+    console.log("herer");
     const user = await this.findOne(userName);
 
     const origHash = user.password,
@@ -35,9 +36,10 @@ export class UserService {
 
     const hash = sha512.crypt(passWord, salt);
     if (user && hash === origHash) {
-      return 1;
+      console.log("abyss: "+user.id);
+      return user.id;
     }else{
-      return 0;
+      return -1;
     }
   }
   update(id: number, updateUserDto: UpdateUserDto) {

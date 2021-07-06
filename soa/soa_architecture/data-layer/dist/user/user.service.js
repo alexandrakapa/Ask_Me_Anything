@@ -25,7 +25,7 @@ let UserService = class UserService {
     async create(CreateUserDto) {
         console.log(CreateUserDto);
         const user = await this.manager.create(user_entity_1.UserEntity, CreateUserDto);
-        console.log(user.username);
+        console.log("here" + user.username);
         return this.manager.save(user);
     }
     async findOne(userName) {
@@ -34,14 +34,16 @@ let UserService = class UserService {
         return this.manager.findOne(user_entity_1.UserEntity, { username: userName });
     }
     async validate(userName, passWord) {
+        console.log("herer");
         const user = await this.findOne(userName);
         const origHash = user.password, parts = origHash.split('$'), rounds = parts[2], salt = '$' + parts[1] + '$' + rounds + '$' + parts[3];
         const hash = sha512_crypt_ts_1.sha512.crypt(passWord, salt);
         if (user && hash === origHash) {
-            return 1;
+            console.log("abyss: " + user.id);
+            return user.id;
         }
         else {
-            return 0;
+            return -1;
         }
     }
     update(id, updateUserDto) {

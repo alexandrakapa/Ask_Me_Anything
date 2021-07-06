@@ -22,11 +22,23 @@ let AppController = class AppController {
         this.authService = authService;
         this.appService = appService;
     }
-    async reg(reg_details) {
-        return await this.appService.register(reg_details);
+    async reg(request) {
+        console.log("here comes the reg controler");
+        console.log("hrerere");
+        console.log(request.body);
+        return await this.appService.register(request.body);
     }
-    async login(log_dets) {
-        return await this.authService.login(log_dets.username);
+    async login(request) {
+        console.log("here comes the login controler");
+        console.log(request.body['username']);
+        let validator = await this.authService.validateUser(request.body['username'], request.body['password']);
+        console.log("here: " + validator);
+        if (validator != -1) {
+            return await this.authService.login(validator);
+        }
+        else {
+            return "wrong credentials!";
+        }
     }
     getTodos() {
         return 1;
@@ -34,15 +46,14 @@ let AppController = class AppController {
 };
 __decorate([
     common_1.Post('register'),
-    __param(0, common_1.Body()),
+    __param(0, common_1.Req()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "reg", null);
 __decorate([
-    common_1.UseGuards(passport_1.AuthGuard('local')),
     common_1.Post('auth/login'),
-    __param(0, common_1.Body()),
+    __param(0, common_1.Req()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)

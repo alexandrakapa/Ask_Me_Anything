@@ -12,19 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
-const operators_1 = require("rxjs/operators");
 let AuthService = class AuthService {
     constructor(jwtService, httpService) {
         this.jwtService = jwtService;
         this.httpService = httpService;
     }
     async validateUser(username, pass) {
-        return this.httpService.post(' http://localhost:3000/data-layer/user/validate', { username: username, password: pass }).pipe(operators_1.map(result => result.data));
+        let res = await this.httpService.post(' http://localhost:3000/user/validate', { username: username, password: pass }).toPromise();
+        return res.data;
     }
-    async login(user) {
-        const payload = { username: user.userName };
+    async login(given_id) {
+        console.log(given_id);
+        const payload = {};
         return {
             accessToken: this.jwtService.sign(payload),
+            id: given_id
         };
     }
 };

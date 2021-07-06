@@ -19,6 +19,9 @@ let QuestionController = class QuestionController {
     constructor(questionService) {
         this.questionService = questionService;
     }
+    async getNikos(){
+        return "nikos";
+    }
     async getAll(headers) {
         console.log("first step:request received!");
         let auth_res = await this.questionService.checkTok(headers.authorization);

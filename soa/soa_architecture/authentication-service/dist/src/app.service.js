@@ -47,6 +47,8 @@ let AppService = class AppService {
         return "ok";
     }
     async register(req_body) {
+        console.log("hrere too");
+        console.log(req_body);
         return this.httpService.post(' http://localhost:3000/user/register', req_body).pipe(operators_1.map(result => result.data));
     }
     async verif(tok) {

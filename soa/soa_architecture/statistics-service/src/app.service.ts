@@ -24,6 +24,8 @@ export class AppService implements OnModuleInit{
       const res2 = await client.hset("stats_services", "keyword",JSON.stringify(obj) );
 
     }
+
+
     return "ok";
   }
 

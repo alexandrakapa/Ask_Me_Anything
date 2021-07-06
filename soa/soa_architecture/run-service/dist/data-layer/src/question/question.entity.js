@@ -13,7 +13,7 @@ exports.Question = void 0;
 const typeorm_1 = require("typeorm");
 const answer_entity_1 = require("../answer/answer.entity");
 const keyword_entity_1 = require("../keyword/keyword.entity");
-const user_entity_1 = require("../user/user.entity");
+const user_entity_1 = require("../user/entities/user.entity");
 let Question = class Question {
 };
 __decorate([
@@ -42,8 +42,8 @@ __decorate([
     __metadata("design:type", Array)
 ], Question.prototype, "keywords", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => user_entity_1.User, (askedFrom) => askedFrom.questions),
-    __metadata("design:type", user_entity_1.User)
+    typeorm_1.ManyToOne(() => user_entity_1.UserEntity, (askedFrom) => askedFrom.questions),
+    __metadata("design:type", user_entity_1.UserEntity)
 ], Question.prototype, "askedFrom", void 0);
 Question = __decorate([
     typeorm_1.Entity()

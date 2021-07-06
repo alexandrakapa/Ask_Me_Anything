@@ -32,6 +32,7 @@ function AskAQuestion(props) {
                 headers: {
                     // 'Accept': 'application/json',
                     'Content-type':'application/json',
+                    'Authorization': 'Bearer '+localStorage.getItem('token'),
                     // 'x-access-token':tok
                 },
                 body: JSON.stringify({ title : data.title, text : data.text, askedFrom: 1, keywords: tags})

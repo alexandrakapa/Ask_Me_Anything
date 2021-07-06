@@ -11,7 +11,7 @@ async function bootstrap() {
         res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
         next();
     });
-    await app.listen(3002);
+    await app.listen(3005);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

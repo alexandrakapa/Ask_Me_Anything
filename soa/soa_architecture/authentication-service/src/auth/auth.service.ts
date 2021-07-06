@@ -2,6 +2,8 @@ import { Injectable, HttpService, OnModuleInit } from "@nestjs/common";
 import { JwtService } from '@nestjs/jwt';
 import { sha512 } from 'sha512-crypt-ts';
 import { map } from "rxjs/operators";
+import * as util from "util";
+import {json} from "express";
 
 @Injectable()
 export class AuthService {
@@ -13,14 +15,16 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
 
-    return this.httpService.post(' http://localhost:3000/data-layer/user/validate',{ username:username,password:pass }).pipe(map(result => result.data));
-
+    let res = await this.httpService.post(' http://localhost:3000/user/validate',{ username:username,password:pass }).toPromise();
+    return res.data;
   }
 
-  async login(user: any) {
-    const payload = { username: user.userName };
+  async login(given_id) {
+    console.log(given_id)
+    const payload = { };
     return {
       accessToken: this.jwtService.sign(payload),
+      id:given_id
     };
   }
 }

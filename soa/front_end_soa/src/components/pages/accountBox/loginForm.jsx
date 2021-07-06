@@ -32,19 +32,24 @@ import { useHistory } from "react-router";
 
 
         const fetch = require('node-fetch');
-
-        fetch('http://localhost:8001/signin',{
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify(empInfo),
-            headers:{
-                // "Access-Control-Allow-Origin": "*",
-                'Content-type':'application/json'}
-        }).then(res => res.json() )
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username:emailRef.current.value,
+                password:passwordRef.current.value,
+            })
+        };
+        console.log("login: "+requestOptions);
+        fetch('http://localhost:3100/auth/login',requestOptions).then(res => res.json() )
             .then( json => {
                         // this.props.setUserData(json.accessToken, json.username);
-                if(json.token!=="" ) {
-                    localStorage.setItem('token', json.token);
+                if(json.accessToken!=="" ) {
+                    console.log("here: "+json.accessToken);
+                    localStorage.setItem('token', json.accessToken);
                     localStorage.setItem('username', empInfo.username);
+                    localStorage.setItem('id', json.id);
+
                     history.push({
                         pathname:  "/home/user"
                     });

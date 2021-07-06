@@ -17,16 +17,6 @@ __decorate([
     class_validator_1.IsString(),
     class_validator_1.IsNotEmpty(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "FirstName", void 0);
-__decorate([
-    class_validator_1.IsString(),
-    class_validator_1.IsNotEmpty(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "LastName", void 0);
-__decorate([
-    class_validator_1.IsString(),
-    class_validator_1.IsNotEmpty(),
-    __metadata("design:type", String)
 ], CreateUserDto.prototype, "username", void 0);
 __decorate([
     class_validator_1.IsString(),

@@ -20,6 +20,7 @@ export class UserController {
   @Post('validate')
   async login(@Body() user_dets) {
     let fin_ans = await this.userService.validate(user_dets.username, user_dets.password);
+    console.log("fin:"+fin_ans);
     return fin_ans;
 
   }

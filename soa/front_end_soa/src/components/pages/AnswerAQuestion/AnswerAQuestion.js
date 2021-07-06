@@ -43,7 +43,7 @@ function AnswerAQuestion(props) {
 
         useEffect(() => {
             fetch(`http://localhost:3000/question/byId/${question_id}`, {
-                // headers:{'Content-type':'application/json'}
+                 headers:{'Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
                 .then(fetchedData => {
@@ -62,7 +62,7 @@ function AnswerAQuestion(props) {
                 })
 
             fetch(`http://localhost:3000/answer/all/${question_id}`, {
-                // headers:{'Content-type':'application/json'}
+                 headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
                 .then(fetchedData => {
@@ -147,6 +147,7 @@ function AnswerAQuestion(props) {
                 headers: {
                     // 'Accept': 'application/json',
                     'Content-type':'application/json',
+                    'Authorization': 'Bearer '+localStorage.getItem('token'),
                     // 'x-access-token':tok
                 },
                 body: JSON.stringify({ text : data.text, answeredFrom: 1, isAnAnswerOf: {question_id}})

@@ -10,22 +10,22 @@ export class QuestionController {
   async getByDay(@Headers() head):Promise<any>{
     let auth_res = await this.questionService.checkTok(head.authorization);
     console.log("auth: "+auth_res);
-    if(auth_res ==1) {
-      return this.questionService.findByDay();
-    }else{
-      return "not authorized!";
-    }
+    // if(auth_res ==1) {
+    return this.questionService.findByDay();
+    // }else{
+    //   return "not authorized!";
+    // }
   }
 
   @Get('statistics/byKeyword')  //for statistics by keyword
   async getByKeyword(@Headers() head):Promise<any>{
     let auth_res = await this.questionService.checkTok(head.authorization);
     console.log("auth: "+auth_res);
-    if(auth_res ==1) {
-      return this.questionService.findByKeyword();
-    }else{
-      return "not authorized!";
-    }
+    // if(auth_res ==1) {
+    return this.questionService.findByKeyword();
+    // }else{
+    //   return "not authorized!";
+    // }
   }
 
   @Get('statistics/byDay/:user')  //for statistics by day

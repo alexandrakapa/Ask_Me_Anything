@@ -47,7 +47,8 @@ export class AppService implements  OnModuleInit{
   }
 
   async register(req_body){
-
+    console.log("hrere too");
+    console.log(req_body);
     return this.httpService.post(' http://localhost:3000/user/register',req_body).pipe(map(result => result.data));
 
   }

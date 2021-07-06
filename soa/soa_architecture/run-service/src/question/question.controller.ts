@@ -5,7 +5,10 @@ import {Question} from "../../../data-layer/src/question/question.entity";
 @Controller('question')
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
-
+  @Get('nikos')
+  async getNikos(){
+    return "nikos";
+  }
 
   @Get('andanswers')  //for display
   async getAll( @Headers() headers):Promise<any>{
@@ -44,8 +47,14 @@ export class QuestionController {
   }
 
   @Get('find/:questionId')
-  async findOneById(@Param('questionId', ParseIntPipe) questionId: number): Promise<any> {
-    return this.questionService.findQuestionById(questionId);
+  async findOneById(@Param('questionId', ParseIntPipe) questionId: number, @Headers() headers): Promise<any> {
+    let auth_res = await this.questionService.checkTok(headers.authorization);
+    if(auth_res ==1) {
+      console.log("ready to go!");
+      return this.questionService.findQuestionById(questionId);
+    }else{
+      return "not authorized!";
+    }
   }
 
 }

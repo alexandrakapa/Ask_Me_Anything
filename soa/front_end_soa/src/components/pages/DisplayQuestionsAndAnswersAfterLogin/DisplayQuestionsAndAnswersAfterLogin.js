@@ -17,7 +17,7 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3001/question/andanswers`)
+        fetch(`http://localhost:3001/question/andanswers`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => response.json())
             .then(fetchedData => {
                 // setData(() => fetchedData)

@@ -4,9 +4,10 @@ export declare class AppController {
     private authService;
     private appService;
     constructor(authService: AuthService, appService: AppService);
-    reg(reg_details: any): Promise<import("rxjs").Observable<any>>;
-    login(log_dets: any): Promise<{
+    reg(request: Request): Promise<import("rxjs").Observable<any>>;
+    login(request: Request): Promise<{
         accessToken: string;
-    }>;
+        id: any;
+    } | "wrong credentials!">;
     getTodos(): number;
 }
