@@ -22,13 +22,13 @@ export default function Home() {
                 }
             })
             .then(fetchedData => {
-
+                console.log(fetchedData)
                 let tmp=[]
                 let newtemp = []
                 let i
                 for (i=0; i<fetchedData.length; i++){
                     tmp.push(fetchedData[i].count)
-                    newtemp.push(fetchedData[i].Keyword_phrase)
+                    newtemp.push(fetchedData[i].keyword_phrase)
 
                 }
                 setLabels(() => tmp)
