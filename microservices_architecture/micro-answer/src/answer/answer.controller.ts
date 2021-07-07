@@ -9,7 +9,8 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('answer')
 export class AnswerController {
   constructor(private readonly answerService: AnswerService) {}
-  // @UseGuards(AuthGuard('jwt'))
+
+  @UseGuards(AuthGuard('jwt'))
   @Post('create')
   create(@Body() createQuizDto: CreateAnswerDto): Promise<void | string> {
     return this.answerService.create(createQuizDto);
