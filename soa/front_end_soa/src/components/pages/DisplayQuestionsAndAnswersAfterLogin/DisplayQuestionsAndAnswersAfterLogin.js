@@ -22,12 +22,18 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
             .then(response => response.json())
             .then(fetchedData => {
                 // let max_id = fetchedData[0].question_id
-                console.log(fetchedData)
                 setMax(() => fetchedData[0].question_id)
                 console.log("MAX",max_id)
                 console.log(fetchedData[0].answers.length ===0);
                 console.log("weird anwswer: "+fetchedData.length);
                 for (let i=0; i<fetchedData.length; i++) {
+                    if(!fetchedData[i].askedFrom){
+                        fetchedData[i].askedFrom = "unknown"
+                    }else {
+                        fetchedData[i].askedFrom = fetchedData[i].askedFrom.username;
+                    }
+                    console.log("SOS:"+fetchedData[i].askedFrom)
+
                     let date;
                     date=fetchedData[i].askedOn
                     date = date.split("T")

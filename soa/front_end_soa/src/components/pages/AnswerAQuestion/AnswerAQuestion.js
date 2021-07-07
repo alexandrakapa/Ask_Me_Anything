@@ -47,16 +47,17 @@ function AnswerAQuestion(props) {
             })
                 .then(response => response.json())
                 .then(fetchedData => {
+                    console.log("FETCHED: "+fetchedData[0].question_title);
                         let date;
-                        date=fetchedData.askedOn
+                        date=fetchedData[0].question_askedOn
                         date = date.split("T")
                         let date2;
                         date2 = date[1].split(".")
                         let cut;
                         cut = date[0].concat(" ",date2[0])
-                        fetchedData.askedOn = cut
+                        fetchedData[0].question_askedOn = cut
 
-                    setQuestion(() => fetchedData)
+                    setQuestion(() => fetchedData[0])
                     console.log(fetchedData)
                     console.log(question)
                 })
@@ -66,7 +67,11 @@ function AnswerAQuestion(props) {
             })
                 .then(response => response.json())
                 .then(fetchedData => {
+
                     for (let i=0; i<fetchedData.length; i++) {
+                        console.log(fetchedData[i].answeredFrom);
+                        fetchedData[i].answeredFrom =fetchedData[i].answeredFrom.username;
+                        console.log(fetchedData[i].answeredFrom);
                         let date;
                         date=fetchedData[i].answeredOn
                         date = date.split("T")
@@ -87,10 +92,10 @@ function AnswerAQuestion(props) {
 
     const users = [
         {
-            name: question.askedFrom,
-            title: question.title,
-            desc: question.text,
-            askedOn: question.askedOn
+            name: question.user_username,
+            title: question.question_title,
+            desc: question.question_text,
+            askedOn: question.question_askedOn
         },
 
     ];
@@ -105,8 +110,8 @@ function AnswerAQuestion(props) {
             <Grid item xs={12} sm={3} md={2}>
                 <Grid container direction="column" alignItems="center">
                     <Avatar className={classes.avatar} style={{ height: '50px', width: '50px' }}/>
-                    {/*<Typography align="center" variant="subtitle2">Asked From: {name}</Typography>*/}
-                    <Typography align="center" variant="subtitle2">Asked On: {askedOn}</Typography>
+                    <Typography align="center" variant="subtitle2"><b><i>Asked From:</i> </b>{name}</Typography>
+                    <Typography align="center" variant="subtitle2"><b><i>Asked On:</i> </b><br />{askedOn}</Typography>
                 </Grid>
             </Grid>
             <Grid item xs={22} sm={9} md={10}>

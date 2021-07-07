@@ -25,14 +25,20 @@ let QuestionService = class QuestionService {
         this.questionManager = questionManager;
     }
     async findQuestionById(question_id) {
-        const question = await this.questionManager.findOne(question_entity_1.Question, question_id);
-        console.log(question_id);
-        if (!question)
-            throw new common_1.NotFoundException(`Question ${question_id} not found.`);
-        return question;
+        const values = this.questionRepo.createQueryBuilder("question")
+            .leftJoinAndSelect("question.askedFrom", "user")
+            .select(['question.question_id', 'question.title', 'question.text', 'question.askedOn', 'user.username'])
+            .where("question.question_id = :cur_id", { cur_id: question_id })
+            .execute();
+        return values;
     }
     findAll() {
-        return this.questionRepo.find({ relations: ["answers"] });
+        const values = this.questionRepo.createQueryBuilder("question")
+            .leftJoinAndSelect("question.answers", "answer")
+            .leftJoinAndSelect("question.askedFrom", "user")
+            .select(['question.question_id', 'question.title', 'question.text', 'question.askedOn', 'answer.text', 'answer.answeredOn', 'answer.answeredFrom', 'user.username'])
+            .getMany();
+        return values;
     }
     findSome() {
         return this.questionRepo.find({ relations: ["answers"], order: {

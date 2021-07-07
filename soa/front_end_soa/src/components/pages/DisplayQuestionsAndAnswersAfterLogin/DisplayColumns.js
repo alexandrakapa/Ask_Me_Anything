@@ -38,7 +38,7 @@ export const columns = [
         options: {
             filter: true,
             sort: false,
-            display: false
+            display: true
         },
     },
 ];

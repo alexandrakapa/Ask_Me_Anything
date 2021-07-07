@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Answer = void 0;
 const typeorm_1 = require("typeorm");
 const question_entity_1 = require("../question/question.entity");
+const user_entity_1 = require("../user/entities/user.entity");
 let Answer = class Answer {
 };
 __decorate([
@@ -27,8 +28,8 @@ __decorate([
     __metadata("design:type", Date)
 ], Answer.prototype, "answeredOn", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
+    typeorm_1.ManyToOne(() => user_entity_1.UserEntity, (answeredFrom) => answeredFrom.questions),
+    __metadata("design:type", user_entity_1.UserEntity)
 ], Answer.prototype, "answeredFrom", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => question_entity_1.Question, (isAnAnswerOf) => isAnAnswerOf.answers),

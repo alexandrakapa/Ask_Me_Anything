@@ -29,7 +29,13 @@ export class AnswerService {
   }
 
   async findAnswersByQuestionId(isAnAnswerOf: any): Promise<Answer[]> {    //returns all answers by question id
-    return this.manager.find(Answer, {isAnAnswerOf});
+    // return this.manager.find(Answer, {isAnAnswerOf});
+    const values = this.answerRepo.createQueryBuilder("answer")
+        .leftJoinAndSelect("answer.answeredFrom", "user")
+        .select(['answer.answer_id','answer.text','answer.answeredOn','user.username'])
+        .getMany();
+    // .execute();
+    return values;
   }
 
   async findByDayUser(user): Promise<Answer[]> {

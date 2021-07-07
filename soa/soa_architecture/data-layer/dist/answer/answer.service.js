@@ -38,7 +38,11 @@ let AnswerService = class AnswerService {
         });
     }
     async findAnswersByQuestionId(isAnAnswerOf) {
-        return this.manager.find(answer_entity_1.Answer, { isAnAnswerOf });
+        const values = this.answerRepo.createQueryBuilder("answer")
+            .leftJoinAndSelect("answer.answeredFrom", "user")
+            .select(['answer.answer_id', 'answer.text', 'answer.answeredOn', 'user.username'])
+            .getMany();
+        return values;
     }
     async findByDayUser(user) {
         const qb = await this.answerRepo

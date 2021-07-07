@@ -14,9 +14,10 @@ export class Answer {
   @CreateDateColumn()
   answeredOn: Date;
 
-  @Column()
-  answeredFrom: number;
 
+
+  @ManyToOne(() => UserEntity, (answeredFrom) => answeredFrom.questions)
+  public answeredFrom: UserEntity;
 
   @ManyToOne(() => Question, (isAnAnswerOf) => isAnAnswerOf.answers)
   public isAnAnswerOf: Question;

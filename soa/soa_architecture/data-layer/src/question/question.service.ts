@@ -11,14 +11,27 @@ export class QuestionService {
               @InjectEntityManager() private questionManager: EntityManager) {}
 
   async findQuestionById(question_id: number): Promise<Question> {  //return one question by question id
-    const question = await this.questionManager.findOne(Question, question_id);
-    console.log(question_id)
-    if (!question) throw new NotFoundException(`Question ${question_id} not found.`);
-    return question;
+    // const question = await this.questionManager.findOne(Question, question_id);
+    // console.log(question)
+    // if (!question) throw new NotFoundException(`Question ${question_id} not found.`);
+    // return question;
+    const values = this.questionRepo.createQueryBuilder("question")
+        .leftJoinAndSelect("question.askedFrom", "user")
+        .select(['question.question_id','question.title','question.text','question.askedOn','user.username'])
+        .where("question.question_id = :cur_id", { cur_id: question_id })
+        .execute();
+    return values;
   }
 
   findAll(): Promise<Question[]> {    //returns all the questions with their answers  //for display
-    return this.questionRepo.find({ relations: ["answers"] });
+    // return this.questionRepo.find({ relations: ["answers","askedFrom"] });
+    const values = this.questionRepo.createQueryBuilder("question")
+        .leftJoinAndSelect("question.answers", "answer")
+        .leftJoinAndSelect("question.askedFrom", "user")
+        .select(['question.question_id','question.title','question.text','question.askedOn','answer.text','answer.answeredOn','answer.answeredFrom','user.username'])
+        .getMany();
+        // .execute();
+    return values;
   }
   findSome(): Promise<Question[]> {    //returns all 10 recent questions with their answers //for display
     return this.questionRepo.find({ relations: ["answers"] ,order: {

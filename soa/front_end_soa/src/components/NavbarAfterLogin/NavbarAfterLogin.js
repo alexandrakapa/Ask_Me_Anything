@@ -10,7 +10,12 @@ function NavbarAfterLogin(props) {
     // console.log(username);
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
+    const logOut = () =>{
+        localStorage.setItem('token', '');
+        localStorage.setItem('id', '');
+        localStorage.setItem('username', '');
+        setClick(false);
+    }
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -98,7 +103,7 @@ function NavbarAfterLogin(props) {
                         <Link
                             to='/'
                             className='nav-links'
-                            onClick={closeMobileMenu}
+                            onClick={logOut}
                         >
                             <i
                                 className="fas fa-sign-in-alt">

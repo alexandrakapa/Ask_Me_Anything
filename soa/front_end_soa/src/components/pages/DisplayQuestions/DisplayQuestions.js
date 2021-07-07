@@ -20,6 +20,11 @@ function DisplayQuestions(props)  {
             .then(response => response.json())
             .then(fetchedData => {
                 for (let i=0; i<fetchedData.length; i++) {
+                    if(!fetchedData[i].askedFrom){
+                        fetchedData[i].askedFrom = "unknown"
+                    }else {
+                        fetchedData[i].askedFrom = fetchedData[i].askedFrom.username;
+                    }
                     let date;
                     date=fetchedData[i].askedOn
                     date = date.split("T")
@@ -48,8 +53,8 @@ function DisplayQuestions(props)  {
                 pathname: '/answer_a_question',
                 state: { question_id: cellIndex[0]}
             })
-            fetch(`http://localhost:3001/question/byId/${cellIndex[0]}`, {
-                method: 'POST',
+            fetch(`http://localhost:3000/question/byId/${cellIndex[0]}`, {
+                method: 'GET',
                 headers: {
                     // 'Accept': 'application/json',
                     'Content-type':'application/json',

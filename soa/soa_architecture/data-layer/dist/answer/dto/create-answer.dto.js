@@ -13,6 +13,7 @@ exports.CreateAnswerDto = void 0;
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 const question_entity_1 = require("../../question/question.entity");
+const user_entity_1 = require("../../user/entities/user.entity");
 class CreateAnswerDto {
 }
 __decorate([
@@ -26,9 +27,8 @@ __decorate([
     __metadata("design:type", Date)
 ], CreateAnswerDto.prototype, "answeredOn", void 0);
 __decorate([
-    class_validator_1.IsNumber(),
-    class_validator_1.IsNotEmpty(),
-    __metadata("design:type", Number)
+    typeorm_1.ManyToOne(() => user_entity_1.UserEntity, (answeredFrom) => answeredFrom.questions),
+    __metadata("design:type", user_entity_1.UserEntity)
 ], CreateAnswerDto.prototype, "answeredFrom", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => question_entity_1.Question, question => question.answers),
