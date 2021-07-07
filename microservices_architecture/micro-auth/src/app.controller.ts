@@ -12,14 +12,28 @@ export class AppController {
   // getHello(): string {
   //   return this.appService.getHello();
   // }
-  @UseGuards(AuthGuard('local'))
+  @Post('register')
+  async reg(@Req() request: Request) {
+    console.log("here comes the reg controler");
+
+    console.log("hrerere");
+    console.log(request.body);
+
+    return await this.authService.register(request.body)
+  }
   @Post('auth/login')
-  async login(@Request() req) {
-    return this.authService.login({ userName: req.user.username });
+  async login(@Req() request: Request) {
+    let validator = await this.authService.validateUser(request.body['username'],request.body['password']);
+    if(validator != -1){
+      return await this.authService.login(validator);
+    }else{
+      let obj={'accessToken':''}
+      return JSON.stringify(obj);
+    }
   }
-  @UseGuards(AuthGuard('jwt'))
-  @Get('todos')
-  getTodos() {
-    return ['Watch Movie', 'Take Health Test', 'Play Cricket'];
-  }
+  // @UseGuards(AuthGuard('jwt'))
+  // @Get('todos')
+  // getTodos() {
+  //   return ['Watch Movie', 'Take Health Test', 'Play Cricket'];
+  // }
 }
