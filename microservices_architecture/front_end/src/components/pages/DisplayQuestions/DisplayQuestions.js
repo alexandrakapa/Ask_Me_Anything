@@ -15,7 +15,7 @@ function DisplayQuestions(props)  {
 
     useEffect( () => {
         fetch(`http://localhost:3000/question`,{
-            // headers:{'Content-type':'application/json'}
+            headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
         })
             .then(response => response.json())
             .then(fetchedData => {
@@ -53,6 +53,7 @@ function DisplayQuestions(props)  {
                 headers: {
                     // 'Accept': 'application/json',
                     'Content-type':'application/json',
+                    'Authorization': 'Bearer '+localStorage.getItem('token')
                     // 'x-access-token':tok
                 },
 

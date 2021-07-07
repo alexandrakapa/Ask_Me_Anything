@@ -45,7 +45,7 @@ function AnswerAQuestion(props) {
 
         useEffect(() => {
             fetch(`http://localhost:3000/question/${question_id}`, {
-                // headers:{'Content-type':'application/json'}
+                headers:{'Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
                 .then(fetchedData => {
@@ -63,7 +63,7 @@ function AnswerAQuestion(props) {
                 })
 
             fetch(`http://localhost:3000/answer/all/${question_id}`, {
-                // headers:{'Content-type':'application/json'}
+                headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
                 .then(fetchedData => {
@@ -78,8 +78,8 @@ function AnswerAQuestion(props) {
                         fetchedData[i].answeredOn = cut
                     }
                     setAnswer(() => fetchedData)
-                    console.log(fetchedData)
-                    console.log(answer)
+                    // console.log(fetchedData)
+                    // console.log(answer)
                 })
 
         }, []);
@@ -88,7 +88,7 @@ function AnswerAQuestion(props) {
 
     const users = [
         {
-            name: question.question_id,
+            name: question.askedFrom,
             title: question.title,
             desc: question.text,
             askedOn: question.askedOn
@@ -106,7 +106,7 @@ function AnswerAQuestion(props) {
             <Grid item xs={12} sm={3} md={2}>
                 <Grid container direction="column" alignItems="center">
                     <Avatar className={classes.avatar} style={{ height: '50px', width: '50px' }}/>
-                    <Typography align="center" variant="subtitle2">Asked From: {name}</Typography>
+                    {/*<Typography align="center" variant="subtitle2">Asked From: {name}</Typography>*/}
                     <Typography align="center" variant="subtitle2">Asked On: {askedOn}</Typography>
                 </Grid>
             </Grid>
@@ -146,11 +146,10 @@ function AnswerAQuestion(props) {
             fetch(`http://localhost:3003/answer/create`, {
                 method: 'POST',
                 headers: {
-                    // 'Accept': 'application/json',
                     'Content-type':'application/json',
-                    // 'x-access-token':tok
+                    'Authorization': 'Bearer '+localStorage.getItem('token'),
                 },
-                body: JSON.stringify({ text : data.text, answeredFrom: 1, isAnAnswerOf: 3})
+                body: JSON.stringify({ text : data.text, answeredFrom: localStorage.getItem('id'), isAnAnswerOf: {question_id}})
 
             })
         }

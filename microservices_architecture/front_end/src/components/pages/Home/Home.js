@@ -104,6 +104,22 @@ export default function Home() {
         return (
             <HomeStyle >
                 <Navbar/>
+                <div className="flip-card">
+                    <div className="flip-card-inner">
+                        <div className="flip-card-front">
+                            <h2>Welcome to AskMeAnything!</h2>
+                            <h2>Feel free to interact with our website!</h2>
+                            <p>Below are some statistics about our website:</p>
+                        </div>
+                        <div className="flip-card-back">
+                            <h2>Get to know us:</h2>
+                            <p1>AskMeAnything is a question and answer website for everyone out there having a question or knowing an answer!</p1>
+                            <p1>Do you have a question but don't seem to find the answer anywhere?Then take a chance and ask here!One of our millions subscribers may know the answer!</p1>
+                            <p1>Do you wanna help others?Then search for a question you know the answer to and help strangers from all over the world!</p1>
+                            <p1>Subscribe NOW to AskMeAnything!Be a part of our community!</p1>
+                        </div>
+                    </div>
+                </div>
             <div className="boxleft">
             <label>Questions per keyword</label>
                 <Bar

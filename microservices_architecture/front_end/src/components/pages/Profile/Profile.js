@@ -18,7 +18,8 @@ export default function Profile() {
     const [number2, setNumber2] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/question/byKeyword/6`)
+        let req_id = localStorage.getItem('id')
+        fetch(`http://localhost:3001/question/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -41,7 +42,7 @@ export default function Profile() {
                 setPhrase(() => newtemp)
             })
         //for the second diagram
-        fetch(`http://localhost:3001/question/byDay/6`)
+        fetch(`http://localhost:3001/question/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 return response.json()
             })
@@ -63,7 +64,7 @@ export default function Profile() {
                 setDay(() => newtemp2)
             })
         //for the third diagram
-        fetch(`http://localhost:3000/answer/byDay/1`)
+        fetch(`http://localhost:3000/answer/byDay/${req_id}`)
             .then(response => {
                 return response.json()
             })

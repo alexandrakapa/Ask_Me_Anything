@@ -14,7 +14,7 @@ import ReactTagInput from "@pathofdev/react-tag-input";
 
 function AskAQuestion(props) {
     // const { register, handleSubmit, formState: { errors } } = useForm();
-    const [tags, setTags] = React.useState(["example tag"])
+    const [tags, setTags] = React.useState([])
 
     const onSubmit = (data) => {
          // console.log(data.keywords)
@@ -26,7 +26,7 @@ function AskAQuestion(props) {
             // console.log(tags[0])
             props.history.push({
                 pathname: '/home/user',
-                state: {  title : data.title, text : data.text, askedFrom: 1, keywords: tags[0]}
+                state: {  title : data.title, text : data.text, askedFrom: localStorage.getItem('id'), keywords: tags[0]}
             })
             // const tok = localStorage.getItem('token');
             fetch(`http://localhost:3002/question/create`, {
@@ -34,9 +34,10 @@ function AskAQuestion(props) {
                 headers: {
                     // 'Accept': 'application/json',
                     'Content-type':'application/json',
+                    'Authorization': 'Bearer '+localStorage.getItem('token'),
                     // 'x-access-token':tok
                 },
-                body: JSON.stringify({ title : data.title, text : data.text, askedFrom: 1, keywords: tags})
+                body: JSON.stringify({ title : data.title, text : data.text, askedFrom: localStorage.getItem('id'), keywords: tags})
 
             })
         }
