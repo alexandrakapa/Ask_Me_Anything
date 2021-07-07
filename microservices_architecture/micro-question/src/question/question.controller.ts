@@ -15,20 +15,18 @@ export class QuestionController {
   //   return this.questionService.create(createQuestionDto);
   // }
 
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Post('create')
   async addProduct(@Body() body: Question) {
     try {
       console.log(body.title);
       console.log(body.text);
-      // console.log(body.askedOn);
       console.log(body.askedFrom);
       console.log(body.keywords);
 
       const generatedId = this.questionService.createQuestion(
         body.title,
         body.text,
-        // body.askedOn,
         body.askedFrom,
         body.keywords,
       );

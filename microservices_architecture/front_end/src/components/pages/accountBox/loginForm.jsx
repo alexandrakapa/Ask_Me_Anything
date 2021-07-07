@@ -33,35 +33,80 @@ import { useHistory } from "react-router";
 
         const fetch = require('node-fetch');
 
-        fetch('http://localhost:8001/signin',{
+        const requestOptions = {
             method: 'POST',
-            body: JSON.stringify(empInfo),
-            headers:{
-                // "Access-Control-Allow-Origin": "*",
-                'Content-type':'application/json'}
-        }).then(res => res.json() )
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username:emailRef.current.value,
+                password:passwordRef.current.value,
+            })
+        };
+        console.log("login: "+requestOptions);
+        fetch('http://localhost:3008/auth/login',requestOptions).then(res => res.json() )
             .then( json => {
-                        // this.props.setUserData(json.accessToken, json.username);
-                if(json.token!=="" ) {
-                    localStorage.setItem('token', json.token);
-                    localStorage.setItem('username', empInfo.username);
-                    history.push({
-                        pathname:  "/home/user"
-                    });
-                }
-                // localStorage.setItem('token', json.token);
-                const tok = localStorage.getItem('token');
-                console.log("here")
-                console.log(tok);
-                // localStorage.setItem('username', json.username);
-                const tokf = localStorage.getItem('username');
-                console.log("here")
-                console.log(tokf);
+                    // this.props.setUserData(json.accessToken, json.username);
+                    // console.log("HEREEEE"+ json);
+                    if(json.accessToken ) {
+                        console.log("here: "+json.accessToken);
+                        localStorage.setItem('token', json.accessToken);
+                        localStorage.setItem('id', json.id);
+                        console.log(localStorage.getItem('token'));
+                        console.log(localStorage.getItem('id'));
+                        history.push({pathname:"/home/user"})
 
-                // console.log(json.token)
+                    }else{
+                        alert("wrong credentials");
+                    }
+                    // localStorage.setItem('token', json.token);
+                    // const tok = localStorage.getItem('token');
+                    // console.log("here")
+                    // console.log(tok);
+                    // // localStorage.setItem('username', json.username);
+                    // const tokf = localStorage.getItem('username');
+                    // console.log("here")
+                    // console.log(tokf);
+
+                    // console.log(json.token)
                 }
             )
+
             .catch(err => console.log(err));
+
+
+
+
+
+
+     //
+        // fetch('http://localhost:8001/signin',{
+        //     method: 'POST',
+        //     body: JSON.stringify(empInfo),
+        //     headers:{
+        //         // "Access-Control-Allow-Origin": "*",
+        //         'Content-type':'application/json'}
+        // }).then(res => res.json() )
+        //     .then( json => {
+        //                 // this.props.setUserData(json.accessToken, json.username);
+        //         if(json.token!=="" ) {
+        //             localStorage.setItem('token', json.token);
+        //             localStorage.setItem('username', empInfo.username);
+        //             history.push({
+        //                 pathname:  "/home/user"
+        //             });
+        //         }
+        //         // localStorage.setItem('token', json.token);
+        //         const tok = localStorage.getItem('token');
+        //         console.log("here")
+        //         console.log(tok);
+        //         // localStorage.setItem('username', json.username);
+        //         const tokf = localStorage.getItem('username');
+        //         console.log("here")
+        //         console.log(tokf);
+        //
+        //         // console.log(json.token)
+        //         }
+        //     )
+        //     .catch(err => console.log(err));
     }
 
 
