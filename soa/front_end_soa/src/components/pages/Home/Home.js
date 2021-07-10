@@ -5,15 +5,18 @@ import {Bar, Line} from 'react-chartjs-2';
 import React, { useEffect, useState} from 'react';
 import Footer from "../../Footer/Footer";
 import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Home() {
     const [labels, setLabels] = useState([]);
     const [phrase, setPhrase] = useState([]);
     const [day, setDay] = useState([]);
     const [number, setNumber] = useState([]);
-
+    const [fetched1 ,setFetched1] = useState(0);
+    const [fetched2 ,setFetched2] = useState(0);
     useEffect(() => {
-        fetch(`http://localhost:3005/question/statistics/byKeyword`)
+        fetch(`https://soa-statistics-service.herokuapp.com/question/statistics/byKeyword`)
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -23,7 +26,7 @@ export default function Home() {
                 }
             })
             .then(fetchedData => {
-
+                setFetched1(1);
                 let tmp=[]
                 let newtemp = []
                 let i
@@ -37,7 +40,7 @@ export default function Home() {
                 // console.log(fetchedData)
             })
         //for the second diagram
-        fetch(`http://localhost:3005/question/statistics/byDay`)
+        fetch(`https://soa-statistics-service.herokuapp.com/question/statistics/byDay`)
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -47,7 +50,7 @@ export default function Home() {
                 }
             })
             .then(fetchedData2 => {
-
+                setFetched2(1);
                 let tmp3=[]
                 let newtemp2 = []
                 let i
@@ -110,47 +113,53 @@ export default function Home() {
                             <h2>Feel free to interact with our website!</h2>
                             <p>Below are some statistics about our website:</p>
                         </div>
-                        <div className="flip-card-back">
-                            <h2>Get to know us:</h2>
-                            <p1>AskMeAnything is a question and answer website for everyone out there having a question or knowing an answer!</p1>
-                            <p1>Do you have a question but don't seem to find the answer anywhere?Then take a chance and ask here!One of our millions subscribers may know the answer!</p1>
-                            <p1>Do you wanna help others?Then search for a question you know the answer to and help strangers from all over the world!</p1>
-                            <p1>Subscribe NOW to AskMeAnything!Be a part of our community!</p1>
+
                         </div>
                     </div>
+                {/*</div>*/}
+                {(fetched1 && fetched2) ?
+
+                    <div>
+                        <div className="boxleft">
+                            <label>Questions per keyword</label>
+                            <Bar
+                                data={state}
+
+                                options={{
+                                    legend: {
+                                        display: true,
+                                        position: 'right'
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        <div className="boxright">
+                            <label>Questions per day</label>
+                            <Line
+                                data={state2}
+                                options={{
+                                    legend: {
+                                        display: true,
+                                        position: 'right'
+                                    }
+                                }}
+                            />
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                        </div>
+
                 </div>
-
-                    <div className="boxleft">
-            <label>Questions per keyword</label>
-                <Bar
-                    data={state}
-
-                    options={{
-                        legend:{
-                            display:true,
-                            position:'right'
-                        }
-                    }}
-                />
-            </div>
-
-                <div className="boxright">
-                    <label>Questions per day</label>
-                    <Line
-                        data={state2}
-                        options={{
-                            legend:{
-                                display:true,
-                                position:'right'
-                            }
-                        }}
-                    />
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-
-                </div>
+                    :
+                    <div>
+                        {/*<LinearProgress />*/}
+                        {/*<LinearProgress color="secondary" />*/}
+                        <CircularProgress color="secondary"/>
+                    </div>
+                }
                 <Footer/>
                 </HomeStyle >
         );

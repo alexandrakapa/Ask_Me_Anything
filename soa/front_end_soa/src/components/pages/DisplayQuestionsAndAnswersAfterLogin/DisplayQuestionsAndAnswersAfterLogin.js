@@ -10,20 +10,23 @@ import {
 } from "@material-ui/core";
 import NavbarAfterLogin from "../../NavbarAfterLogin/NavbarAfterLogin";
 import {DisplayQuestionsAndAnswersStyle} from "../DisplayQuestionsAndAnswersAfterLogin/DisplayQuestionsAndAnswersStyle";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 export default function DisplayQuestionsAndAnswersAfterLogin() {
     const [answer, setAnswer] = useState([]);
     const [data, setData] = useState([])
     const [max_id , setMax] = useState();
+    const [fetched,setFetched] = useState(0);
     console.log(localStorage.getItem('token'));
     useEffect(() => {
-        fetch(`http://localhost:3001/question/andanswers`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://soa-run-service.herokuapp.com/question/andanswers`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => response.json())
             .then(fetchedData => {
                 // let max_id = fetchedData[0].question_id
                 setMax(() => fetchedData[0].question_id)
                 console.log("MAX",max_id)
+                setFetched(1);
                 console.log(fetchedData[0].answers.length ===0);
                 console.log("weird anwswer: "+fetchedData.length);
                 for (let i=0; i<fetchedData.length; i++) {
@@ -126,6 +129,7 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
         <DisplayQuestionsAndAnswersStyle>
             <div>
             <NavbarAfterLogin/>
+                {fetched ?
             <MuiThemeProvider theme={
                 createMuiTheme({
                     overrides: {
@@ -193,6 +197,11 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
                 </div>
 
             </MuiThemeProvider>
+                    : <div>
+                        <LinearProgress />
+                        <LinearProgress color="secondary" />
+                    </div>
+                }
             <Footer/>
         </div>
 </DisplayQuestionsAndAnswersStyle>

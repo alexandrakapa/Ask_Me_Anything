@@ -14,7 +14,7 @@ export class AppService {
     console.log(`The module has been initialized.`);
     console.log("nikos");
     const client = await this.redisService.getClient();
-    const my_addr = "http://localhost:3002/sb";
+    const my_addr = " https://soa-service-bus.herokuapp.com/sb";
 
     const reg_get_addr = await client.hget("sb", "addr")
     if(reg_get_addr != my_addr){
@@ -92,66 +92,5 @@ export class AppService {
 
     }
   }
-  // async getAuth(tok) {
-  //   const config = {
-  //     headers: { Authorization: tok }
-  //   };
-  //   const client = await this.redisService.getClient();
-  //   const auth_get_addr = await client.hget("auth_services", "auth");
-  //   console.log(auth_get_addr);
-  //   if(auth_get_addr !="nil"){
-  //    return this.httpService
-  //       .post(auth_get_addr, {
-  //       },config)
-  //      .pipe(
-  //        catchError(e => {
-  //          throw new HttpException(e.response.data, e.response.status);
-  //        }),
-  //        map(response => response.data),
-  //      );
-  //   }else{
-  //     return "failed - auth service seems not to be responding!";
-  //   }
-  //   // return 'Hello World!';
-  // }
-  //
-  // async getLogin(details) {
-  //
-  //   const client = await this.redisService.getClient();
-  //   const auth_get_addr = await client.hget("auth_services", "login");
-  //   console.log(auth_get_addr);
-  //   if(auth_get_addr !="nil"){
-  //     return this.httpService
-  //       .post(auth_get_addr, details)
-  //       .pipe(
-  //         catchError(e => {
-  //           throw new HttpException(e.response.data, e.response.status);
-  //         }),
-  //         map(response => response.data),
-  //       );
-  //   }else{
-  //     return "failed - auth service seems not to be responding!";
-  //   }
-  //   // return 'Hello World!';
-  // }
-  //
-  // async getRegister(details) {
-  //
-  //   const client = await this.redisService.getClient();
-  //   const auth_get_addr = await client.hget("auth_services", "register");
-  //   console.log(auth_get_addr);
-  //   if(auth_get_addr !="nil"){
-  //     return this.httpService
-  //       .post(auth_get_addr, details)
-  //       .pipe(
-  //         catchError(e => {
-  //           throw new HttpException(e.response.data, e.response.status);
-  //         }),
-  //         map(response => response.data),
-  //       );
-  //   }else{
-  //     return "failed - auth service seems not to be responding!";
-  //   }
-  //   // return 'Hello World!';
-  // }
+
 }

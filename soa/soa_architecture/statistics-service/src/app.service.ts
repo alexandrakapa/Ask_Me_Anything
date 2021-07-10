@@ -10,7 +10,7 @@ export class AppService implements OnModuleInit{
     console.log(`The module has been initialized.`);
     console.log("nikos");
     const client = await this.redisService.getClient();
-    const my_addr = "http://localhost:3005/question/statistics";
+    const my_addr = "https://soa-statistics-service.herokuapp.com/question/statistics";
 
     const stats_day_addr = await client.hget("stats_services", "day")
     if(!stats_day_addr || stats_day_addr[0] != my_addr+"/byDay"){

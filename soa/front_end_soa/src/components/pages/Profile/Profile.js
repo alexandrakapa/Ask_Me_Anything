@@ -3,6 +3,7 @@ import NavbarAfterLogin from '../../NavbarAfterLogin/NavbarAfterLogin';
 import {ProfileStyle} from "../Profile/ProfileStyle";
 import {Bar, Line} from "react-chartjs-2";
 import Footer from "../../FooterAfterLogin/Footer";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Profile() {
     const tokf = localStorage.getItem('username');
@@ -15,10 +16,13 @@ export default function Profile() {
     const [number, setNumber] = useState([]);
     const [day2, setDay2] = useState([]);
     const [number2, setNumber2] = useState([]);
+    const [isloading1 ,setisloading1] = useState(0);
+    const [isloading2 ,setisloading2] = useState(0);
+    const [isloading3 ,setisloading3] = useState(0);
 
     useEffect(() => {
         let req_id = localStorage.getItem('id')
-        fetch(`http://localhost:3005/question/statistics/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://soa-statistics-service.herokuapp.com/question/statistics/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -29,6 +33,7 @@ export default function Profile() {
             })
             .then(fetchedData => {
                 // console.log(fetchedData)
+                setisloading1(1)
                 let tmp=[]
                 let newtemp = []
                 let i
@@ -41,12 +46,12 @@ export default function Profile() {
                 setPhrase(() => newtemp)
             })
         //for the second diagram
-        fetch(`http://localhost:3005/question/statistics/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://soa-statistics-service.herokuapp.com/question/statistics/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 return response.json()
             })
             .then(fetchedData2 => {
-
+                setisloading2(1)
                 let tmp3=[]
                 let newtemp2 = []
                 let i
@@ -63,12 +68,12 @@ export default function Profile() {
                 setDay(() => newtemp2)
             })
         //for the third diagram
-        fetch(`http://localhost:3000/answer/statistics/byDay/${req_id}`)
+        fetch(` https://soa-data-layer-service.herokuapp.com/answer/statistics/byDay/${req_id}`)
             .then(response => {
                 return response.json()
             })
             .then(fetchedData3 => {
-
+                setisloading3(1)
                 let tmp4=[]
                 let newtemp3 = []
                 let i
@@ -137,7 +142,9 @@ export default function Profile() {
             <h1>My contributions</h1>
 
             <div className="boxleft">
+
                 <label>My Questions per day</label>
+                {isloading2 ?
                 <Line
                     data={state2}
                     options={{
@@ -146,13 +153,16 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
-            <br/>
+                />:<CircularProgress color="secondary"/>}
+
+
+                <br/>
             <br/>
             </div>
 
             <div className="boxright">
                 <label>My Answers per day</label>
+                {isloading3?
                 <Line
                     data={state3}
                     options={{
@@ -161,12 +171,13 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
+                />:<CircularProgress color="secondary"/>}
                 <br/>
                 <br/>
             </div>
             <div className="boxmiddle">
                 <label>My Questions per keyword</label>
+                {isloading1?
                 <Bar
                     data={state}
 
@@ -181,7 +192,8 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
+                />:
+                    <CircularProgress color="secondary"/>}
             </div>
 
 

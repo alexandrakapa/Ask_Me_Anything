@@ -4,11 +4,14 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { RedisModule } from 'nestjs-redis';
 import { ConfigModule, ConfigService } from "@nestjs/config";
-const options = { host: 'localhost',
-  port: 6379,
-  ttl: null};
+import { RedisModule } from 'nestjs-redis';
+let register = require("url").parse("redis://redistogo:835bc9eed609d3f4e44fc556d4c16412@soapfish.redistogo.com:11413/")
+const options = {
+  port:register.port,
+  host:register.hostname,
+  password:register.auth.split(":")[1],
+}
 @Module({
   imports: [
     AuthModule,
@@ -21,12 +24,7 @@ const options = { host: 'localhost',
       },
     }),
     RedisModule.register(options),
-    // RedisModule.register(
-    //   {
-    //     host: 'localhost',
-    // "port": 6379,
-    // ttl: null }
-    // )
+
 
     JwtStrategy,
    ],

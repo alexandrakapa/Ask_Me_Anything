@@ -9,14 +9,14 @@ export class QuestionService {
   constructor(private httpService: HttpService,private redisService:RedisService) {}
 
   findByDay(): Observable<AxiosResponse<any>> {
-    return this.httpService.get('http://localhost:3000/question/statistics/byDay')
+    return this.httpService.get('https://soa-data-layer-service.herokuapp.com/question/statistics/byDay')
       .pipe(
         map(response => response.data),
       );
   }
 
   findByKeyword(): Observable<AxiosResponse<any>> {
-    return this.httpService.get('http://localhost:3000/question/statistics/byKeyword')
+    return this.httpService.get('https://soa-data-layer-service.herokuapp.com/question/statistics/byKeyword')
       .pipe(
         map(response => response.data),
       );
@@ -45,14 +45,14 @@ export class QuestionService {
   }
 
   findByDayUser(user:number): Observable<AxiosResponse<any>> {
-    return this.httpService.get('http://localhost:3000/question/statistics/byDay/'+user)
+    return this.httpService.get('https://soa-data-layer-service.herokuapp.com/question/statistics/byDay/'+user)
         .pipe(
             map(response => response.data),
         );
   }
 
   findByKeywordUser(user:number): Observable<AxiosResponse<any>> {
-    return this.httpService.get('http://localhost:3000/question/statistics/byKeyword/'+user)
+    return this.httpService.get('https://soa-data-layer-service.herokuapp.com/question/statistics/byKeyword/'+user)
         .pipe(
             map(response => response.data),
         );

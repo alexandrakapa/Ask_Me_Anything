@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post,Headers } from "@nestjs/common";
 import { QuestionService } from './question.service';
-import {Question} from "../../../data-layer/src/question/question.entity";
 
 @Controller('question')
 export class QuestionController {

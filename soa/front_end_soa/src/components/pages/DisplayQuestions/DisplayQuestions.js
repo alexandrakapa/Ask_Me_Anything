@@ -6,19 +6,22 @@ import {withRouter} from "react-router-dom";
 import {columns} from './DisplayColumns';
 import MUIDataTable from "mui-datatables";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core/styles";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 
 function DisplayQuestions(props)  {
 
     const [question, setQuestion] = useState([]);
+    const [fetched ,setfetched] = useState(0);
 
     useEffect( () => {
-        fetch(`http://localhost:3001/question/andanswers`,{
+        fetch(`https://soa-run-service.herokuapp.com/question/andanswers`,{
              headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
         })
             .then(response => response.json())
             .then(fetchedData => {
+                setfetched(1)
                 for (let i=0; i<fetchedData.length; i++) {
                     if(!fetchedData[i].askedFrom){
                         fetchedData[i].askedFrom = "unknown"
@@ -53,7 +56,7 @@ function DisplayQuestions(props)  {
                 pathname: '/answer_a_question',
                 state: { question_id: cellIndex[0]}
             })
-            fetch(`http://localhost:3000/question/byId/${cellIndex[0]}`, {
+            fetch(`https://soa-data-layer-service.herokuapp.com/question/byId/${cellIndex[0]}`, {
                 method: 'GET',
                 headers: {
                     // 'Accept': 'application/json',
@@ -131,12 +134,16 @@ function DisplayQuestions(props)  {
             }>
             <div
                 style={{ marginLeft: '5%', marginRight: '5%', marginTop: '2%', marginBottom: '2%', padding:'2px'}}>
+                {fetched?
             <MUIDataTable
                 title={"Please click on a question to answer it!"}
                 data={question}
                 columns={columns}
                 options = {options}
             />
+            :  <div >
+                        <LinearProgress color="secondary"/>
+                    </div>}
             </div>
 
             </MuiThemeProvider>

@@ -27,7 +27,7 @@ function AskAQuestion(props) {
                 state: {  title : data.title, text : data.text, askedFrom: localStorage.getItem('id'), keywords: tags[0]}
             })
             // const tok = localStorage.getItem('token');
-            fetch(`http://localhost:3001/question/create`, {
+            fetch(`https://soa-run-service.herokuapp.com/question/create`, {
                 method: 'POST',
                 headers: {
                     // 'Accept': 'application/json',

@@ -16,11 +16,12 @@ export class Answer {
 
 
 
-  @ManyToOne(() => UserEntity, (answeredFrom) => answeredFrom.questions)
-  public answeredFrom: UserEntity;
+
 
   @ManyToOne(() => Question, (isAnAnswerOf) => isAnAnswerOf.answers)
   public isAnAnswerOf: Question;
 
+  @ManyToOne(() => UserEntity, (answeredFrom) => answeredFrom.questions)
+  public answeredFrom: UserEntity;
 
 }

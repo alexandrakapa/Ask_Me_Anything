@@ -12,7 +12,7 @@ export class AppService implements OnModuleInit{
     console.log(`The module has been initialized.`);
     console.log("nikos");
     const client = await this.redisService.getClient();
-    const my_addr = "http://localhost:3001";
+    const my_addr = "https://soa-run-service.herokuapp.com";
 
     const create_answer = await client.hget("run_services", "create_answer")
     if(create_answer != my_addr+"/answer/create"){

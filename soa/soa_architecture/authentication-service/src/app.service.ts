@@ -15,7 +15,7 @@ export class AppService implements  OnModuleInit{
     console.log(`The module has been initialized.`);
     console.log("nikos");
     const client = await this.redisService.getClient();
-    const my_addr = "http://localhost:3100";
+    const my_addr = "https://soa-authentication-service.herokuapp.com";
 
     const reg_get_addr = await client.hget("auth", "register");
 
@@ -35,7 +35,7 @@ export class AppService implements  OnModuleInit{
 
     }
 
-    const auth_get_addr = await client.hget("auth", "check");
+    const auth_get_addr = await client.hget("auth", "check_tok");
     if(!auth_get_addr || auth_get_addr[0] != my_addr+"/auth/check"){
       console.log("problem3");
       let obj = [my_addr+"/auth/check","post","auth"]
@@ -49,7 +49,7 @@ export class AppService implements  OnModuleInit{
   async register(req_body){
     console.log("hrere too");
     console.log(req_body);
-    return this.httpService.post(' http://localhost:3000/user/register',req_body).pipe(map(result => result.data));
+    return this.httpService.post(' https://soa-data-layer-service.herokuapp.com/user/register',req_body).pipe(map(result => result.data));
 
   }
   async verif(tok){

@@ -42,7 +42,7 @@ function AnswerAQuestion(props) {
     const question_id = location.state.question_id;
 
         useEffect(() => {
-            fetch(`http://localhost:3000/question/byId/${question_id}`, {
+            fetch(`https://soa-data-layer-service.herokuapp.com/question/byId/${question_id}`, {
                  headers:{'Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
@@ -62,7 +62,7 @@ function AnswerAQuestion(props) {
                     console.log(question)
                 })
 
-            fetch(`http://localhost:3000/answer/all/${question_id}`, {
+            fetch(`https://soa-data-layer-service.herokuapp.com/answer/all/${question_id}`, {
                  headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
@@ -147,7 +147,7 @@ function AnswerAQuestion(props) {
                 pathname: '/home/user',
             })
             // const tok = localStorage.getItem('token');
-            fetch(`http://localhost:3001/answer/create`, {
+            fetch(`https://soa-run-service.herokuapp.com/answer/create`, {
                 method: 'POST',
                 headers: {
                     // 'Accept': 'application/json',

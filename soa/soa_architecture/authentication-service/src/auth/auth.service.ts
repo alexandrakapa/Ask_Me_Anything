@@ -15,7 +15,7 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
 
-    let res = await this.httpService.post(' http://localhost:3000/user/validate',{ username:username,password:pass }).toPromise();
+    let res = await this.httpService.post(' https://soa-data-layer-service.herokuapp.com/user/validate',{ username:username,password:pass }).toPromise();
     return res.data;
   }
 

@@ -17,14 +17,14 @@ export const HomeAfterLoginStyle = styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+    //transition: transform 0.6s;
+    //transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
+  //.flip-card:hover .flip-card-inner {
+  //  transform: rotateY(180deg);
+  //}
 
   .flip-card-front, .flip-card-back {
     position: absolute;
@@ -43,7 +43,7 @@ export const HomeAfterLoginStyle = styled.div`
   .flip-card-back {
     background: linear-gradient(325deg, rgba(70, 17, 152, 1) 50%, rgb(91, 255, 106) 100%);
     color: white;
-    transform: rotateY(180deg);
+    //transform: rotateY(180deg);
     
   }
 
