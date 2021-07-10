@@ -19,6 +19,7 @@ import { AnswerService } from "./answer/answer.service";
     RedisCacheModule
   ],
   controllers: [AppController],
-  providers: [AppService, QuestionService, AnswerService]
+  providers: [AppService]
+
 })
 export class AppModule {}

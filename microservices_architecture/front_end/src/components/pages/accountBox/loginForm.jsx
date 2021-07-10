@@ -50,6 +50,8 @@ import { useHistory } from "react-router";
                         console.log("here: "+json.accessToken);
                         localStorage.setItem('token', json.accessToken);
                         localStorage.setItem('id', json.id);
+                        localStorage.setItem('username', emailRef.current.value);
+                        console.log(localStorage.getItem('username'))
                         console.log(localStorage.getItem('token'));
                         console.log(localStorage.getItem('id'));
                         history.push({pathname:"/home/user"})
