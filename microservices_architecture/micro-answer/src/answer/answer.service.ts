@@ -5,32 +5,20 @@ import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager, getManager } from "typeorm";
 import { Question } from '../question/question.entity';
 import { Answer } from '../answer/entities/answer.entity';
-import { RedisCacheService } from '../redis-cache/redis-cache.service';
+import { RedisService } from "nestjs-redis";
 
 @Injectable()
 export class AnswerService implements OnModuleInit {
-  constructor(@InjectEntityManager() private manager: EntityManager,private cacheManager: RedisCacheService,private httpService: HttpService,
+  constructor(@InjectEntityManager() private manager: EntityManager,private readonly redisService:RedisService,private httpService: HttpService,
   ) {}
   async onModuleInit() {
+    const client = await this.redisService.getClient();
+
     console.log(`The module has been initialized.`);
-    const saved_subs = await this.cacheManager.get('subscribers');
-    console.log(saved_subs[0]);
-    const subs= saved_subs[0].subscribers;
-    let found = false;
-    const my_addr = 'http://localhost:3003/answer/bus';
-    for (let i = 0; i < subs[0].length; i++) {
-      if(subs[0][i] == my_addr){
-        found=true;
-      }
-    }
-    if(!found){
-      subs[0].push(my_addr);
-      const new_obj = [
-        {
-          subscribers: subs,
-        },
-      ];
-      await this.cacheManager.set('subscribers', new_obj);
+    let saved_subs = await client.hget('subscribers','answer-micro');
+    const my_addr = 'https://answer-microservice.herokuapp.com/answer/bus';
+    if(saved_subs != my_addr){
+      let setter = await client.hset('subscribers','answer-micro',my_addr)
     }
   }
 
@@ -81,7 +69,7 @@ export class AnswerService implements OnModuleInit {
         .returning(['answer_id'])
         .execute();
       await this.httpService
-        .post('http://localhost:3200/bus', {
+        .post('https://choreo-microservice.herokuapp.com/bus', {
           id: new_answer.raw[0].answer_id,
           text: cont,
           answeredFrom: CreateAnswerDto.answeredFrom,
