@@ -2,6 +2,8 @@
 
 ## Team : Saas-19
 
+#### :exclamation: :exclamation: If the page doesn't load after a while, please refresh the page. It is a problem of heroku not ours. :exclamation: :exclamation:
+
 ### Description:
 Our project is a website for answers and questions. A user can sign in, sign up, view questions and answers, view statistics, create questions, create answers and view his profile. 
 
