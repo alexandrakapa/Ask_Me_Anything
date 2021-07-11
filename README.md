@@ -1,12 +1,26 @@
-# Saas-19_Q2D
+# Ask me anything project 
 
-⚠️ **IMPORTANT** ⚠️
-* Σε κάθε branch θα φτιάχνουμε features/architectures και (ώστε να αποφύγουμε τα 100 διαφορετικά branches) και ΜΟΛΙΣ κάτι είναι έτοιμο και δουλεύει μπαίνει στο master και μετά αγνοούμε την ύπαρξη του (δηλαδή μετά για νέο feature φτιάχνουμε νέο branch) .
-* Επίσης ιδανικά να μην βάζουμε το όνομα μας στο branch
+## Team : Saas-19
 
+#### :exclamation: :exclamation: If the page doesn't load after a while, please refresh the page. It is a problem of heroku not ours. :exclamation: :exclamation:
 
-🔥 **LET'S GO** 🔥
+### Description:
+Our project is a website for answers and questions. A user can sign in, sign up, view questions and answers, view statistics, create questions, create answers and view his profile. 
 
-🔴 SPRINTS:\
-❗ 10 - 17 Απριλίου\
-❗ 17 - 22 Απριλίου
+### Project members:
+* [Giorgoulakis Nikolaos](https://github.com/nikosgio) (03117138) 
+* [Kaparou Alexandra](https://github.com/alexandrakapa) (03117100)
+
+### Stack:
+* Javascript
+* Typescript
+* CSS
+* HTML
+* PostgreSQL
+
+### Deployment:
+* Heroku
+
+### Architectures:
+The website is made with two architectures, microservices and SOA. Each architecture can be seen in the respective folder.
+
