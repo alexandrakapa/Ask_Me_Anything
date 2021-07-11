@@ -19,3 +19,6 @@ Our project is a website for answers and questions. A user can sign in, sign up,
 ### Deployment:
 * Heroku
 
+### Architectures:
+The website is made with two architectures, microservices and SOA. Each architecture can be seen in the respective folder.
+
