@@ -3,13 +3,11 @@ import { QuestionService } from '../question/question.service';
 import { Question } from '../question/question.entity';
 import { KeywordService } from './keyword.service';
 import { Keyword } from './keyword.entity';
-import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('keyword')
 export class KeywordController {
   constructor(
     private readonly keywordService: KeywordService,
-    @Inject('KEYWORD_SERVICE') private readonly client: ClientProxy
   ){}
 
   @Get()
@@ -22,7 +20,6 @@ export class KeywordController {
   @HttpCode(201)
   async createKeyword(@Body() newKeyword:any){
     const keyword = await this.keywordService.create(newKeyword)
-    this.client.emit('keyword_created',newKeyword)
     console.log(newKeyword)
     return newKeyword
 

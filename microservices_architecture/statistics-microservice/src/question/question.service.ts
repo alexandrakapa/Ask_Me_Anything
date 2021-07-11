@@ -2,40 +2,28 @@ import { Injectable } from '@nestjs/common';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, getManager, getRepository, Repository } from 'typeorm';
 import { Question } from './question.entity';
-import { RedisCacheService } from '../redis-cache/redis-cache.service';
 import { Keyword } from '../keyword/keyword.entity';
+import { RedisService } from "nestjs-redis";
 
 @Injectable()
 export class QuestionService {
   constructor(
     @InjectRepository(Question) private questionRepo: Repository<Question>,@InjectEntityManager() private manager: EntityManager,
-    private cacheManager: RedisCacheService,
+    private readonly redisService: RedisService,
   ) {}
   async onModuleInit() {
+    const client = await this.redisService.getClient();
     console.log(`The module has been initialized.`);
-    const saved_subs = await this.cacheManager.get('subscribers');
-    console.log(saved_subs[0]);
-    const subs = saved_subs[0].subscribers;
-    let found = false;
-    const my_addr = 'http://localhost:3001/question/bus';
-    for (let i = 0; i < subs[2].length; i++) {
-      if (subs[2][i] == my_addr) {
-        found = true;
-      }
+    let saved_subs = await client.hget('subscribers','statistics');
+    console.log("first: "+saved_subs)
+    const my_addr = 'https://micro-statistics.herokuapp.com/question/bus';
+    if (saved_subs !== my_addr){
+       await client.hset('subscribers','statistics',my_addr)
     }
-    if (!found) {
-      subs[2].push(my_addr);
-      const new_obj = [
-        {
-          subscribers: subs,
-        },
-      ];
-      await this.cacheManager.set('subscribers', new_obj);
-    }
+    let sav_subs = await client.hget('subscribers','statistics');
+    console.log("second: "+sav_subs)
   }
-  // findAll(): Promise<Question[]> {
-  //   return this.questionRepo.find();
-  // }
+
 
   async findAll(): Promise<Question[]> {
     return this.questionRepo.find();
@@ -64,19 +52,13 @@ export class QuestionService {
       }
     }
 
-    const new_question = await getManager()
-      .createQueryBuilder()
-      .insert()
-      .into(Question)
-      .values([
-        {
-          question_id: quest_id,
 
-          askedFrom: quest_from,
-          askedOn: quest_on,
-          keywords: keys,
-        },
-      ]).execute();
+    const question = new Question();
+    question.question_id = quest_id
+    question.askedFrom = quest_from;
+    question.keywords = keys;
+    // console.log(question.question_id)
+    let saved_qu = await this.manager.save(question);
     return "ok";
   }
 
@@ -130,7 +112,7 @@ export class QuestionService {
   async findByKeywordUser(user): Promise<Question[]> {
     const qb = await this.questionRepo
       .createQueryBuilder("question")
-      .select(`keyword.keyword_id,"Keyword_phrase", COUNT(question.question_id) AS count`)
+      .select(`keyword.keyword_id,"keyword_phrase", COUNT(question.question_id) AS count`)
       .innerJoin('question_keyword','question_keyword', 'question.question_id = question_keyword.question_id')
       .innerJoin('keyword','keyword', 'question_keyword.keyword_id = keyword.keyword_id')
       .where(`question.askedFrom = ${user}`)

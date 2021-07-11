@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState} from "react";
 import {
     BoldLink,
     BoxContainer,
@@ -10,17 +10,21 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useHistory } from "react-router";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
  export function LoginForm(props) {
 
      const emailRef = React.useRef();
      const passwordRef = React.useRef();
      const { switchToSignup } = useContext(AccountContext);
      const history = useHistory();
+     const [isloading ,setisloading] = useState(0);
 
     function onSubmit() {
         // alert("The form was submitted");
         // console.log(emailRef.current.value)
         // console.log(passwordRef.current.value)
+        setisloading(1)
 
         let empInfo={
             username:emailRef.current.value,
@@ -42,9 +46,10 @@ import { useHistory } from "react-router";
             })
         };
         console.log("login: "+requestOptions);
-        fetch('http://localhost:3008/auth/login',requestOptions).then(res => res.json() )
+        fetch('https://micro-authentication.herokuapp.com/auth/login',requestOptions).then(res => res.json() )
             .then( json => {
-                    // this.props.setUserData(json.accessToken, json.username);
+                setisloading(0)
+                // this.props.setUserData(json.accessToken, json.username);
                     // console.log("HEREEEE"+ json);
                     if(json.accessToken ) {
                         console.log("here: "+json.accessToken);
@@ -134,6 +139,12 @@ import { useHistory } from "react-router";
                     <MutedLink href="#">Forgot your password?</MutedLink>
                     <Marginer direction="vertical" margin="1.6em"/>
                     <SubmitButton type="submit" onClick={onSubmit}>Login</SubmitButton>
+                <div>
+                    {isloading?
+                        <CircularProgress color="secondary"/>:
+                        null
+                    }
+                </div>
                     <Marginer direction="vertical" margin="1em"/>
                     <MutedLink href="#">
                         Don't have an account?{" "}

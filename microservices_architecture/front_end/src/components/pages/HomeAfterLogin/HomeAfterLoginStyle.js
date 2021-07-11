@@ -23,7 +23,7 @@ export const HomeAfterLoginStyle = styled.div`
   }
 
   .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
+    //transform: rotateY(180deg);
   }
 
   .flip-card-front, .flip-card-back {
@@ -43,7 +43,7 @@ export const HomeAfterLoginStyle = styled.div`
   .flip-card-back {
     background: linear-gradient(325deg, rgba(70, 17, 152, 1) 50%, rgb(91, 255, 106) 100%);
     color: white;
-    transform: rotateY(180deg);
+    //transform: rotateY(180deg);
     
   }
 

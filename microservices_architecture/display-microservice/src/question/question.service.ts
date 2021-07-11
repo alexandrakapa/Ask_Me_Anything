@@ -55,21 +55,16 @@ export class QuestionService {
       }
     }
 
-    const new_question = await getManager()
-      .createQueryBuilder()
-      .insert()
-      .into(Question)
-      .values([
-        {
-          question_id: quest_id,
-          title: title,
-          text: text,
-          askedFrom: quest_from,
-          askedOn: quest_on,
-          keywords: keys,
-          // answers:[],
-        },
-      ]).execute();
+
+    const question = new Question();
+    question.question_id = quest_id
+    question.title = title;
+    question.text = text;
+    question.askedOn =quest_on;
+    question.askedFrom = quest_from;
+    question.keywords = keys;
+    // console.log(question.question_id)
+    let saved_qu = await this.questionManager.save(question);
     return 'ok';
   }
   // create(newQuestion){

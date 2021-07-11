@@ -30,13 +30,6 @@ export class Question {
 
 
   @ManyToMany(type => Keyword, { cascade: true })
-  @JoinTable({
-    name: 'question_keyword',
-    joinColumn: { name: 'question_id', referencedColumnName: 'question_id' },
-    inverseJoinColumn: {
-      name: 'keyword_id',
-      referencedColumnName: 'keyword_id',
-    },
-  })
+  @JoinTable({ name: 'question_keyword', joinColumn: { name: 'question_id', referencedColumnName: 'question_id'}, inverseJoinColumn: { name: 'keyword_id', referencedColumnName: 'keyword_id'}, })
   keywords: Keyword[];
 }

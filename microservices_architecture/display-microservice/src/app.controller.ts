@@ -12,6 +12,7 @@ export class AppController {
   async getEvent(@Req() req, @Res() res) {
     console.log(req.body.id);
     await this.questionService.make_question_keyword( req.body.id,req.body.title,req.body.text,req.body.askedFrom,req.body.askedOn,req.body.keywords);
+    console.log("ok1");
     res.send('ok');
   }
 

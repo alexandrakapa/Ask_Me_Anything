@@ -18,6 +18,7 @@ import {
     Typography
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 
@@ -25,12 +26,14 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
     const [answer, setAnswer] = useState([]);
     const [data, setData] = useState([])
     const [max_id , setMax] = useState();
+    const [fetched,setFetched] = useState(0);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/question`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://micro-display.herokuapp.com/question`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => response.json())
             .then(fetchedData => {
                 setMax(() => fetchedData[0].question_id)
+                setFetched(1);
                 // console.log("MAX",max_id)
                 // console.log(fetchedData[0].answers.length ===0);
                 // console.log("weird anwswer: "+fetchedData.length);
@@ -122,73 +125,78 @@ export default function DisplayQuestionsAndAnswersAfterLogin() {
 <DisplayQuestionsAndAnswersStyle>
         <div>
             <NavbarAfterLogin/>
-            <MuiThemeProvider theme={
-                createMuiTheme({
-                    overrides: {
-                        MUIDataTable: {
-                            root: {
-                                backgroundColor: '#2bbf9c',
-                                width: '500px',
+            {fetched ?
+                <MuiThemeProvider theme={
+                    createMuiTheme({
+                        overrides: {
+                            MUIDataTable: {
+                                root: {
+                                    backgroundColor: '#2bbf9c',
+                                    width: '500px',
+                                },
                             },
-                        },
-                        MuiToolbar: {
-                            root: {
-                                backgroundColor: '#a27dd0'
-                            }
-
-                        },
-                        MUIDataTableSelectCell: {
-                            root: {
-                                backgroundColor: '#a27dd0'
-                            },
-                            headerCell: {
-                                backgroundColor: '#a27dd0',
-                            },
-                            expandDisabled: {
-                                // Soft hide the button.
-                                visibility: 'hidden',
-                            },
-                        },
-                        MUIDataTableBodyCell: {
-                            headerCell: {
-                                backgroundColor: '#6700bd',
-                            },
-                        },
-                        MUIDataTableHeadCell: {
-                            root: {
-                                borderBottom : '1px solid black',
-                                borderColor : 'black',
-                            },
-                            fixedHeader: {
-                                position: 'sticky',
-                                top: '0px',
-                                zIndex: 100,
-                                backgroundColor: '#9ed9ba',
-                                borderColor : 'black'
-
-                            },
-                        },
-                        MuiTableFooter: {
-                            root: {
-                                '& .MuiToolbar-root': {
+                            MuiToolbar: {
+                                root: {
                                     backgroundColor: '#a27dd0'
+                                }
+
+                            },
+                            MUIDataTableSelectCell: {
+                                root: {
+                                    backgroundColor: '#a27dd0'
+                                },
+                                headerCell: {
+                                    backgroundColor: '#a27dd0',
+                                },
+                                expandDisabled: {
+                                    // Soft hide the button.
+                                    visibility: 'hidden',
+                                },
+                            },
+                            MUIDataTableBodyCell: {
+                                headerCell: {
+                                    backgroundColor: '#6700bd',
+                                },
+                            },
+                            MUIDataTableHeadCell: {
+                                root: {
+                                    borderBottom: '1px solid black',
+                                    borderColor: 'black',
+                                },
+                                fixedHeader: {
+                                    position: 'sticky',
+                                    top: '0px',
+                                    zIndex: 100,
+                                    backgroundColor: '#9ed9ba',
+                                    borderColor: 'black'
+
+                                },
+                            },
+                            MuiTableFooter: {
+                                root: {
+                                    '& .MuiToolbar-root': {
+                                        backgroundColor: '#a27dd0'
+                                    },
                                 },
                             },
                         },
-                    },
-                })
-            }>
-                <div
-                    style={{ float:'center', marginLeft: '5%', marginRight: '5%', marginTop: '2%'}}>
-                    <MUIDataTable
-                        title={"Here you can see questions with their answers!"}
-                        data={data}
-                        columns={columns}
-                        options = {options}
-                    />
-                </div>
+                    })
+                }>
+                    <div
+                        style={{float: 'center', marginLeft: '5%', marginRight: '5%', marginTop: '2%'}}>
+                        <MUIDataTable
+                            title={"Here you can see questions with their answers!"}
+                            data={data}
+                            columns={columns}
+                            options={options}
+                        />
+                    </div>
 
-            </MuiThemeProvider>
+                </MuiThemeProvider> :<div>
+                    <LinearProgress />
+                    <LinearProgress color="secondary" />
+                </div>
+            }
             <Footer/>
         </div>
         </DisplayQuestionsAndAnswersStyle>

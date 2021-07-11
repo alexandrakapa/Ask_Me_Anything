@@ -4,7 +4,6 @@ import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
 import Footer from "../../FooterAfterLogin/Footer";
 
 export default function HomeAfterLogin() {
-    const tokf = localStorage.getItem('username');
     const username = localStorage.getItem('username');
     // console.log("here")
     // console.log(tokf);

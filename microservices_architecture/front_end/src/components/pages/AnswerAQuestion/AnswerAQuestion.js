@@ -44,7 +44,7 @@ function AnswerAQuestion(props) {
     const question_id = location.state.question_id;
 
         useEffect(() => {
-            fetch(`http://localhost:3000/question/${question_id}`, {
+            fetch(`https://micro-display.herokuapp.com/question/${question_id}`, {
                 headers:{'Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
@@ -62,7 +62,7 @@ function AnswerAQuestion(props) {
                     console.log(question)
                 })
 
-            fetch(`http://localhost:3000/answer/all/${question_id}`, {
+            fetch(`https://micro-display.herokuapp.com/answer/all/${question_id}`, {
                 headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}
             })
                 .then(response => response.json())
@@ -143,7 +143,7 @@ function AnswerAQuestion(props) {
                 pathname: '/home/user',
             })
             // const tok = localStorage.getItem('token');
-            fetch(`http://localhost:3003/answer/create`, {
+            fetch(`https://answer-microservice.herokuapp.com/answer/create`, {
                 method: 'POST',
                 headers: {
                     'Content-type':'application/json',

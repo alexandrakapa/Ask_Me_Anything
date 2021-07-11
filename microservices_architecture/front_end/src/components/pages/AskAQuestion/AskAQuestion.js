@@ -29,7 +29,7 @@ function AskAQuestion(props) {
                 state: {  title : data.title, text : data.text, askedFrom: localStorage.getItem('id'), keywords: tags[0]}
             })
             // const tok = localStorage.getItem('token');
-            fetch(`http://localhost:3002/question/create`, {
+            fetch(`https://question-microservice.herokuapp.com/question/create`, {
                 method: 'POST',
                 headers: {
                     // 'Accept': 'application/json',

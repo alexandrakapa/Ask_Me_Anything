@@ -12,7 +12,7 @@ const options = {
   password:register.auth.split(":")[1],
 }
 @Module({
-  imports: [TypeOrmModule.forFeature([Answer]), AuthModule, RedisModule.register(options),HttpModule],
+  imports: [TypeOrmModule.forFeature([Answer]), AuthModule, RedisModule.register(options),HttpModule,],
   controllers: [AnswerController],
   providers: [AnswerService],
 })

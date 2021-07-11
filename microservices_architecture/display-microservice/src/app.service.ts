@@ -1,31 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { RedisCacheService } from './redis-cache/redis-cache.service';
+import { RedisService } from "nestjs-redis";
 
 @Injectable()
 export class AppService {
-  constructor(private cacheManager: RedisCacheService) {}
+  constructor(private readonly redisService: RedisService) {}
   async onModuleInit() {
+    const client = await this.redisService.getClient();
 
     console.log(`The module has been initialized.`);
-    const saved_subs = await this.cacheManager.get('subscribers');
+    const saved_subs = await client.hget('subscribers','display');
 
-    console.log(saved_subs[0]);
-    const subs= saved_subs[0].subscribers;
-    let found = false;
-    const my_addr = 'http://localhost:3000/bus';
-    for (let i = 0; i < subs[1].length; i++) {
-      if(subs[1][i] == my_addr){
-        found=true;
-      }
+    const my_addr = 'https://micro-display.herokuapp.com/bus';
+    if(saved_subs !== my_addr){
+      await client.hset('subscribers','display',my_addr)
     }
-    if(!found){
-      subs[1].push(my_addr);
-      const new_obj = [
-        {
-          subscribers: subs,
-        },
-      ];
-      await this.cacheManager.set('subscribers', new_obj);
     }
-  }
+
 }

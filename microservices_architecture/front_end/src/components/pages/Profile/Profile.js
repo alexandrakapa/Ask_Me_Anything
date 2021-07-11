@@ -4,6 +4,7 @@ import {ProfileStyle} from "../Profile/ProfileStyle";
 import {Bar, Line} from "react-chartjs-2";
 import {HomeAfterLoginStyle} from "../HomeAfterLogin/HomeAfterLoginStyle";
 import Footer from "../../FooterAfterLogin/Footer";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Profile() {
     const tokf = localStorage.getItem('username');
@@ -16,10 +17,12 @@ export default function Profile() {
     const [number, setNumber] = useState([]);
     const [day2, setDay2] = useState([]);
     const [number2, setNumber2] = useState([]);
-
+    const [isloading1 ,setisloading1] = useState(0);
+    const [isloading2 ,setisloading2] = useState(0);
+    const [isloading3 ,setisloading3] = useState(0);
     useEffect(() => {
         let req_id = localStorage.getItem('id')
-        fetch(`http://localhost:3001/question/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://micro-statistics.herokuapp.com/question/byKeyword/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -29,24 +32,27 @@ export default function Profile() {
                 }
             })
             .then(fetchedData => {
-
+                setisloading1(1)
                 let tmp=[]
                 let newtemp = []
                 let i
                 for (i=0; i<fetchedData.length; i++){
                     tmp.push(fetchedData[i].count)
-                    newtemp.push(fetchedData[i].Keyword_phrase)
+                    newtemp.push(fetchedData[i].keyword_phrase)
 
                 }
                 setLabels(() => tmp)
                 setPhrase(() => newtemp)
+                console.log(phrase)
+                console.log(labels)
             })
         //for the second diagram
-        fetch(`http://localhost:3001/question/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
+        fetch(`https://micro-statistics.herokuapp.com/question/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 return response.json()
             })
             .then(fetchedData2 => {
+                setisloading2(1)
 
                 let tmp3=[]
                 let newtemp2 = []
@@ -64,12 +70,12 @@ export default function Profile() {
                 setDay(() => newtemp2)
             })
         //for the third diagram
-        fetch(`http://localhost:3000/answer/byDay/${req_id}`)
+        fetch(`https://micro-display.herokuapp.com/answer/byDay/${req_id}`,{headers:{'Content-type':'application/json','Authorization': 'Bearer '+localStorage.getItem('token'),}})
             .then(response => {
                 return response.json()
             })
             .then(fetchedData3 => {
-
+                setisloading3(1)
                 let tmp4=[]
                 let newtemp3 = []
                 let i
@@ -138,6 +144,7 @@ export default function Profile() {
 
             <div className="boxleft">
                 <label>My Questions per day</label>
+                {isloading2 ?
                 <Line
                     data={state2}
                     options={{
@@ -146,13 +153,14 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
+                />:<CircularProgress color="secondary"/>}
                 <br/>
                 <br/>
             </div>
 
             <div className="boxright">
                 <label>My Answers per day</label>
+                {isloading3?
                 <Line
                     data={state3}
                     options={{
@@ -161,12 +169,13 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
+                />:<CircularProgress color="secondary"/>}
                 <br/>
                 <br/>
             </div>
             <div className="boxmiddle">
                 <label>My Questions per keyword</label>
+                {isloading1?
                 <Bar
                     data={state}
 
@@ -181,7 +190,8 @@ export default function Profile() {
                             position:'right'
                         }
                     }}
-                />
+                />:
+                    <CircularProgress color="secondary"/>}
             </div>
             <Footer/>
         </ProfileStyle >

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import {
     BoldLink,
     BoxContainer,
@@ -10,50 +10,61 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import {useHistory} from "react-router";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export function SignupForm(props) {
     const { switchToSignin } = useContext(AccountContext);
     const emailRef = React.useRef();
     const passwordRef = React.useRef();
+    const secpasswordRef = React.useRef();
+    const [isloading ,setisloading] = useState(0);
     const history = useHistory();
 
     function onSubmit() {
+        setisloading(1)
+        console.log("first: "+passwordRef.current.value)
+        console.log("second: "+secpasswordRef.current.value)
 
-        let empInfo={
-            username:emailRef.current.value,
-            password:passwordRef.current.value,
-        };
-        console.log(empInfo);
-        const getdata= JSON.stringify(empInfo);
-        console.log(getdata);
+        if(passwordRef.current.value !== secpasswordRef.current.value){
+            console.log("here")
+            alert("Passwords do not match")
+        }else {
+            let empInfo = {
+                username: emailRef.current.value,
+                password: passwordRef.current.value,
+            };
+            console.log(empInfo);
+            const getdata = JSON.stringify(empInfo);
+            console.log(getdata);
 
 
-        let formBody = [];
-        for (let property in empInfo) {
-            let encodedKey = encodeURIComponent(property);
-            let encodedValue = encodeURIComponent(empInfo[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-        console.log(formBody);
-        const fetch = require('node-fetch');
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username:emailRef.current.value,
-                password:passwordRef.current.value,
-            })
-        };
-        console.log(requestOptions);
-        fetch('http://localhost:3008/register',requestOptions).then(response => {
-            if(response.ok){
-                switchToSignin();
-            }else{
-                alert("There has been an error with your registration ")
+            let formBody = [];
+            for (let property in empInfo) {
+                let encodedKey = encodeURIComponent(property);
+                let encodedValue = encodeURIComponent(empInfo[property]);
+                formBody.push(encodedKey + "=" + encodedValue);
             }
-        } )
-
+            formBody = formBody.join("&");
+            console.log(formBody);
+            const fetch = require('node-fetch');
+            const requestOptions = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: emailRef.current.value,
+                    password: passwordRef.current.value,
+                })
+            };
+            console.log(requestOptions);
+            fetch('https://micro-authentication.herokuapp.com/register', requestOptions).then(response => {
+                setisloading(0)
+                if (response.ok) {
+                    switchToSignin();
+                } else {
+                    alert("There has been an error with your registration ")
+                }
+            })
+        }
     }
     return (
 
@@ -61,10 +72,16 @@ export function SignupForm(props) {
             <FormContainer>
                 <Input type="email" placeholder="Email (user name)" ref={emailRef}/>
                 <Input type="password" placeholder="Password" ref={passwordRef} />
-                <Input type="password" placeholder="Re-enter password" />
+                <Input type="password" placeholder="Re-enter password" ref={secpasswordRef} />
             </FormContainer>
             <Marginer direction="vertical" margin={10} />
             <SubmitButton type="submit" onClick={onSubmit}>Signup</SubmitButton>
+            <div>
+                {isloading?
+                    <CircularProgress color="secondary"/>:
+                    null
+                }
+            </div>
             <Marginer direction="vertical" margin="1em" />
             <MutedLink href="#">
                 Already have an account?

@@ -35,7 +35,6 @@ export class AnswerService implements OnModuleInit {
     return tade;
   }
   async create(CreateAnswerDto: CreateAnswerDto) {
-    return this.manager.transaction(async (manager) => {
       const questionId = CreateAnswerDto.isAnAnswerOf;
       if (!questionId)
         throw new BadRequestException('Quiz id missing.');
@@ -68,7 +67,7 @@ export class AnswerService implements OnModuleInit {
         ])
         .returning(['answer_id'])
         .execute();
-      await this.httpService
+      let ans = await this.httpService
         .post('https://choreo-microservice.herokuapp.com/bus', {
           id: new_answer.raw[0].answer_id,
           text: cont,
@@ -77,7 +76,8 @@ export class AnswerService implements OnModuleInit {
           category: 'answer',
         })
         .toPromise();
-    });
+      console.log("ok: "+ans);
+
     return 'ok';
   }
 

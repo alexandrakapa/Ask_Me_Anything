@@ -5,6 +5,8 @@ import Navbar from "../../Navbar/Navbar";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core/styles";
 import MUIDataTable from "mui-datatables";
 import Footer from "../../Footer/Footer";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {
@@ -24,15 +26,17 @@ export default function DisplayQuestionsAndAnswers() {
     const [answer, setAnswer] = useState([]);
     const [data, setData] = useState([])
     const [max_id , setMax] = useState();
+    const [fetched ,setfetched] = useState(0);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/question/some_answers`)
+        fetch(`https://micro-display.herokuapp.com/question/some_answers`)
             .then(response => response.json())
             .then(fetchedData => {
                 setMax(() => fetchedData[0].question_id)
                 console.log("MAX",max_id)
                 console.log(fetchedData[0].answers.length ===0);
                 console.log("weird anwswer: "+fetchedData.length);
+                setfetched(1);
                 for (let i=0; i<fetchedData.length; i++) {
                     let date;
                     date=fetchedData[i].askedOn
@@ -121,6 +125,7 @@ export default function DisplayQuestionsAndAnswers() {
     return (
         <div>
             <Navbar/>
+            {fetched?
             <MuiThemeProvider theme={
                 createMuiTheme({
                     overrides: {
@@ -187,7 +192,10 @@ export default function DisplayQuestionsAndAnswers() {
                     />
                 </div>
 
-            </MuiThemeProvider>
+            </MuiThemeProvider>:<div >
+                    <LinearProgress/>
+                    <LinearProgress color="secondary"/>
+                </div>}
             <Footer/>
         </div>
 

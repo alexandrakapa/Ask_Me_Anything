@@ -40,6 +40,7 @@ export class AnswerService {
     //   // .set({ answers: answers })
     //   .where('id = :id', { id: quid })
     //   .execute();
+    console.log("ok2");
     return 'ok';
   }
   async findAnswersByQuestionId(isAnAnswerOf: any): Promise<Answer[]> {    //returns all answers by question id

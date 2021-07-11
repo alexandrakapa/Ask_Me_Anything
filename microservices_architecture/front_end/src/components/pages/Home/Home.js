@@ -4,15 +4,17 @@ import {Bar, Line} from 'react-chartjs-2';
 
 import React, { useEffect, useState} from 'react';
 import Footer from "../../Footer/Footer";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Home() {
     const [labels, setLabels] = useState([]);
     const [phrase, setPhrase] = useState([]);
     const [day, setDay] = useState([]);
     const [number, setNumber] = useState([]);
-
+    const [fetched1 ,setFetched1] = useState(0);
+    const [fetched2 ,setFetched2] = useState(0);
     useEffect(() => {
-        fetch(`http://localhost:3001/question/byKeyword`)
+        fetch(`https://micro-statistics.herokuapp.com/question/byKeyword`)
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -23,6 +25,7 @@ export default function Home() {
             })
             .then(fetchedData => {
                 console.log(fetchedData)
+                setFetched1(1);
                 let tmp=[]
                 let newtemp = []
                 let i
@@ -38,7 +41,7 @@ export default function Home() {
                 // console.log(fetchedData.length)
             })
         //for the second diagram
-        fetch(`http://localhost:3001/question/byDay`)
+        fetch(`https://micro-statistics.herokuapp.com/question/byDay`)
             .then(response => {
                 if (response.ok){
                     return response.json()
@@ -51,8 +54,9 @@ export default function Home() {
 
                 let tmp3=[]
                 let newtemp2 = []
-                let i
-                for (i=0; i<fetchedData2.length; i++){
+                setFetched2(1);
+
+                for (let i=0; i<fetchedData2.length; i++){
                     tmp3.push(fetchedData2[i].count)
                     // newtemp2.push(fetchedData2[i].questions_per_day.slice(0, 10))
                     let day = fetchedData2[i].questions_per_day.slice(8, 10)
@@ -111,15 +115,17 @@ export default function Home() {
                             <h2>Feel free to interact with our website!</h2>
                             <p>Below are some statistics about our website:</p>
                         </div>
-                        <div className="flip-card-back">
-                            <h2>Get to know us:</h2>
-                            <p1>AskMeAnything is a question and answer website for everyone out there having a question or knowing an answer!</p1>
-                            <p1>Do you have a question but don't seem to find the answer anywhere?Then take a chance and ask here!One of our millions subscribers may know the answer!</p1>
-                            <p1>Do you wanna help others?Then search for a question you know the answer to and help strangers from all over the world!</p1>
-                            <p1>Subscribe NOW to AskMeAnything!Be a part of our community!</p1>
-                        </div>
+                        {/*<div className="flip-card-back">*/}
+                        {/*    <h2>Get to know us:</h2>*/}
+                        {/*    <p1>AskMeAnything is a question and answer website for everyone out there having a question or knowing an answer!</p1>*/}
+                        {/*    <p1>Do you have a question but don't seem to find the answer anywhere?Then take a chance and ask here!One of our millions subscribers may know the answer!</p1>*/}
+                        {/*    <p1>Do you wanna help others?Then search for a question you know the answer to and help strangers from all over the world!</p1>*/}
+                        {/*    <p1>Subscribe NOW to AskMeAnything!Be a part of our community!</p1>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
+                {(fetched1 &&fetched2)?
+                <div>
             <div className="boxleft">
             <label>Questions per keyword</label>
                 <Bar
@@ -161,6 +167,12 @@ export default function Home() {
                     <br/>
 
                 </div>
+                </div>:
+                    <div>
+                        {/*<LinearProgress />*/}
+                        {/*<LinearProgress color="secondary" />*/}
+                        <CircularProgress color="secondary"/>
+                    </div>}
                 <Footer/>
                 </HomeStyle >
         );
