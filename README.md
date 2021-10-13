@@ -11,6 +11,15 @@ Our project is a website for answers and questions. A user can sign in, sign up,
 * [Giorgoulakis Nikolaos](https://github.com/nikosgio) (03117138) 
 * [Kaparou Alexandra](https://github.com/alexandrakapa) (03117100)
 
+### Site links:
+The sites can be accessed via:
+* [SOA architecture](https://soa-frontend-service.herokuapp.com/)
+* [Microservices arcitecture](https://micro-front.herokuapp.com/)
+
+To **login** you can either create a new account or login with the following credentials:
+Username: guest
+Password: guest
+
 ### Stack:
 * Javascript
 * Typescript
